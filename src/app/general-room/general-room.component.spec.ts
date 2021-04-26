@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeneralRoomLayoutComponent } from './general-room-layout.component';
+import { GeneralRoomComponent } from './general-room.component';
 
-describe('GeneralRoomLayoutComponent', () => {
-  let component: GeneralRoomLayoutComponent;
-  let fixture: ComponentFixture<GeneralRoomLayoutComponent>;
+describe('GeneralRoomComponent', () => {
+  let component: GeneralRoomComponent;
+  let fixture: ComponentFixture<GeneralRoomComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GeneralRoomLayoutComponent ]
+      declarations: [ GeneralRoomComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GeneralRoomLayoutComponent);
+    fixture = TestBed.createComponent(GeneralRoomComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
