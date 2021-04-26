@@ -10,7 +10,7 @@ import { GeneralRoomLayoutComponent } from './_share/components/general-room-lay
 @NgModule({
   declarations: [
     AppComponent,
-    GeneralRoomLayoutComponent
+    GeneralRoomLayoutComponent,
   ],
   imports: [
     BrowserModule,
