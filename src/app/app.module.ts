@@ -5,11 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-<<<<<<< HEAD
-import { GeneralRoomLayoutComponent } from './_shared/components/general-room-layout/general-room-layout.component';
-=======
 
->>>>>>> dev
 
 @NgModule({
   declarations: [
