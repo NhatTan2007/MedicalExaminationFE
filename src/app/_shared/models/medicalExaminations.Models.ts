@@ -6,7 +6,6 @@ export abstract class AExaminationRooms
 
   constructor() {
      this.IsRegistered = false;
-
    }
 }
 
@@ -78,8 +77,8 @@ export class NeurologyExamination extends AExaminationRooms //Thần kinh - tâm
 {
 	Neurosurgery 		: string;
 	NeurosurgeryLevel	: number;
-	Psychiatry 		: string;
-	PsychiatryLevel	: number;
+	Psychiatry 		    : string;
+	PsychiatryLevel	    : number;
 }
 
 export class ObstetricsAndGynecologyExamination extends AExaminationRooms //Sản phụ khoa
