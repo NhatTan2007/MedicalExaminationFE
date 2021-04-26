@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { GeneralRoomLayoutComponent } from './_shared/components/general-room-layout/general-room-layout.component';
 
 const routes: Routes = [
 	{
-		path: "hanh-chinh",
-		component: ,
+		path: "",
+		component: GeneralRoomLayoutComponent,
 		children: [
 			{
 				path: "",
