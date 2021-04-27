@@ -21,8 +21,14 @@ export class MedicalService{
     departmentId: string;
 }
 
-export class MedicalServiceRes{
+export interface CreateMedicalServiceRes{
     mServiceId  : number;
+    message     : string;
+    success     : boolean;
+}
+
+export interface UpdateMedicalServiceRes{
+    medicalService: MedicalService;
     message     : string;
     success     : boolean;
 }

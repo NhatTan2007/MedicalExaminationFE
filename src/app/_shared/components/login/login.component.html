@@ -1,0 +1,32 @@
+<div class="body">
+    <div class="text-center logo pt-2">
+        <img class="logo" src="../../../../assets/logo-so-y-te.png" alt="Logo Sở y tế tỉnh Thừa Thiên Huế">
+        <h2>Sở y tế tỉnh Thừa Thiên Huế</h2>
+    </div>
+    <div class="float-right pr-5">
+        <h1 class="text-center"><strong>PHÒNG BẢO VỆ SỨC KHỎE CÁN BỘ</strong></h1>
+        <h1 class="text-center"><strong>THỪA THIÊN HUẾ</strong></h1>
+    </div>
+    <form class="container border loginForm" [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Tên đăng nhập</mat-label>
+            <input type="text" matInput formControlName="username"/>
+            <!-- <span class="error" *ngIf="">Tên đăng nhập không tồn tại</span>     -->
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Mật khẩu</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button href="javascript:;" mat-icon-button matSuffix 
+                (click)="hide = !hide" [attr.aria-label]="'Hide password'" 
+                [attr.aria-pressed]="hide"
+                class="text-decoration-none">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-checkbox class="w-100" color="primary" formControlName="remember">Ghi nhớ tài khoản</mat-checkbox>
+        <div>
+            <button mat-flat-button color="primary" type="submit">Đăng nhập</button>
+            <a [routerLink]="" class="float-right text-decoration-none">Quên mật khẩu</a>
+        </div>
+    </form>
+</div>
