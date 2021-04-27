@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GeneralRoomComponent implements OnInit {
   public pathCreateOrganization = "tao-to-chuc"
+  public pathListOrganizations = "danh-sach-to-chuc"
   constructor() { }
 
   ngOnInit(): void {
