@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ogranization-list.component.scss']
 })
 export class OgranizationListComponent implements OnInit {
-
+  pathOrganizationDetails = "/auth/phong-tong-hop/tao-dot-kham-to-chuc"
   constructor() { }
 
   ngOnInit(): void {
