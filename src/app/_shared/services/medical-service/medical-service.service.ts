@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from "../config/config.service";
-import { MedicalServiceRes,
+import { CreateMedicalServiceRes,
+			UpdateMedicalServiceRes,
           	CreateMedicalServiceReq,
           	UpdateMedicalServiceReq,
 			MedicalService} from "../../models/medicalService.Models";
@@ -25,13 +26,13 @@ export class MedicalServiceService {
 			.pipe(map(res => <MedicalService[]>res))
 	}
 
-	CreateMedicalServices(medicalService: CreateMedicalServiceReq): Observable<MedicalServiceRes>{
+	CreateMedicalServices(medicalService: CreateMedicalServiceReq): Observable<CreateMedicalServiceRes>{
 		return this.httpClient.post(`${this.apiDomain}/create`, medicalService)
-			.pipe(map(res => <MedicalServiceRes>res))
+			.pipe(map(res => <CreateMedicalServiceRes>res))
 	}
 
-	UpdateMedicalServices(medicalService: UpdateMedicalServiceReq): Observable<MedicalServiceRes>{
+	UpdateMedicalServices(medicalService: UpdateMedicalServiceReq): Observable<UpdateMedicalServiceRes>{
 		return this.httpClient.post(`${this.apiDomain}/create`, medicalService)
-			.pipe(map(res => <MedicalServiceRes>res))
+			.pipe(map(res => <UpdateMedicalServiceRes>res))
 	}
 }

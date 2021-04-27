@@ -1,12 +1,33 @@
+export class MedicalRecordDetails{
+    abdominalUltrasound: AbdominalUltrasound
+    bloodTests: BloodTests
+    breastUltrasound: BreastUltrasound
+    cardiacUltrasoundProbes: CardiacUltrasoundProbes
+    chestXray: ChestXray
+    clinicalUrineTests: ClinicalUrineTests
+    dermatologyExamination: DermatologyExamination
+    internalMedicineExamination: InternalMedicineExamination
+    medicalImagingDiagnostics: MedicalImagingDiagnostics
+    neurologyExamination: NeurologyExamination
+    obstetricsAndGynecologyExamination: ObstetricsAndGynecologyExamination
+    ophthalmologyExamination: OphthalmologyExamination
+    oralAndMaxillofacialExamination: OralAndMaxillofacialExamination
+    otorhinolaryngologyExamination: OtorhinolaryngologyExamination
+    physicalExamination: PhysicalExamination
+    surgeryExamination: SurgeryExamination
+    thyroidUltrasound: ThyroidUltrasound
+}
+
 export abstract class AExaminationRooms
 {
-  MServiceId 	: number;
-  IsRegistered	: boolean;
-  Price			: number;
+    departmentId    : string
+    MServiceId 	    : number
+    IsRegistered	: boolean
+    Price			: number
 
-  constructor() {
-     this.IsRegistered = false;
-   }
+    constructor() {
+        this.IsRegistered = false;
+    }
 }
 
 export class AbdominalUltrasound extends AExaminationRooms // Siêu âm bụng - Chẩn đoán hình ảnh
