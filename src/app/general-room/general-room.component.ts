@@ -1,17 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { NavLinkLeft } from '../_shared/models/linkNavLeft.Model';
 
 @Component({
-  selector: 'app-general-room',
-  templateUrl: './general-room.component.html',
-  styleUrls: ['./general-room.component.scss']
+	selector: 'app-general-room',
+	templateUrl: './general-room.component.html',
+	styleUrls: ['./general-room.component.scss']
 })
 export class GeneralRoomComponent implements OnInit {
-  public pathCreateOrganization = "tao-to-chuc"
-  public pathListOrganizations = "danh-sach-to-chuc"
-  public pathserviceslist = "danh-sach-dich-vu"
-  constructor() { }
+	navLinks: NavLinkLeft[] = []
+	constructor() { }
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+		this.AddNavLinks("Tạo thông tin bệnh nhân","#");
+		this.AddNavLinks("Tạo bệnh án mới","#");
+		this.AddNavLinks("Điều chỉnh giá dịch vụ","danh-sach-dich-vu");
+		this.AddNavLinks("Danh sách tổ chức","danh-sach-to-chuc");
+		this.AddNavLinks("Tạo tổ chức","tao-to-chuc");
+	}
+
+	AddNavLinks(name, path){
+		let newNavLink = new NavLinkLeft(name, path);
+		this.navLinks.push(newNavLink);
+	}
 
 }

@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { GeneralRoomRoutingModule } from './general-room-routing.module';
 import { CreateNewPatientComponent } from './create-new-patient/create-new-patient.component';
 import { GeneralRoomComponent } from './general-room.component';
-
-import { CreateOgranizationExaminationComponent } from './create-ogranization-examination/create-ogranization-examination.component';
+import { CreateOgranizationComponent } from "./create-ogranization/create-ogranization.component";
+import { OrganizationDetailsComponent } from './organization-details/organization-details.component';
 import { OgranizationListComponent } from './ogranization-list/ogranization-list.component';
 import { ServicesListComponent } from './services-list/services-list.component';
+import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 
 
@@ -15,14 +16,16 @@ import { ServicesListComponent } from './services-list/services-list.component';
   declarations: [
     CreateNewPatientComponent,
     GeneralRoomComponent,
-    CreateOgranizationExaminationComponent,
+    OrganizationDetailsComponent,
     OgranizationListComponent,
+    CreateOgranizationComponent,
     ServicesListComponent
-
   ],
   imports: [
     CommonModule,
-    GeneralRoomRoutingModule
+    GeneralRoomRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class GeneralRoomModule { }
