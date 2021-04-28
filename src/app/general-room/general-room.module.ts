@@ -9,8 +9,8 @@ import { OrganizationDetailsComponent } from './organization-details/organizatio
 import { OgranizationListComponent } from './ogranization-list/ogranization-list.component';
 import { ServicesListComponent } from './services-list/services-list.component';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-
-
+import { CreateCustomerExaminationComponent } from './create-customer-examination/create-customer-examination.component';
+import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,9 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     OrganizationDetailsComponent,
     OgranizationListComponent,
     CreateOgranizationComponent,
-    ServicesListComponent
+    ServicesListComponent,
+    CreateCustomerExaminationComponent,
+    CreateCustomerInformationComponent,
   ],
   imports: [
     CommonModule,
