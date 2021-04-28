@@ -7,6 +7,7 @@ import { GeneralRoomComponent } from './general-room.component';
 import { CreateOgranizationComponent } from "./create-ogranization/create-ogranization.component";
 import { OrganizationDetailsComponent } from './organization-details/organization-details.component';
 import { OgranizationListComponent } from './ogranization-list/ogranization-list.component';
+import { ServicesListComponent } from './services-list/services-list.component';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 
 
@@ -17,7 +18,8 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
     GeneralRoomComponent,
     OrganizationDetailsComponent,
     OgranizationListComponent,
-    CreateOgranizationComponent
+    CreateOgranizationComponent,
+    ServicesListComponent
   ],
   imports: [
     CommonModule,
