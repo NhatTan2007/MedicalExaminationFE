@@ -13,7 +13,7 @@ export class GeneralRoomComponent implements OnInit {
 	ngOnInit(): void {
 		this.AddNavLinks("Tạo thông tin bệnh nhân","#");
 		this.AddNavLinks("Tạo bệnh án mới","#");
-		this.AddNavLinks("Điều chỉnh giá dịch vụ","#");
+		this.AddNavLinks("Điều chỉnh giá dịch vụ","danh-sach-dich-vu");
 		this.AddNavLinks("Danh sách tổ chức","danh-sach-to-chuc");
 		this.AddNavLinks("Tạo tổ chức","tao-to-chuc");
 	}

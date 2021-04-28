@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { OrganizationDetailsComponent } from './organization-details/organization-details.component';
 import { CreateOgranizationComponent } from './create-ogranization/create-ogranization.component';
 import { OgranizationListComponent } from './ogranization-list/ogranization-list.component';
+import { ServicesListComponent } from './services-list/services-list.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
     path: "danh-sach-to-chuc",
     component: OgranizationListComponent
   },
+  {
+    path: "danh-sach-dich-vu",
+    component: ServicesListComponent
+  }
 ];
 
 @NgModule({
