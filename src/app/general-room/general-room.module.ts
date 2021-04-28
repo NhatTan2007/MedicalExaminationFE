@@ -7,16 +7,17 @@ import { GeneralRoomComponent } from './general-room.component';
 
 import { CreateOgranizationExaminationComponent } from './create-ogranization-examination/create-ogranization-examination.component';
 import { OgranizationListComponent } from './ogranization-list/ogranization-list.component';
+import { ServicesListComponent } from './services-list/services-list.component';
 
 
 
 @NgModule({
   declarations: [
     CreateNewPatientComponent,
-
     GeneralRoomComponent,
     CreateOgranizationExaminationComponent,
-    OgranizationListComponent
+    OgranizationListComponent,
+    ServicesListComponent
 
   ],
   imports: [
