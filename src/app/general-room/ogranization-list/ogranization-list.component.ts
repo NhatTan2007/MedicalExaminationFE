@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Organization } from 'src/app/_shared/models/organization.Models';
 import { OrganizationService } from 'src/app/_shared/services/organization/organization.service';
 
@@ -12,7 +13,8 @@ export class OgranizationListComponent implements OnInit {
 	createOrganizationPath = "/auth/phong-tong-hop/tao-to-chuc"
 	organizations: Organization[] = []
 	constructor(private organizationService: OrganizationService,
-					private router: Router) {}
+				private router: Router,
+				private  spinner: NgxSpinnerService){}
 
 	ngOnInit(): void {
 		this.GetOrganizations()
