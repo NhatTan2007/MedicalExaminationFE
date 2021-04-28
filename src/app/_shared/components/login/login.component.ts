@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatFormFieldControl } from '@angular/material/form-field';
 import { AccountLogin } from '../../models/accountLogin.Model';
 
 @Component({
@@ -15,8 +14,8 @@ export class LoginComponent implements OnInit {
 
     ngOnInit(): void {
 		this.loginForm = this.formBuilder.group({
-			username: [null, [Validators.required]],
-			password: [null, [Validators.required]],
+			username: ["", [Validators.required]],
+			password: ["", [Validators.required]],
 			remember: [false]
 		})
     }
@@ -29,7 +28,7 @@ export class LoginComponent implements OnInit {
 		this.loginForm.patchValue(
 			{
 				username: this.loginForm.get("username").value,
-				password: null
+				password: ""
 			}
 		)
 	}
