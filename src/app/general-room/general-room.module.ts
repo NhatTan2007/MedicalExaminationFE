@@ -19,9 +19,11 @@ import { CreateCustomerInformationComponent } from './create-customer-informatio
     OrganizationDetailsComponent,
     OgranizationListComponent,
     CreateOgranizationComponent,
+
     ServicesListComponent,
     CreateCustomerExaminationComponent,
     CreateCustomerInformationComponent,
+
   ],
   imports: [
     CommonModule,
