@@ -10,6 +10,8 @@ import { OgranizationListComponent } from './ogranization-list/ogranization-list
 import { ServicesListComponent } from './services-list/services-list.component';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { CreateCustomerExaminationComponent } from './create-customer-examination/create-customer-examination.component';
+import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     OgranizationListComponent,
     CreateOgranizationComponent,
     ServicesListComponent,
+    CreateCustomerExaminationComponent,
+    CreateCustomerInformationComponent,
   ],
   imports: [
     CommonModule,

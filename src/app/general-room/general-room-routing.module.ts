@@ -6,6 +6,10 @@ import { CreateOgranizationComponent } from './create-ogranization/create-ograni
 import { OgranizationListComponent } from './ogranization-list/ogranization-list.component';
 import { ServicesListComponent } from './services-list/services-list.component';
 
+import { CreateCustomerExaminationComponent } from './create-customer-examination/create-customer-examination.component';
+import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
+
+
 const routes: Routes = [
   {
     path: "tao-to-chuc",
@@ -22,7 +26,16 @@ const routes: Routes = [
   {
     path: "danh-sach-dich-vu",
     component: ServicesListComponent
+  },
+  {
+    path:"tao-benh-an-benh-nhan",
+    component: CreateCustomerExaminationComponent
+  },
+  {
+    path:"tao-thong-tin-benh-nhan",
+    component: CreateCustomerInformationComponent
   }
+
 ];
 
 @NgModule({
