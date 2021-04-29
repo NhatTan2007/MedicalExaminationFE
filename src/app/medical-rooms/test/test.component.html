@@ -1,0 +1,33 @@
+<div class="d-flex flex-row justify-content-center">
+  <div class="p-3">
+    <a href="#"> Hồ sơ bệnh nhân</a>
+  </div>
+  <div class="p-3">
+    <a href="#"> Chẩn đoán </a>
+  </div>
+  <div class="p-3">
+    <a href="#"> Hình ảnh</a>
+  </div>
+</div>
+
+<form [formGroup]="createForm1" (ngSubmit)="onSubmit1()">
+  <div class="form-group mt-3">
+    <label for="comment">Xét nghiệm máu</label>
+    <textarea class="form-control" rows="5" formControlName="result1">
+    </textarea>
+  </div>
+  <div class=" mt-2 d-flex justify-content-end">
+    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
+  </div>
+</form>
+
+<form [formGroup]="createForm2" (ngSubmit)="onSubmit2()">
+  <div class="form-group mt-3">
+    <label for="comment">Xét nghiệm nước tiểu</label>
+    <textarea class="form-control" rows="5" formControlName="result2">
+    </textarea>
+  </div>
+  <div class=" mt-2 d-flex justify-content-end">
+    <button type="submit " class="btn btn-primary">Submit</button>
+  </div>
+</form>

@@ -1,0 +1,21 @@
+<div class="d-flex flex-row justify-content-center">
+  <div class="p-3">
+    <a href="#"> Hồ sơ bệnh nhân</a>
+  </div>
+  <div class="p-3">
+    <a href="#"> Chẩn đoán </a>
+  </div>
+  <div class="p-3">
+    <a href="#"> Hình ảnh</a>
+  </div>
+</div>
+
+<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
+  <div class="form-group mt-3">
+    <label for="comment">Mắt</label>
+    <textarea class="form-control" rows="5" formControlName="result"></textarea>
+  </div>
+  <div class=" mt-2 d-flex justify-content-end">
+    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
+  </div>
+</form>
