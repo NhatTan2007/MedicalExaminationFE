@@ -89,7 +89,7 @@ export class InternalMedicineExamination extends AExaminationRooms // Nội khoa
     MusculoskeletalLevel 	: number;
 }
 
-export class MedicalImagingDiagnostics extends AExaminationRooms //Chẩn đoán hình ảnh
+export class MedicalImagingDiagnostics extends AExaminationRooms //Chẩn đoán hình ảnh - Chẩn đoán hình ảnh y tế
 {
 	Result: string;
 }
