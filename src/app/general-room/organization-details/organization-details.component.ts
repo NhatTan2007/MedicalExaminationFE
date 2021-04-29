@@ -40,7 +40,6 @@ export class OrganizationDetailsComponent implements OnInit {
 			})
 			this.spinner.hide();
 		})
-
 	}
 
 	getOrganization(id: string): Observable<Organization>{
