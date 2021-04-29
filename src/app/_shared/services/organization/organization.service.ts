@@ -39,7 +39,7 @@ export class OrganizationService {
 	}
 
 	UpdateOrganization(organization: UpdateOrganizationReq): Observable<UpdateOrganizationRes>{
-		return this.httpClient.put(`${this.apiDomain}/create`, organization)
+		return this.httpClient.put(`${this.apiDomain}/update`, organization)
 		.pipe(map(res => res as UpdateOrganizationRes))
 	}
 }

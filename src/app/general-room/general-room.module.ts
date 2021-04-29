@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { GeneralRoomRoutingModule } from './general-room-routing.module';
@@ -9,6 +9,9 @@ import { OrganizationDetailsComponent } from './organization-details/organizatio
 import { OgranizationListComponent } from './ogranization-list/ogranization-list.component';
 import { ServicesListComponent } from './services-list/services-list.component';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 import { CreateCustomerExaminationComponent } from './create-customer-examination/create-customer-examination.component';
 import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
 
@@ -30,6 +33,8 @@ import { CreateCustomerInformationComponent } from './create-customer-informatio
     GeneralRoomRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-  ]
+    NgxSpinnerModule
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class GeneralRoomModule { }
