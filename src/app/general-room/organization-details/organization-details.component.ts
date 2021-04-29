@@ -19,7 +19,7 @@ export class OrganizationDetailsComponent implements OnInit {
 	constructor(private activatedRoute: ActivatedRoute,
 				private organizationService: OrganizationService,
 				private router: Router,
-				private  spinner: NgxSpinnerService,
+				private spinner: NgxSpinnerService,
 				private formBuilder: FormBuilder){}
 
 	async ngOnInit(): Promise<void> {

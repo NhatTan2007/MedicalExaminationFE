@@ -14,14 +14,20 @@ export class OgranizationListComponent implements OnInit {
 	organizations: Organization[] = []
 	constructor(private organizationService: OrganizationService,
 				private router: Router,
-				private  spinner: NgxSpinnerService){}
+				private spinner: NgxSpinnerService){}
 
 	ngOnInit(): void {
-		this.GetOrganizations()
+		this.spinner.show();
+		this.GetOrganizations();
+		
 	}
 
 	GetOrganizations(){
-		this.organizationService.GetOrganizations().toPromise<Organization[]>().then(res => this.organizations = res)
+		this.organizationService.GetOrganizations()
+			.toPromise<Organization[]>().then((res) => {
+				this.organizations = res
+				this.spinner.hide();
+			}, () => {this.spinner.hide()})
 	}
 
 	GetDetailsOrganization(organizationId: string){
