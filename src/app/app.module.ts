@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './_shared/components/login/login.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [AppComponent, MainLayoutComponent, LoginComponent],
@@ -29,8 +30,9 @@ import { LoginComponent } from './_shared/components/login/login.component';
     MatIconModule,
     MatButtonModule,
     MatCheckboxModule,
+    NgxSpinnerModule,
   ],
-
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
   exports: [FormsModule, ReactiveFormsModule],

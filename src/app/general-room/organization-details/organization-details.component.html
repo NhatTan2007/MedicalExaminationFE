@@ -1,67 +1,88 @@
-<form>
-  <div>
-      <label>Tên tổ chức:</label>
-      <input type="text" class="form-control" placeholder="Enter groupname" required>
-  </div>
-  <div class="form-row">
-      <div class="col">
-          <label>Sô điện thoại của tổ chức:</label>
-          <input type="number" class="form-control" placeholder="Enter numberphone" required>
-      </div>
-      <div class="col">
-          <label>Email của tổ chức:</label>
-          <input type="email" class="form-control" placeholder="Enter email" required>
-      </div>
-  </div>
-  <div>
-      <label>Địa chỉ của tổ chức:</label>
-      <input type="text" class="form-control" placeholder="Enter address" required>
-  </div>
-  <div class="form-row">
-      <div class="col">
-          <label>Tên người liên hệ của tổ chức:</label>
-          <input type="text" class="form-control" placeholder="Enter person contact" required>
-      </div>
-      <div class="col">
-          <label>Email của người liên hệ:</label>
-          <input type="email" class="form-control" placeholder="Enter email" required>
-      </div>
-  </div>
-  <div class="form-row">
-      <div class="col">
-          <label>Số điện thoại của người liên hệ:</label>
-          <input type="number" class="form-control" placeholder="Enter numberphone" required>
-      </div>
-     <div class="col mt-4 ">
-          <button type="button" class="btn btn-primary">Xuất chi tiết đợt khám</button>
-          <button type="submit" class="btn btn-warning">Tạo đợt khám mới</button>
+<form *ngIf="$organization | async" [formGroup] = "formModify" (ngSubmit)="updateOrganizationInfo()">
+    <div class="form-group">
+        <label for="#organizationName">Tên tổ chức:</label>
+        <input  type="text" class="form-control" 
+                formControlName="organizationName"
+                #organizationName [attr.disabled]="!update ? true : null">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="#organizationPhoneNumber">Số điện thoại</label>
+            <input  type="text" class="form-control" 
+                    formControlName="organizationPhoneNumber"
+                    #organizationPhoneNumber [attr.disabled]="!update ? true : null">
+        </div>
+        <div class="form-group col-6">
+            <label for="#organizationEmail">Email</label>
+            <input  type="text" class="form-control" 
+                    formControlName="organizationEmail"
+                    #organizationEmail [attr.disabled]="!update ? true : null">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="#organizationAddress">Địa chỉ</label>
+        <input  type="text" class="form-control" 
+                formControlName="organizationAddress"
+                #organizationAddress [attr.disabled]="!update ? true : null">
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="#personContact">Người liên hệ</label>
+            <input  type="text" class="form-control" 
+                    formControlName="personContact"
+                    #personContact [attr.disabled]="!update ? true : null">
+        </div>
+        <div class="form-group col-6">
+            <label for="#emailContact">Email người liên hệ</label>
+            <input  type="text" class="form-control" 
+                    formControlName="emailContact"
+                    #emailContact [attr.disabled]="!update ? true : null"  pattern="(^[\w])+([\w._])*\@([\w{2,}\-])+(\.[\w]{2,4})$">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="#phoneContact">Điện thoại liên hệ</label>
+        <input  type="text" class="form-control" 
+                formControlName="phoneContact"
+                #phoneContact [attr.disabled]="!update ? true : null">
+    </div>
+    <div class="d-flex">
+        <a  class="btn btn-primary"
+            href="javascript:;"
+            (click)="openUpdate()"
+            *ngIf="!update">Chỉnh sửa</a>
+        <button class="btn btn-primary" type="submit"
+                *ngIf="update">Xác nhận</button>
+        <a type="button" class="btn btn-info ml-2 mr-2">Xuất chi tiết đợt khám</a>
+        <a type="submit" class="btn btn-success">Tạo đợt khám mới</a>
+        </div>
+    </form>
+    <form class="mt-2">
+    <div class="row">
+        <div class="col-2 border">
+            <div class="list-group">
+                <h6>Đợt khám</h6>
 
-     </div>
-  </div>
+                <ul>
+                    <li>bla bla</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-3 border">
+            <div class="list-group">
+                <h6>Danh sách nhân viên</h6>
+
+            </div>
+        </div>
+        <div class="col-7 border">
+            <div class="list-group">
+                <h6>Danh sách dịch vụ</h6>
+
+            </div>
+        </div>
+    </div>
 </form>
-<form class="mt-2">
-  <div class="row">
-      <div class="col-2 border">
-          <div class="list-group">
-            <h6>Đợt khám</h6>
-
-             <ul>
-                 <li>bla bla</li>
-             </ul>
-          </div>
-      </div>
-      <div class="col-3 border">
-          <div class="list-group">
-            <h6>Danh sách nhân viên</h6>
-
-           </div>
-      </div>
-      <div class="col-7 border">
-          <div class="list-group">
-            <h6>Danh sách dịch vụ</h6>
-
-           </div>
-      </div>
-  </div>
-
-</form>
+<ngx-spinner
+    fullScreen = false
+    color = "#fff"
+    type = "ball-clip-rotate"
+></ngx-spinner>
