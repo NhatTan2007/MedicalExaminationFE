@@ -19,6 +19,7 @@ export class MedicalService{
     price       : number;
     isActive    : boolean;
     departmentId: string;
+    update      : boolean
 }
 
 export interface CreateMedicalServiceRes{

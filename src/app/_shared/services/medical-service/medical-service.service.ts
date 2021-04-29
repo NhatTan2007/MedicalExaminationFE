@@ -18,7 +18,17 @@ export class MedicalServiceService {
 
 	GetMedicalServices(): Observable<MedicalService[]>{
 		return this.httpClient.get(`${this.apiDomain}`)
-			.pipe(map(res => <MedicalService[]>res))
+			.pipe(
+					map(res => (<MedicalService[]>res)
+						.map(e => ({...e, update: false}))
+						)
+				)
+			
+	}
+
+	GetMedicalService(medicalServiceId: number): Observable<MedicalService>{
+		return this.httpClient.get(`${this.apiDomain}/${medicalServiceId}`)
+		.pipe(map(res => res as MedicalService))
 	}
 
 	GetActiveMedicalServices(): Observable<MedicalService[]>{
@@ -32,7 +42,12 @@ export class MedicalServiceService {
 	}
 
 	UpdateMedicalServices(medicalService: UpdateMedicalServiceReq): Observable<UpdateMedicalServiceRes>{
-		return this.httpClient.post(`${this.apiDomain}/create`, medicalService)
+		return this.httpClient.put(`${this.apiDomain}/update`, medicalService)
 			.pipe(map(res => <UpdateMedicalServiceRes>res))
+	}
+
+	GetMedicalServiceByDepartmentId(search: string): Observable<MedicalService[]>{
+		return this.httpClient.get(`${this.apiDomain}/search/${search}`)
+		.pipe(map(res => res as MedicalService[]))
 	}
 }

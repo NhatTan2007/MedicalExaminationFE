@@ -8,7 +8,9 @@ import { OrganizationDetailsComponent } from './organization-details/organizatio
 import { OgranizationListComponent } from './ogranization-list/ogranization-list.component';
 import { ServicesListComponent } from './services-list/services-list.component';
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
+
 import { NgxSpinnerModule } from 'ngx-spinner';
+
 import { CreateCustomerExaminationComponent } from './create-customer-examination/create-customer-examination.component';
 import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
 import { MatRadioModule } from '@angular/material/radio';
@@ -21,9 +23,11 @@ import { MatNativeDateModule } from "@angular/material/core";
     OrganizationDetailsComponent,
     OgranizationListComponent,
     CreateOgranizationComponent,
+
     ServicesListComponent,
     CreateCustomerExaminationComponent,
     CreateCustomerInformationComponent,
+
   ],
   imports: [
     CommonModule,
