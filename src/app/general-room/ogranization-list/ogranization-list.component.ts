@@ -19,7 +19,6 @@ export class OgranizationListComponent implements OnInit {
 	ngOnInit(): void {
 		this.spinner.show();
 		this.GetOrganizations();
-		
 	}
 
 	GetOrganizations(){

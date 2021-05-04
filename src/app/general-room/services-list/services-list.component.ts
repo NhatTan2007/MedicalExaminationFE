@@ -21,7 +21,6 @@ constructor(private medicalServiceService: MedicalServiceService,
 ngOnInit(): void {
 	this.spinner.show();
 	this.GetServicesList()
-	this.spinner.hide();
 }
 
 GetMedicalService(id: number): Observable<MedicalService>{
@@ -32,6 +31,9 @@ GetServicesList(){
 	this.medicalServiceService.GetMedicalServices()
 		.toPromise<MedicalService[]>().then((res) => {
 		this.medicalServices = res
+		this.spinner.hide();
+		}, () => {
+			this.spinner.hide();
 		})
 }
 
@@ -66,16 +68,16 @@ updatePrice(price: number, service: MedicalService){
 		service.price = Number(price)
 	}
 }
-	isActive(isactive: MedicalService){
-		let index = this.medicalServices.indexOf(isactive)
-		if(index != -1){
-			isactive.isActive = true
-		}
+activeService(isactive: MedicalService){
+	let index = this.medicalServices.indexOf(isactive)
+	if(index != -1){
+		isactive.isActive = true
 	}
-	deIsActive(isactive: MedicalService){
-		let index = this.medicalServices.indexOf(isactive)
-		if(index != -1){
-			isactive.isActive = false
-		}
+}
+deactiveService(isactive: MedicalService){
+	let index = this.medicalServices.indexOf(isactive)
+	if(index != -1){
+		isactive.isActive = false
 	}
+}
 }

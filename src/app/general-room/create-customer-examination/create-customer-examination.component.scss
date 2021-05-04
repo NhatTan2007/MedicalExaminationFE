@@ -1,0 +1,16 @@
+input{
+    height: 100%;
+    border-radius: 5px !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header{
+    height: 48px !important;
+}
+
+::ng-deep .mat-horizontal-content-container{
+    padding: 0 0 12px 0 !important;
+}
+
+p{
+    margin-bottom: 6px !important;
+}
