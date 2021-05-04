@@ -14,6 +14,7 @@ import { ConfigService } from '../config/config.service';
 })
 export class MedicalRecordService {
     protected apiDomain = `${this.config.getDomain()}/MedicalRecord`
+	newMedicalRecord: CreateMedicalRecordReq;
     constructor(private config: ConfigService,
                 private httpClient: HttpClient) { }
 

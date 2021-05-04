@@ -37,4 +37,9 @@ export class CustomerService {
 		return this.httpClient.get(`${this.apiDomain}/search/${keyword}`)
 		.pipe(map(res => res as Customer[]));
 	}
+
+	GetCustomerByIdentityNumber(identityNumber: string): Observable<Customer>{
+		return this.httpClient.get(`${this.apiDomain}/identityNumber/${identityNumber}`)
+		.pipe(map(res => res as Customer));
+	}
 }

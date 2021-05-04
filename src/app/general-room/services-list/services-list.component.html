@@ -12,32 +12,70 @@
 		</div>
 	</div>
 	<div class="col-12 mt-3">
-		<table class="table table-bordered table-hover">
+		<table class="table table-hover table-bordered">
 			<thead class="thead-light">
-				<tr class="text-center text-uppercase">
+					<tr class="text-center text-uppercase">
 					<th class="p-1">STT</th>
 					<th class="p-1" >Tên dịch vụ</th>
 					<th class="p-1 w-25" >Giá</th>
-					<th style="width: 220px" class="p-1" ></th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngFor="let service of medicalServices; let idx = index">
-					<td class="text-center align-middle" style="width: 5px p-1">{{idx + 1}}</td>
-					<td class="p-1 align-middle" >{{service.mServiceName}}</td>
-					<td class="p-1 w-25 align-middle" >
-						<input (change)="updatePrice($event.target.value, service)" 
+				<tr *ngFor="let service of medicalServices; let idx = index" class="">
+					<td class="text-center align-middle" 
+						style="width: 50px">{{idx + 1}}
+					</td>
+					<td class="p-1 align-middle" *ngIf="service.isActive"
+						style="font-size: 1rem;">{{service.mServiceName}}
+					</td>
+					<td class="p-1 align-middle text-danger" *ngIf="!service.isActive"
+					style="font-size: 1rem;">{{service.mServiceName}}
+					</td>
+					<td class="p-1 align-middle d-flex" >
+						<input 	(keyup.enter)="updateMedicalServiceInfo(service)"
+								(change)="updatePrice($event.target.value, service)" 
 								type="text" class="form-control" 
-								[disabled]="!service.update" value="{{service.price}}">
-					<td class="p-1" style="width: 220px">
-						<a class="btn btn-warning mr-1 mr-lg-2 p-1 p-lg-2" (click)="openModify(service)" *ngIf="!service.update">Chỉnh giá</a>
-						<a class="btn btn-success mr-1 mr-lg-2 p-1 p-lg-2" (click)="updateMedicalServiceInfo(service)" *ngIf="service.update">Cập nhật</a>
-						<a class="btn btn-primary p-1 p-lg-2" (click)="isActive(service)" *ngIf="!service.isActive">Kích hoạt</a>
-						<a class="btn btn-danger p-1 p-lg-2" (click)="deIsActive(service)" *ngIf="service.isActive">Hủy kích hoạt</a>
+								[disabled]="!service.update" value="{{service.price}}"
+								style="height: 40px">
+						<button mat-icon-button [matMenuTriggerFor]="menu"
+								class="border-0 menu-action float-right"
+								style="background-color: transparent; top: 0; right: 0;">
+						<mat-icon>more_vert</mat-icon>
+						</button>
+						<mat-menu #menu="matMenu">
+							<button mat-menu-item 
+								(click)="openModify(service)" 
+								*ngIf="!service.update">
+								<mat-icon class="text-primary">build</mat-icon>
+								<span>Chỉnh giá</span>
+							</button>
+							<button mat-menu-item 
+								(click)="updateMedicalServiceInfo(service)" 
+								*ngIf="service.update">
+								<mat-icon class="text-info">check_circle</mat-icon>
+								<span>Cập nhật</span>
+							</button>
+							<button mat-menu-item 
+								(click)="activeService(service)" 
+								*ngIf="!service.isActive">
+								<mat-icon class="text-success">check</mat-icon>
+								<span>Kích hoạt</span>
+							</button>
+							<button mat-menu-item 
+								(click)="deactiveService(service)" 
+								*ngIf="service.isActive">
+								<mat-icon class="text-danger">remove_circle</mat-icon>
+								<span>Hủy kích hoạt</span>
+							</button>
+						</mat-menu>								  
 					</td>
 				</tr>
 			</tbody>
 		</table>
 	</div>
-
 </div>
+<ngx-spinner
+    fullScreen = false
+    color = "#fff"
+    type = "ball-clip-rotate"
+></ngx-spinner>

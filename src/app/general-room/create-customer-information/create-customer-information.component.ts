@@ -38,7 +38,6 @@ export class CreateCustomerInformationComponent implements OnInit {
 			this.customerService.CreateCustomer(this.createForm.value as CreateCustomerReq)
 				.subscribe((res) => {
 					if(res.success) this.router.navigate(['']);
-					console.log(res.customerId)
 				})
 		}
 	}

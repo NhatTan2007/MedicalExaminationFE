@@ -13,6 +13,7 @@ export class CreateCustomerReq{
 
 export class Customer extends CreateCustomerReq{
     customerId: string
+    fullName = this.lastName + this.firstName
 }
 
 export class UpdateCustomerReq extends Customer{
