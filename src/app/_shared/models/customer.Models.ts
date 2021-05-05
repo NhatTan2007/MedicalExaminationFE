@@ -3,7 +3,7 @@ export class CreateCustomerReq{
     lastName: string
     dateOfBirth: Date
     email: string
-    adress: string
+    address: string
     phoneNumber: string
     identityNumber: string
     gender: boolean
