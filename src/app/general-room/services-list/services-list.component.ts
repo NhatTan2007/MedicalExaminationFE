@@ -20,14 +20,14 @@ constructor(private medicalServiceService: MedicalServiceService,
 
 ngOnInit(): void {
 	this.spinner.show();
-	this.GetServicesList()
+	this.getServicesList()
 }
 
-GetMedicalService(id: number): Observable<MedicalService>{
+getMedicalService(id: number): Observable<MedicalService>{
 	return this.medicalServiceService.GetMedicalService(id);
 }
 
-GetServicesList(){
+getServicesList(){
 	this.medicalServiceService.GetMedicalServices()
 		.toPromise<MedicalService[]>().then((res) => {
 		this.medicalServices = res
@@ -37,7 +37,7 @@ GetServicesList(){
 		})
 }
 
-SeachMedicalService(keyword: string){
+seachMedicalService(keyword: string){
 	this.medicalServiceService.GetMedicalServiceByDepartmentId(keyword)
 							.subscribe((res) => this.medicalServices = res);
 }
@@ -56,8 +56,10 @@ async updateMedicalServiceInfo(service: MedicalService){
 				if(res.success) {
 					service = res.medicalService
 					service.update = false
-					console.log(this.medicalServices)
 				}
+			},
+			() => {
+				this.getServicesList()
 			}
 		);
 }

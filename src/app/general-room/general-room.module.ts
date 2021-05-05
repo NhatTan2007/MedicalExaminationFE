@@ -10,6 +10,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 import { GeneralRoomRoutingModule } from './general-room-routing.module';
 import { GeneralRoomComponent } from './general-room.component';
@@ -19,7 +21,9 @@ import { OgranizationListComponent } from './ogranization-list/ogranization-list
 import { ServicesListComponent } from './services-list/services-list.component';
 import { CreateCustomerExaminationComponent } from './create-customer-examination/create-customer-examination.component';
 import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
+import { ListCustomerComponent } from './list-customer/list-customer.component';
 
+export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
 	declarations: [
@@ -30,6 +34,7 @@ import { CreateCustomerInformationComponent } from './create-customer-informatio
 		ServicesListComponent,
 		CreateCustomerExaminationComponent,
 		CreateCustomerInformationComponent,
+    ListCustomerComponent,
 	],
 	imports: [
 		CommonModule,
@@ -44,7 +49,9 @@ import { CreateCustomerInformationComponent } from './create-customer-informatio
 		MatMenuModule,
 		MatIconModule,
 		MatButtonModule,
-		MatStepperModule
+		MatStepperModule,
+		MatCheckboxModule,
+		NgxMaskModule.forRoot()
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

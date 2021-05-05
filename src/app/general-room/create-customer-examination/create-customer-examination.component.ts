@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Customer } from 'src/app/_shared/models/customer.Models';
-import { CreateMedicalRecordReq } from 'src/app/_shared/models/medicalRecord.Models';
+import { AExaminationRooms, MedicalRecordDetails } from 'src/app/_shared/models/medicalExaminationDetails.Models';
+import { CreateMedicalRecordReq, CreateMedicalRecordRes } from 'src/app/_shared/models/medicalRecord.Models';
 import { MedicalService } from 'src/app/_shared/models/medicalService.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 import { MedicalServiceService } from 'src/app/_shared/services/medical-service/medical-service.service';
@@ -19,7 +20,9 @@ export class CreateCustomerExaminationComponent implements OnInit {
 	isSearch = false
 	services: MedicalService[] = []
 	medicalHistoryFrom: FormGroup
-	medicalServices: FormGroup
+	selectedServices: MedicalService[] = []
+	servicesInMedicalRecord: AExaminationRooms[] = []
+	checkAll = false
 	newMedicalRecord: CreateMedicalRecordReq
 	constructor(private customerService: CustomerService,
 				private medicalService: MedicalServiceService,
@@ -28,7 +31,6 @@ export class CreateCustomerExaminationComponent implements OnInit {
 				private formBuilder: FormBuilder) { }
 
 	ngOnInit(): void {
-		this.spiner.show();
 		this.getMedicalServices();
 		this.medicalHistoryFrom = this.formBuilder.group({
 			reasonToExamination: ['', Validators.required],
@@ -44,31 +46,48 @@ export class CreateCustomerExaminationComponent implements OnInit {
 	getCustomerByIdentityNumber(){
 		this.spiner.show();
 		this.customerService.GetCustomerByIdentityNumber(this.customerIdentityNumber)
-			.subscribe((res) => {
+			.toPromise().then(async (res) => {
 				this.customer = res
 				if(this.customer != null){
 					this.customer.fullName = `${this.customer.lastName} ${this.customer.firstName}`
-					this.newMedicalRecord = this.medicalRecordService.newMedicalRecord = new CreateMedicalRecordReq(this.customer.customerId);
+					this.newMedicalRecord = new CreateMedicalRecordReq(this.customer.customerId);
 					this.isSearch = false;
-					this.spiner.hide();
+					this.newMedicalRecord.customerLastName = this.customer.lastName;
+					this.newMedicalRecord.customerFirstName = this.customer.firstName;
+					this.servicesInMedicalRecord = await this.medicalRecordService.getListServicesFromMedicalRecord(this.newMedicalRecord.details);
 				}
 				if(this.customer == null) this.isSearch = true
+				this.spiner.hide();
 			})
+	}
+
+	cancelCreate(){
+		this.customer = null
+		this.newMedicalRecord = null
 	}
 
 	getMedicalServices(){
 		this.medicalService.GetActiveMedicalServices().toPromise().then((res) => {
 			this.services = res
-			this.spiner.hide();
-			console.log(this.services)
 		})
 	}
 
 	submitFirstStep(){
 		if(this.medicalHistoryFrom.valid){
-			this.bindingDataStep1();
+			this.bindingDataFirstStep();
 		}
-		console.log(this.newMedicalRecord);
+	}
+
+	selectServices(service: MedicalService, selected: boolean){
+		let index = this.selectedServices.indexOf(service)
+		if(selected && index == -1){
+			this.selectedServices.push(service)
+			this.newMedicalRecord.totalAmount += service.price
+		}
+		if(!selected && index != -1){
+			this.selectedServices.splice(index, 1);
+			this.newMedicalRecord.totalAmount -= service.price
+		}
 	}
 
 	resetFirstStep(){
@@ -81,20 +100,47 @@ export class CreateCustomerExaminationComponent implements OnInit {
 			medicationsIsUsing: '',
 			pregnancyHistory: ''
 		})
-		this.bindingDataStep1();
+		this.bindingDataFirstStep();
 	}
 
-	getValueFromField(nameField: string, form: FormGroup){
+
+	private getValueFromField(nameField: string, form: FormGroup){
 		return form.get(nameField).value;
 	}
 
-	bindingDataStep1(){
+	private bindingDataFirstStep(){
 		this.newMedicalRecord.reasonToExamination = this.getValueFromField("reasonToExamination", this.medicalHistoryFrom);
-		this.newMedicalRecord.medicalHistory.medicalHistoryFamily.haveOrNot = this.getValueFromField("medicalHistoryFamilyHaveOrNot", this.medicalHistoryFrom);
+		this.newMedicalRecord.medicalHistory.medicalHistoryFamily.haveOrNot = this.getValueFromField("medicalHistoryFamilyHaveOrNot", this.medicalHistoryFrom) == 0 ? false : true;
 		this.newMedicalRecord.medicalHistory.medicalHistoryFamily.details = this.getValueFromField("medicalHistoryFamilyDetails", this.medicalHistoryFrom);
-		this.newMedicalRecord.medicalHistory.medicalHistoryCustomer.haveOrNot = this.getValueFromField("medicalHistoryCustomerHaveOrNot", this.medicalHistoryFrom);
+		this.newMedicalRecord.medicalHistory.medicalHistoryCustomer.haveOrNot = this.getValueFromField("medicalHistoryCustomerHaveOrNot", this.medicalHistoryFrom) == 0 ? false : true;
 		this.newMedicalRecord.medicalHistory.medicalHistoryCustomer.details = this.getValueFromField("medicalHistoryCustomerDetails", this.medicalHistoryFrom);
 		this.newMedicalRecord.medicalHistory.anotherQuetions.medicationsIsUsing = this.getValueFromField("medicationsIsUsing", this.medicalHistoryFrom);
 		this.newMedicalRecord.medicalHistory.anotherQuetions.pregnancyHistory = this.getValueFromField("pregnancyHistory", this.medicalHistoryFrom);
+	}
+
+	private isServiceRegisterd(service: AExaminationRooms): number{
+		for (let index = 0; index < this.selectedServices.length; index++){
+			if(this.selectedServices[index].mServiceId == service.mServiceId) return index
+		}
+		return -1
+	}
+
+	createMedicalRecord(){
+		for (let i = 0; i < this.servicesInMedicalRecord.length; i++) {
+			let index = this.isServiceRegisterd(this.servicesInMedicalRecord[i])
+			if(index != -1){
+				this.servicesInMedicalRecord[i].isRegistered = true
+				this.servicesInMedicalRecord[i].price = this.selectedServices[index].price
+			}
+		}
+		this.newMedicalRecord.details = <MedicalRecordDetails>this.servicesInMedicalRecord.reduce((obj, value) => {
+											obj[value.objName] = value;
+											return obj;
+										}, {})
+		this.newMedicalRecord.isActive = true
+		this.medicalRecordService.CreateMedicalRecord(this.newMedicalRecord)
+			.subscribe((res) => {
+				res as CreateMedicalRecordRes
+			})
 	}
 }

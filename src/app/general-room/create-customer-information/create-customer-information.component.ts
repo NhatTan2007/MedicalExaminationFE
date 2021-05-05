@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { CreateCustomerReq } from 'src/app/_shared/models/customer.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 
@@ -13,7 +14,8 @@ export class CreateCustomerInformationComponent implements OnInit {
 	createForm: FormGroup
 	constructor(private customerService: CustomerService,
 				private formBuilder: FormBuilder,
-				private router: Router) { }
+				private router: Router,
+				private spiner: NgxSpinnerService) { }
 
 	ngOnInit(): void {
 		this.createForm = this.formBuilder.group({
@@ -31,14 +33,14 @@ export class CreateCustomerInformationComponent implements OnInit {
 	}
 
 	CreateCustomer(){
-		console.log(this.createForm.valid)
 		if(this.createForm.valid){
+			this.spiner.show();
 			let newCustomer = this.createForm.value as CreateCustomerReq
-			newCustomer.gender = this.createForm.get("dateOfBirth").value == 0 ? false : true
+			newCustomer.gender = this.createForm.get("gender").value == 0 ? false : true
 			this.customerService.CreateCustomer(this.createForm.value as CreateCustomerReq)
 				.subscribe((res) => {
 					if(res.success) this.router.navigate(['']);
-				})
+				},() => {}, () => {this.spiner.hide()})
 		}
 	}
 

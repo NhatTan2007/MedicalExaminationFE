@@ -1,0 +1,29 @@
+<div>
+    <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Tìm bằng CMND/hộ chiếu</mat-label>
+        <input matInput placeholder="Tìm bằng CMND/hộ chiếu">
+        <mat-icon style="cursor: pointer;" matSuffix>search</mat-icon>
+    </mat-form-field>
+</div>
+
+<div class="border" style="border-radius: 5px;">
+    <table class="table-sm table-striped w-100">
+        <tbody>
+            <tr *ngFor="let medicalRecord of listActiveMedicalRecord">
+                <td>
+                    <a (click)="getMedicalRecord(medicalRecord.medicalRecordId)" href="javascript:;" 
+                        class="text-decoration-none text-dark">
+                        <span class="text-left d-block">{{medicalRecord.medicalRecordId}}</span>
+                        <span class="text-right d-block">{{medicalRecord.customerFullName}}</span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ngx-spinner
+	fullScreen = false
+	color = "#fff"
+	type = "ball-clip-rotate">
+</ngx-spinner>
