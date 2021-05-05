@@ -15,8 +15,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './_shared/components/login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+
 @NgModule({
-  declarations: [AppComponent, MainLayoutComponent, LoginComponent],
+  declarations: [AppComponent, MainLayoutComponent, LoginComponent, ],
   imports: [
     BrowserModule,
     AppRoutingModule,

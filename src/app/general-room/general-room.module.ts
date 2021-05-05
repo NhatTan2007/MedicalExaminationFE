@@ -16,6 +16,7 @@ import { CreateCustomerInformationComponent } from './create-customer-informatio
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from "@angular/material/core";
+import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MatNativeDateModule } from "@angular/material/core";
     ServicesListComponent,
     CreateCustomerExaminationComponent,
     CreateCustomerInformationComponent,
+    DetailCustomerComponent,
 
   ],
   imports: [
