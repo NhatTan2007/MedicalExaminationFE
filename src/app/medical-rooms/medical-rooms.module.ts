@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-<<<<<<< HEAD
-=======
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { NgxSpinnerModule } from 'ngx-spinner';
->>>>>>> dev
 
 import { MedicalRoomsRoutingModule } from './medical-rooms-routing.module';
 import { MedicalRoomsComponent } from './medical-rooms.component';
@@ -23,10 +20,7 @@ import { OtorhinolaryngologyExaminationComponent } from './otorhinolaryngology-e
 import { PhysicalExaminationComponent } from './physical-examination/physical-examination.component';
 import { SurgeryExaminationComponent } from './surgery-examination/surgery-examination.component';
 import { NeurologyExaminationComponent } from './neurology-examination/neurology-examination.component';
-<<<<<<< HEAD
-=======
 import { ListActiveMedicalRecordComponent } from './list-active-medical-record/list-active-medical-record.component';
->>>>>>> dev
 
 @NgModule({
   declarations: [
@@ -43,23 +37,17 @@ import { ListActiveMedicalRecordComponent } from './list-active-medical-record/l
     OtorhinolaryngologyExaminationComponent,
     PhysicalExaminationComponent,
     SurgeryExaminationComponent,
-<<<<<<< HEAD
-=======
     ListActiveMedicalRecordComponent,
->>>>>>> dev
   ],
   imports: [
     CommonModule,
     MedicalRoomsRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-<<<<<<< HEAD
-=======
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    NgxSpinnerModule
->>>>>>> dev
+    NgxSpinnerModule,
   ],
 })
 export class MedicalRoomsModule {}

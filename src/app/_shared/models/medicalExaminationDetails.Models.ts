@@ -109,11 +109,6 @@ export class BreastUltrasound extends AExaminationRooms {
   }
 }
 
-<<<<<<< HEAD
-export class MedicalImagingDiagnostics extends AExaminationRooms //Chẩn đoán hình ảnh - Chẩn đoán hình ảnh y tế
-{
-	Result: string;
-=======
 export class CardiacUltrasoundProbes extends AExaminationRooms {
   // Thăm dò tim mạch - Chẩn đoán hình ảnh
   cardiacUltrasoundProbesResult: string;
@@ -127,7 +122,6 @@ export class CardiacUltrasoundProbes extends AExaminationRooms {
     this.doctorName = '';
     this.cardiacUltrasoundProbesResult = '';
   }
->>>>>>> dev
 }
 
 export class ChestXray extends AExaminationRooms {
