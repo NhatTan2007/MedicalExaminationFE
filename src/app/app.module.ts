@@ -16,6 +16,7 @@ import { LoginComponent } from './_shared/components/login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
+<<<<<<< HEAD
   declarations: [AppComponent, MainLayoutComponent, LoginComponent],
   imports: [
     BrowserModule,
@@ -36,5 +37,27 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   providers: [],
   bootstrap: [AppComponent],
   exports: [FormsModule, ReactiveFormsModule],
+=======
+	declarations: [AppComponent, MainLayoutComponent, LoginComponent],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		NgbModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatIconModule,
+		MatButtonModule,
+		MatCheckboxModule,
+		NgxSpinnerModule,
+	],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	providers: [],
+	bootstrap: [AppComponent],
+	exports: [FormsModule, ReactiveFormsModule],
+>>>>>>> dev
 })
 export class AppModule {}

@@ -4,7 +4,8 @@
 			<a *ngFor="let link of navLinks"
 				[routerLink]="link.path"
 				routerLinkActive="active"
-				class="list-group-item list-group-item-action">{{link.name}}</a>
+				class="list-group-item list-group-item-action"
+				style="font-size: 1rem; font-weight: 500;">{{link.name}}</a>
 		</div>
 	</div>
 	<div class="w-100 p-0 ml-2 position-relative">

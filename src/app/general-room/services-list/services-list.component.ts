@@ -20,22 +20,24 @@ constructor(private medicalServiceService: MedicalServiceService,
 
 ngOnInit(): void {
 	this.spinner.show();
-	this.GetServicesList()
-	this.spinner.hide();
+	this.getServicesList()
 }
 
-GetMedicalService(id: number): Observable<MedicalService>{
+getMedicalService(id: number): Observable<MedicalService>{
 	return this.medicalServiceService.GetMedicalService(id);
 }
 
-GetServicesList(){
+getServicesList(){
 	this.medicalServiceService.GetMedicalServices()
 		.toPromise<MedicalService[]>().then((res) => {
 		this.medicalServices = res
+		this.spinner.hide();
+		}, () => {
+			this.spinner.hide();
 		})
 }
 
-SeachMedicalService(keyword: string){
+seachMedicalService(keyword: string){
 	this.medicalServiceService.GetMedicalServiceByDepartmentId(keyword)
 							.subscribe((res) => this.medicalServices = res);
 }
@@ -54,8 +56,10 @@ async updateMedicalServiceInfo(service: MedicalService){
 				if(res.success) {
 					service = res.medicalService
 					service.update = false
-					console.log(this.medicalServices)
 				}
+			},
+			() => {
+				this.getServicesList()
 			}
 		);
 }
@@ -66,16 +70,16 @@ updatePrice(price: number, service: MedicalService){
 		service.price = Number(price)
 	}
 }
-	isActive(isactive: MedicalService){
-		let index = this.medicalServices.indexOf(isactive)
-		if(index != -1){
-			isactive.isActive = true
-		}
+activeService(isactive: MedicalService){
+	let index = this.medicalServices.indexOf(isactive)
+	if(index != -1){
+		isactive.isActive = true
 	}
-	deIsActive(isactive: MedicalService){
-		let index = this.medicalServices.indexOf(isactive)
-		if(index != -1){
-			isactive.isActive = false
-		}
+}
+deactiveService(isactive: MedicalService){
+	let index = this.medicalServices.indexOf(isactive)
+	if(index != -1){
+		isactive.isActive = false
 	}
+}
 }

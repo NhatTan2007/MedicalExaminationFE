@@ -2,6 +2,12 @@
 
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
 
 html, body { min-height: 100vh; height: 100%; }
 body {
@@ -23,13 +29,14 @@ label{
 }
 
 .btn{
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.5rem !important;
 }
 
 .mat-radio-button.mat-accent.mat-radio-checked
 .mat-radio-outer-circle{
     border-color: #3f51b5;
 }
+
 
 .mat-radio-button.mat-accent
 .mat-radio-inner-circle,
