@@ -34,7 +34,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		ServicesListComponent,
 		CreateCustomerExaminationComponent,
 		CreateCustomerInformationComponent,
-  ListCustomerComponent,
+    ListCustomerComponent,
 	],
 	imports: [
 		CommonModule,
