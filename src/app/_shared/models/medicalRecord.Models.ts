@@ -56,7 +56,9 @@ export class CreateMedicalRecordReq{
         this.isActive = false;
         this.isPaid = false;
         this.isGroup = false;
+        this.totalAmount = 0;
     }
+
 }
 
 export class MedicalRecord extends CreateMedicalRecordReq{
@@ -74,6 +76,7 @@ export interface MedicalRecordViewRes{
     medicalRecordId: string
     customerFirstName: string
     customerLastName: string
+    customerFullName: string
     isActive: boolean
     isPaid: boolean
 }

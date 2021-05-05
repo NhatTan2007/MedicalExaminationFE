@@ -2,7 +2,7 @@
 	<div class="col-12">
 		<div class="mt-1">
 			<div class="input-group">
-				<input (change)="SeachMedicalService($event.target.value)" class="form-control py-2" placeholder="tìm kiếm theo tên id phòng ban" type="search" value="" id="example-search-input">
+				<input (change)="seachMedicalService($event.target.value)" class="form-control py-2" placeholder="Tìm kiếm theo tên id phòng ban" type="search" value="" id="example-search-input">
 				<span class="input-group-append">
 					<button class="btn btn-outline-secondary" type="button">
 						<i class="fa fa-search"></i>
@@ -32,10 +32,12 @@
 					style="font-size: 1rem;">{{service.mServiceName}}
 					</td>
 					<td class="p-1 align-middle d-flex" >
+						<div 	*ngIf="!service.update"
+								class="w-100 d-flex align-items-center flex-row-reverse">{{service.price | mask: 'separator':'.'}}</div>
 						<input 	(keyup.enter)="updateMedicalServiceInfo(service)"
 								(change)="updatePrice($event.target.value, service)" 
-								type="text" class="form-control" 
-								[disabled]="!service.update" value="{{service.price}}"
+								type="text" class="form-control text-right" 
+								[hidden]="!service.update" value="{{service.price}}"
 								style="height: 40px">
 						<button mat-icon-button [matMenuTriggerFor]="menu"
 								class="border-0 menu-action float-right"
