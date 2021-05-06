@@ -15,7 +15,8 @@ export class CustomerService {
 
 	GetCustomers(): Observable<Customer[]>{
 		return this.httpClient.get(`${this.apiDomain}`)
-			.pipe(map(res => res as Customer[]));
+			.pipe(map(res => (res as Customer[])
+										.map(c => ({...c, fullName: `${c.lastName} ${c.firstName}`}))));
 	}
 
 	GetCustomer(customerId: string): Observable<Customer>{
@@ -29,13 +30,14 @@ export class CustomerService {
 	}
 
 	UpdateCustomer(customer: UpdateCustomerReq): Observable<UpdateCustomerRes>{
-		return this.httpClient.put(`${this.apiDomain}/create`, customer)
+		return this.httpClient.put(`${this.apiDomain}/update`, customer)
 		.pipe(map(res => res as UpdateCustomerRes));
 	}
 
 	SearchCustomer(keyword: string): Observable<Customer[]>{
 		return this.httpClient.get(`${this.apiDomain}/search/${keyword}`)
-		.pipe(map(res => res as Customer[]));
+			.pipe(map(res => (res as Customer[])
+										.map(c => ({...c, fullName: `${c.lastName} ${c.firstName}`}))));
 	}
 
 	GetCustomerByIdentityNumber(identityNumber: string): Observable<Customer>{

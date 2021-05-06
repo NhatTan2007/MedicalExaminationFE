@@ -21,6 +21,7 @@ import { OgranizationListComponent } from './ogranization-list/ogranization-list
 import { ServicesListComponent } from './services-list/services-list.component';
 import { CreateCustomerExaminationComponent } from './create-customer-examination/create-customer-examination.component';
 import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
+import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
 import { ListCustomerComponent } from './list-customer/list-customer.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -34,7 +35,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		ServicesListComponent,
 		CreateCustomerExaminationComponent,
 		CreateCustomerInformationComponent,
-    ListCustomerComponent,
+    	ListCustomerComponent,
+		DetailCustomerComponent
 	],
 	imports: [
 		CommonModule,
