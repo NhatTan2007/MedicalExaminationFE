@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-obstetrics-and-gynecology-examination',
   templateUrl: './obstetrics-and-gynecology-examination.component.html',
-  styleUrls: ['./obstetrics-and-gynecology-examination.component.scss']
+  styleUrls: ['./obstetrics-and-gynecology-examination.component.scss'],
 })
 export class ObstetricsAndGynecologyExaminationComponent implements OnInit {
   createForm: FormGroup;
@@ -20,5 +20,4 @@ export class ObstetricsAndGynecologyExaminationComponent implements OnInit {
   onSubmit(): void {
     console.log(this.createForm.value);
   }
-
 }
