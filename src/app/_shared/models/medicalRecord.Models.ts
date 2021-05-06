@@ -58,7 +58,6 @@ export class CreateMedicalRecordReq{
         this.isGroup = false;
         this.totalAmount = 0;
     }
-
 }
 
 export class MedicalRecord extends CreateMedicalRecordReq{
