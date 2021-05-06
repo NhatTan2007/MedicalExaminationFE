@@ -23,10 +23,12 @@ export class OgranizationListComponent implements OnInit {
 
 	GetOrganizations(){
 		this.organizationService.GetOrganizations()
-			.toPromise<Organization[]>().then((res) => {
+			.subscribe((res) => {
 				this.organizations = res
 				this.spinner.hide();
-			}, () => {this.spinner.hide()})
+			},(error) => {
+				this.spinner.hide();
+			})
 	}
 
 	GetDetailsOrganization(organizationId: string){
