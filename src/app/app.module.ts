@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './_shared/components/login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TokenInterceptor } from './_shared/interceptor/tokenInterceptor';
 
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent, LoginComponent],
@@ -33,7 +34,13 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 		NgxSpinnerModule,
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
-	providers: [],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: TokenInterceptor,
+			multi: true
+		}
+	],
 	bootstrap: [AppComponent],
 	exports: [FormsModule, ReactiveFormsModule],
 })
