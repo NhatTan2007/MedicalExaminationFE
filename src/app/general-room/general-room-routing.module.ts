@@ -9,6 +9,7 @@ import { ServicesListComponent } from './services-list/services-list.component';
 import { CreateCustomerExaminationComponent } from './create-customer-examination/create-customer-examination.component';
 import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
 import { ListCustomerComponent } from './list-customer/list-customer.component';
+import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,10 @@ const routes: Routes = [
 	{
 		path: "ds-benh-nhan",
 		component: ListCustomerComponent
+	},
+	{
+		path:"chi-tiet-benh-nhan/:customerId",
+		component: DetailCustomerComponent
 	}
 
 ];
