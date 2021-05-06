@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AExaminationRooms, MedicalRecordDetails } from '../../models/medicalExaminationDetails.Models';
 import { CreateMedicalRecordReq,
 			CreateMedicalRecordRes,
 			MedicalRecord,
@@ -14,8 +15,20 @@ import { ConfigService } from '../config/config.service';
 })
 export class MedicalRecordService {
     protected apiDomain = `${this.config.getDomain()}/MedicalRecord`
+	medicalRecord: MedicalRecord
     constructor(private config: ConfigService,
                 private httpClient: HttpClient) { }
+
+	async getListServicesFromMedicalRecord(medicalRecordDetails: MedicalRecordDetails): Promise<AExaminationRooms[]>{ 
+		let services: AExaminationRooms[] = []
+		for(let serviceName in medicalRecordDetails){  
+			if(medicalRecordDetails.hasOwnProperty(serviceName)){  
+				medicalRecordDetails[serviceName].objName = serviceName
+				services.push(medicalRecordDetails[serviceName]);  
+			}  
+		}
+		return services
+	}
 
 	CreateMedicalRecord(medicalRecord: CreateMedicalRecordReq): Observable<CreateMedicalRecordRes>{
 		return this.httpClient.post(`${this.apiDomain}/create`, medicalRecord)
@@ -37,9 +50,9 @@ export class MedicalRecordService {
 			.pipe(map(res => res as UpdateMedicalRecordRes))
 	}
 
-	SearchActiveMedicalRecord(searchKey: string): Observable<MedicalRecordViewRes>{
-		return this.httpClient.get(`${this.apiDomain}/searchActive/${searchKey}`)
-			.pipe(map(res => res as MedicalRecordViewRes))
+	GetActiveMedicalRecord(): Observable<MedicalRecordViewRes[]>{
+		return this.httpClient.get(`${this.apiDomain}/getActive`)
+			.pipe(map(res => res as MedicalRecordViewRes[]))
 	}
 	
 }

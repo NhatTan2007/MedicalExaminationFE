@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router} from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs';
+import { empty, Observable } from 'rxjs';
+import { AExaminationRooms } from 'src/app/_shared/models/medicalExaminationDetails.Models';
 import { Organization } from 'src/app/_shared/models/organization.Models';
 import { OrganizationService } from 'src/app/_shared/services/organization/organization.service';
 
@@ -16,6 +17,7 @@ export class OrganizationDetailsComponent implements OnInit {
 	$organization: Observable<Organization>
 	formModify: FormGroup
 	update = false
+	arr: AExaminationRooms[] = []
 	constructor(private activatedRoute: ActivatedRoute,
 				private organizationService: OrganizationService,
 				private router: Router,
@@ -57,9 +59,13 @@ export class OrganizationDetailsComponent implements OnInit {
 		this.organizationService.UpdateOrganization(updateOrganization).subscribe(
 			(res) => {
 				if(res.success) this.organization = res.organization
-				console.log(res)
+				for (let key in res){
+					if(res.hasOwnProperty(key)){
+						console.log(res[key])
+					}
+				}
 			}
-		);
+		)
 	}
 
 }

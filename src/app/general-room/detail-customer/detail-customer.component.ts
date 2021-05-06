@@ -17,6 +17,7 @@ export class DetailCustomerComponent implements OnInit {
   customer: Customer
 	$customer: Observable<Customer>
 	formModify: FormGroup
+  update = false
   constructor(private activatedRoute: ActivatedRoute,
               private customerService: CustomerService,
               private router: Router,
@@ -30,17 +31,18 @@ export class DetailCustomerComponent implements OnInit {
 		this.$customer.subscribe((res) => {
 			this.customer = res
 			if(this.customer == null) this.router.navigate(['not-found'])
+      console.log(new Date(res.dateOfBirth).toISOString())
 			this.formModify = this.formBuilder.group({
 				firstName: [res.firstName,[Validators.required]],
-        lastName: [res.lastName,[Validators.required]],
-        dateOfBirth: [res.dateOfBirth,[Validators.required]],
-        email: [res.email,[Validators.required]],
-        adress: [res.adress,[Validators.required]],
-        phoneNumber: [res.phoneNumber,[Validators.required]],
-        identityNumber: [res.identityNumber,[Validators.required]],
-        gender: [res.gender,[Validators.required]],
-        dateOfIssuanceIdentityNumber: [res.dateOfIssuanceIdentityNumber,[Validators.required]],
-        placeOfIssuanceIdentityNumber: [res.placeOfIssuanceIdentityNumber,[Validators.required]],
+				lastName: [res.lastName,[Validators.required]],
+				dateOfBirth: [new Date(res.dateOfBirth).toISOString().substring(0,10),[Validators.required]],
+				email: [res.email,[Validators.required]],
+				address: [res.address,[Validators.required]],
+				phoneNumber: [res.phoneNumber,[Validators.required]],
+				identityNumber: [res.identityNumber,[Validators.required]],
+				gender: [res.gender,[Validators.required]],
+				dateOfIssuanceIdentityNumber: [new Date(res.dateOfIssuanceIdentityNumber).toISOString().substring(0,10),[Validators.required]],
+				placeOfIssuanceIdentityNumber: [res.placeOfIssuanceIdentityNumber,[Validators.required]],
 			})
 			this.spinner.hide();
 		})
@@ -48,6 +50,54 @@ export class DetailCustomerComponent implements OnInit {
 
   getCustomer(id: string): Observable<Customer>{
 		return this.customerService.GetCustomer(id)
+	}
+  
+  openUpdate(){
+		this.update = true
+	}
+
+  updateCustomerInfo(){
+		this.update = false
+		let updateCustomer: Customer = this.formModify.value as Customer
+		updateCustomer.customerId = this.customer.customerId
+    console.log(updateCustomer)
+		this.customerService.UpdateCustomer(updateCustomer).subscribe(
+			(res) => {
+				if(res.success) this.customer = res.customer
+				for (let key in res){
+					if(res.hasOwnProperty(key)){
+						console.log(res[key])
+					}
+				}
+			},
+			() => {
+				this.restoreData()
+      		}
+		)
+	}
+
+	back(){
+		this.update = false,
+		() => {
+			this.restoreData()
+		}
+	}
+
+  	restoreData(){
+		this.formModify.reset(
+			{
+				firstName: this.customer.firstName,
+				lastName: this.customer.lastName,
+				dateOfBirth: new Date(this.customer.dateOfBirth).toISOString().substring(0,10),
+				email: this.customer.email,
+				address: this.customer.address,
+				phoneNumber: this.customer.phoneNumber,
+				identityNumber: this.customer.identityNumber,
+				gender: this.customer.gender,
+				dateOfIssuanceIdentityNumber: new Date(this.customer.dateOfIssuanceIdentityNumber).toISOString().substring(0,10),
+				placeOfIssuanceIdentityNumber: this.customer.placeOfIssuanceIdentityNumber,
+			}
+		);
 	}
 
 }
