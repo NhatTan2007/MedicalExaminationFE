@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 })
 export class ConfigService {
-	private domain = "http://api.khamskdinhky.tech"
+	private domain = "https://api.khamskdinhky.tech:5001"
 	tokenKey = ""
     constructor() { }
 

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/internal/Subject';
 import { map } from 'rxjs/operators';
 import { AExaminationRooms, MedicalRecordDetails } from '../../models/medicalExaminationDetails.Models';
 import { CreateMedicalRecordReq,
@@ -16,6 +17,7 @@ import { ConfigService } from '../config/config.service';
 export class MedicalRecordService {
     protected apiDomain = `${this.config.getDomain()}/MedicalRecord`
 	medicalRecord: MedicalRecord
+	medicalRecord$: Subject<MedicalRecord> = new Subject<MedicalRecord>();
     constructor(private config: ConfigService,
                 private httpClient: HttpClient) { }
 
@@ -28,6 +30,14 @@ export class MedicalRecordService {
 			}  
 		}
 		return services
+	}
+
+	getMedicalRecord$(): Observable<MedicalRecord>{
+		return this.medicalRecord$.asObservable();
+	}
+
+	emitMedicalRecord(medicalRecord: MedicalRecord): void{
+		this.medicalRecord$.next(medicalRecord);
 	}
 
 	CreateMedicalRecord(medicalRecord: CreateMedicalRecordReq): Observable<CreateMedicalRecordRes>{

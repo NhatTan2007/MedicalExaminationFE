@@ -23,7 +23,7 @@ export class CreateCustomerInformationComponent implements OnInit {
 			lastName: ['', [Validators.required]],
 			dateOfBirth: ['', [Validators.required]],
 			email: [''],
-			adress: ['', [Validators.required]],
+			address: ['', [Validators.required]],
 			phoneNumber: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^0+[0-9\\s]*")]],
 			identityNumber: ['', Validators.required],
 			gender: [null, Validators.required],
@@ -33,10 +33,12 @@ export class CreateCustomerInformationComponent implements OnInit {
 	}
 
 	CreateCustomer(){
+		
 		if(this.createForm.valid){
 			this.spiner.show();
 			let newCustomer = this.createForm.value as CreateCustomerReq
 			newCustomer.gender = this.createForm.get("gender").value == 0 ? false : true
+			console.log(newCustomer);
 			this.customerService.CreateCustomer(this.createForm.value as CreateCustomerReq)
 				.subscribe((res) => {
 					if(res.success) this.router.navigate(['']);
