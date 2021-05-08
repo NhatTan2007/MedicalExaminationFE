@@ -1,1 +1,47 @@
-<p>list-customer works!</p>
+<div class="row">
+    <div class="col-12">
+		<div class="mt-1">
+			<div class="input-group">
+				<input (change)="SearchCustomer($event.target.value)" class="form-control py-2" placeholder="Tìm kiếm theo tên bệnh nhân" type="search" value="" id="example-search-input">
+				<span class="input-group-append">
+					<button class="btn btn-outline-secondary" type="button">
+						<i class="fa fa-search"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="col-12 mt-3">
+		<table class="table table-bordered table-hover">
+			<thead class="thead-light text-center">
+				<tr>
+					<th>STT</th>
+					<th>Tên bệnh nhân</th>                 
+                    <th>Số điện thoại</th>
+                    <th>Số CMND/hộ chiếu</th>
+					<!-- <th></th> -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let cus of customers; let idx = index">
+					<td style="width: 10px">{{idx + 1}}</td>
+					<td><a (click)="GetDetailCustomer(cus.customerId)">{{cus.fullName}}</a></td>
+                    <td class="text-right">{{cus.phoneNumber}}</td>
+                    <td class="text-right">{{cus.identityNumber}}</td>
+					<!-- <td class="text-center" style="width: 120px;">
+						<a (click)="GetDetailCustomer(cus.customerId)"
+							class="btn btn-primary p-1">
+							Chi tiết
+						</a>
+					</td> -->
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<ngx-spinner
+	fullScreen = false
+	color = "#fff"
+	type = "ball-clip-rotate">
+</ngx-spinner>

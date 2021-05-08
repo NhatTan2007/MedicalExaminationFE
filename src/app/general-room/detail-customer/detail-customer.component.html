@@ -1,4 +1,4 @@
-<form [formGroup]="createForm" (ngSubmit)="CreateCustomer()">
+<form *ngIf="$customer | async" [formGroup] = "formModify" (ngSubmit)="updateCustomerInfo()">
     <div class="form-row">
         <div class="form-group col-6">
             <label for="#lastName">Họ</label>
@@ -19,17 +19,18 @@
             <mat-radio-group
                 class="example-radio-group"
                 formControlName="gender" #gender>
-                <mat-radio-button class="mr-2" value=1>
+                <mat-radio-button class="mr-2" value=1 [checked]="customer.gender == 1">
                     Nam
                 </mat-radio-button>
-                <mat-radio-button value=0>
+                <mat-radio-button value=0 [checked]="customer.gender == 0">
                     Nữ
                 </mat-radio-button>
             </mat-radio-group>
         </div>
         <div class="form-group col-3">
             <label for="#dateOfBirth" class="control-label p-0" >Ngày sinh</label>
-            <input #dateOfBirth class="form-control" formControlName="dateOfBirth" type="date">
+            <input class="form-control" formControlName="dateOfBirth" type="date"
+            #dateOfBirth>
         </div>   
         <div class="form-group col-6">
             <label for="#identityNumber">Số CMND/Hộ chiếu</label>
@@ -65,8 +66,43 @@
                 formControlName="address"
                 #address>
     </div>
-    <button class="btn btn-primary mr-2" type="submit">Tạo mới</button>
-    <a class="btn btn-warning" (click)="resetForm()" type="submit">Xóa nội dung</a>
+    <div class="d-flex">
+        <a  class="btn btn-primary"          
+            (click)="openUpdate()"
+            *ngIf="!update">Chỉnh sửa</a>
+        <button class="btn btn-primary" type="submit"
+                *ngIf="update">Xác nhận</button>
+        <a class="btn btn-warning ml-2"
+        (click)="back()"
+        *ngIf="update">Trở Lại</a>
+        </div>
+</form>
+    <hr>
+    <strong >lịch sử khám bệnh</strong>
+
+    <form class="mt-2">
+    <div class="row">
+        <div class="col-2 border">
+            <div class="list-group">
+                <h6>Đợt khám</h6>
+                <ul>
+                    <li>bla bla</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-3 border">
+            <div class="list-group">
+                <h6>Lý do khám bệnh</h6>
+
+            </div>
+        </div>
+        <div class="col-7 border">
+            <div class="list-group">
+                <h6>Danh sách dịch vụ</h6>
+
+            </div>
+        </div>
+    </div>
 </form>
 <ngx-spinner
 	fullScreen = false

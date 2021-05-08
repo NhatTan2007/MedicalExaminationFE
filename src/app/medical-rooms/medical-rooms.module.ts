@@ -21,6 +21,7 @@ import { PhysicalExaminationComponent } from './physical-examination/physical-ex
 import { SurgeryExaminationComponent } from './surgery-examination/surgery-examination.component';
 import { NeurologyExaminationComponent } from './neurology-examination/neurology-examination.component';
 import { ListActiveMedicalRecordComponent } from './list-active-medical-record/list-active-medical-record.component';
+import { CustomerInformationComponent } from './customer-information/customer-information.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ListActiveMedicalRecordComponent } from './list-active-medical-record/l
     PhysicalExaminationComponent,
     SurgeryExaminationComponent,
     ListActiveMedicalRecordComponent,
+    CustomerInformationComponent,
   ],
   imports: [
     CommonModule,

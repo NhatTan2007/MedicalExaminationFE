@@ -3,3 +3,9 @@ export class AccountLogin{
     password: string
     remember: boolean
 }
+
+export class AccountLoginRes{
+    departmentId: string
+    fullName: string
+    userId: string
+}

@@ -26,12 +26,13 @@ export class LoginComponent implements OnInit {
 		if(this.loginForm.valid){
 			let loginData = this.loginForm.value as AccountLogin
 			this.authService.login(loginData);
+		} else{
+			this.loginForm.patchValue(
+				{
+					username: this.loginForm.get("username").value,
+					password: ""
+				}
+			)
 		}
-		this.loginForm.patchValue(
-			{
-				username: this.loginForm.get("username").value,
-				password: ""
-			}
-		)
 	}
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Customer } from 'src/app/_shared/models/customer.Models';
 import { AExaminationRooms, MedicalRecordDetails } from 'src/app/_shared/models/medicalExaminationDetails.Models';
@@ -28,7 +29,8 @@ export class CreateCustomerExaminationComponent implements OnInit {
 				private medicalService: MedicalServiceService,
 				private medicalRecordService: MedicalRecordService,
 				private spiner: NgxSpinnerService,
-				private formBuilder: FormBuilder) { }
+				private formBuilder: FormBuilder,
+				private router: Router) { }
 
 	ngOnInit(): void {
 		this.getMedicalServices();
@@ -138,9 +140,14 @@ export class CreateCustomerExaminationComponent implements OnInit {
 											return obj;
 										}, {})
 		this.newMedicalRecord.isActive = true
+		this.newMedicalRecord.isPaid = true
 		this.medicalRecordService.CreateMedicalRecord(this.newMedicalRecord)
 			.subscribe((res) => {
 				res as CreateMedicalRecordRes
 			})
+	}
+
+	GetDetailCustomer(customerId: string){
+		this.router.navigate(['/auth/phong-tong-hop/chi-tiet-benh-nhan', customerId])
 	}
 }
