@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { MedicalRecordViewRes } from 'src/app/_shared/models/medicalRecord.Models';
+import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/med
 export class ListActiveMedicalRecordComponent implements OnInit {
 	listActiveMedicalRecord: MedicalRecordViewRes[] = []
 	constructor(private medicalRecordService: MedicalRecordService,
+				private customerService: CustomerService,
 				private spiner: NgxSpinnerService) { }
 
 	async ngOnInit(): Promise<void> {

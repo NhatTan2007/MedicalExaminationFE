@@ -23,7 +23,7 @@ export class CreateOgranizationComponent implements OnInit {
 				organizationAddress: ['', [Validators.required, Validators.minLength(10)]],
 				personContact: ['',[Validators.required]],
 				emailContact: ['', [Validators.required]],
-				phoneContact: ['', [Validators.required, Validators.minLength(10)]]
+				phoneContact: ['', [Validators.required, Validators.minLength(10), Validators.pattern("^0+[0-9\\s]*")]]
 			}
 		)
     }
