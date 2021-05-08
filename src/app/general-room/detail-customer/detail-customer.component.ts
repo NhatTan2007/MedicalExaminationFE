@@ -31,7 +31,6 @@ export class DetailCustomerComponent implements OnInit {
 		this.$customer.subscribe((res) => {
 			this.customer = res
 			if(this.customer == null) this.router.navigate(['not-found'])
-      console.log(new Date(res.dateOfBirth).toISOString())
 			this.formModify = this.formBuilder.group({
 				firstName: [res.firstName,[Validators.required]],
 				lastName: [res.lastName,[Validators.required]],
@@ -44,6 +43,7 @@ export class DetailCustomerComponent implements OnInit {
 				dateOfIssuanceIdentityNumber: [new Date(res.dateOfIssuanceIdentityNumber).toISOString().substring(0,10),[Validators.required]],
 				placeOfIssuanceIdentityNumber: [res.placeOfIssuanceIdentityNumber,[Validators.required]],
 			})
+			this.formModify.disable();
 			this.spinner.hide();
 		})
   }
@@ -54,6 +54,7 @@ export class DetailCustomerComponent implements OnInit {
   
   openUpdate(){
 		this.update = true
+		this.formModify.enable();
 	}
 
   updateCustomerInfo(){

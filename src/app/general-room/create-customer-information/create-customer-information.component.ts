@@ -33,6 +33,7 @@ export class CreateCustomerInformationComponent implements OnInit {
 	}
 
 	CreateCustomer(){
+		
 		if(this.createForm.valid){
 			this.spiner.show();
 			let newCustomer = this.createForm.value as CreateCustomerReq
