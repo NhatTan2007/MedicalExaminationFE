@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { MedicalRecordViewRes } from 'src/app/_shared/models/medicalRecord.Models';
+import { Observable } from 'rxjs';
+import { Subject } from 'rxjs/internal/Subject';
+import { MedicalRecord, MedicalRecordViewRes } from 'src/app/_shared/models/medicalRecord.Models';
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
 
 @Component({
@@ -10,6 +12,7 @@ import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/med
 })
 export class ListActiveMedicalRecordComponent implements OnInit {
 	listActiveMedicalRecord: MedicalRecordViewRes[] = []
+	medicalRecord: MedicalRecord
 	constructor(private medicalRecordService: MedicalRecordService,
 				private spiner: NgxSpinnerService) { }
 
@@ -29,7 +32,8 @@ export class ListActiveMedicalRecordComponent implements OnInit {
 	async getMedicalRecord(medicalRecordId: string){
 		await this.medicalRecordService.GetMedicalRecord(medicalRecordId)
 		.subscribe((res) => {
-			this.medicalRecordService.medicalRecord = res
+			this.medicalRecord = res
+			this.medicalRecordService.emitMedicalRecord(res);
 		})
 	}
 }

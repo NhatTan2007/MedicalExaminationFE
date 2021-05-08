@@ -38,6 +38,14 @@ export class MedicalRecordDetails{
     }
 }
 
+export class MedicalRecordDetailsUpdate extends MedicalRecordDetails{
+    medicalRecordId: string
+    constructor(medicalRecordId: string){
+        super()
+        this.medicalRecordId = medicalRecordId
+    }
+}
+
 export abstract class AExaminationRooms
 {
     departmentId    : string

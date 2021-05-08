@@ -140,6 +140,7 @@ export class CreateCustomerExaminationComponent implements OnInit {
 											return obj;
 										}, {})
 		this.newMedicalRecord.isActive = true
+		this.newMedicalRecord.isPaid = true
 		this.medicalRecordService.CreateMedicalRecord(this.newMedicalRecord)
 			.subscribe((res) => {
 				res as CreateMedicalRecordRes
