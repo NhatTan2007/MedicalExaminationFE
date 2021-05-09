@@ -1,17 +1,19 @@
-<div class="row">
-    <div class="col-12">
+<div class="w-100">
+    <div class="w-100">
 		<div class="mt-1">
 			<div class="input-group">
-				<input (change)="SearchCustomer($event.target.value)" class="form-control py-2" placeholder="Tìm kiếm theo tên bệnh nhân" type="search" value="" id="example-search-input">
+				<input (change)="SearchCustomer($event.target.value)" 
+						class="form-control py-2" 
+						placeholder="Tìm kiếm theo tên bệnh nhân hoặc CMND/Hộ chiếu" 
+						type="search" #searchPatient>
 				<span class="input-group-append">
-					<button class="btn btn-outline-secondary" type="button">
-						<i class="fa fa-search"></i>
-					</button>
+					<i class="fa fa-search input-group-text pt-0 pb-0"
+						style="cursor: pointer;" (click)="SearchCustomer(searchPatient.value)"></i>
 				</span>
 			</div>
 		</div>
 	</div>
-	<div class="col-12 mt-3">
+	<div class="w-100 mt-3">
 		<table class="table table-bordered table-hover">
 			<thead class="thead-light text-center">
 				<tr>
