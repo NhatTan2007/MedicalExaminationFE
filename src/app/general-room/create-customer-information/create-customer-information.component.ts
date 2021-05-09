@@ -51,7 +51,7 @@ export class CreateCustomerInformationComponent implements OnInit {
 			lastName: '',
 			dateOfBirth: '',
 			email: '',
-			adress: '',
+			address: '',
 			phoneNumber: '',
 			identityNumber: '',
 			gender: null,

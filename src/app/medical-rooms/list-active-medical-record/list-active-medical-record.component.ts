@@ -14,6 +14,7 @@ export class ListActiveMedicalRecordComponent implements OnInit {
 	listActiveMedicalRecord: MedicalRecordViewRes[] = []
 	medicalRecord: MedicalRecord
 	constructor(private medicalRecordService: MedicalRecordService,
+				private customerService: CustomerService,
 				private spiner: NgxSpinnerService) { }
 
 	async ngOnInit(): Promise<void> {
