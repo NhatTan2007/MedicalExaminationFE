@@ -2,14 +2,17 @@
   	<div class="w-100">
 		<div class="form-group">
 			<label for="#organizationName" class="form-label">Tên tổ chức</label>
-			<input 	#organizationName
+			<input 	[class.is-invalid]='createForm.get("organizationName").errors && createForm.get("organizationName").touched'
+					#organizationName
 					formControlName="organizationName" type="text"
 					class="form-control" placeholder="Nhập tên tổ chức">
+			<div class="invalid-feedback">Tên tổ chức không được để trống</div>		
 		</div>
 		<div class="form-row">
 			<div class="form-group col">
 				<label for="#organizationPhoneNumber">Số điện thoại</label>
-				<input	#organizationPhoneNumber
+				<input	
+						#organizationPhoneNumber
 						formControlName="organizationPhoneNumber"
 						type="tel" class="form-control" 
 						placeholder="Nhập số điện thoại">
@@ -23,31 +26,47 @@
 		</div>
 		<div class="form-group">
 			<label for="#organizationAddress">Địa chỉ</label>
-			<input 	#organizationAddress formControlName="organizationAddress" 
+			<input 	[class.is-invalid]='createForm.get("organizationAddress").errors && createForm.get("organizationAddress").touched'
+					#organizationAddress formControlName="organizationAddress" 
 					type="text" class="form-control"
 					placeholder="Nhập địa chỉ">
+			<div *ngIf="createForm.get('organizationAddress').hasError('required')"
+					class="invalid-feedback">Địa chỉ tổ chức không được để trống</div>
+			<div *ngIf="createForm.get('organizationAddress').hasError('minlength')"
+					class="invalid-feedback">Điền đầy đủ Địa chỉ tổ chức không được để trống</div>
 		</div>
 	</div>
 	<div class="w-100">
 		<div class="form-row">
 			<div class="form-group col">
 					<label class="#personContact">Tên người liên hệ</label>
-					<input 	#personContact formControlName="personContact"
+					<input 	[class.is-invalid]='createForm.get("personContact").errors && createForm.get("personContact").touched'
+							#personContact formControlName="personContact"
 							type="text" class="form-control" 
 							placeholder="Tên người liên hệ">
+					<div class="invalid-feedback">Tên người liên hệ không được để trống</div>	
 			</div>
 			<div class="form-group col">
 					<label for="#emailContact">Email của người liên hệ</label>
-					<input 	#emailContact formControlName="emailContact"
+					<input 	[class.is-invalid]='createForm.get("emailContact").errors && createForm.get("emailContact").touched'
+							#emailContact formControlName="emailContact"
 							type="email" class="form-control"
 							placeholder="Nhập email" pattern="(^[\w])+([\w._])*\@([\w{2,}\-])+(\.[\w]{2,4})$">
+					<div class="invalid-feedback">Email người liên hệ không được để trống</div>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="#phoneContact">Số điện thoại của người liên hệ</label>
-			<input 	#phoneContact formControlName="phoneContact"
+			<input 	[class.is-invalid]='createForm.get("phoneContact").errors && createForm.get("phoneContact").touched'
+					#phoneContact formControlName="phoneContact"
 					type="tel" class="form-control"
 					placeholder="Nhập số điện thoại">
+			<div *ngIf="createForm.get('phoneContact').hasError('required')"
+                class="invalid-feedback">Số điện thoại của người liên hệ</div>
+            <div *ngIf="createForm.get('phoneContact').hasError('minlength')"
+                class="invalid-feedback">Điền đầy đủ số điện thoại</div>
+            <div *ngIf="createForm.get('phoneContact').hasError('pattern')"
+                class="invalid-feedback">Điền đúng số điện thoại</div>
 		</div>
 		<div class="mt-2 d-flex justify-content-end">
 			<button type="submit" class="btn btn-primary">Khởi tạo</button>
