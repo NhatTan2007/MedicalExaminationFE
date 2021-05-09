@@ -4,23 +4,22 @@ import { CustomerService } from 'src/app/_shared/services/customer/customer.serv
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Customer } from 'src/app/_shared/models/customer.Models';
 
-
 @Component({
-  selector: 'app-list-customer',
-  templateUrl: './list-customer.component.html',
-  styleUrls: ['./list-customer.component.scss']
+	selector: 'app-list-customer',
+	templateUrl: './list-customer.component.html',
+	styleUrls: ['./list-customer.component.scss']
 })
 export class ListCustomerComponent implements OnInit {
 customers: Customer[] =[]
 customer: Customer
-  constructor(private customerService: CustomerService,
-              private router: Router,
-              private spinner: NgxSpinnerService) { }
+	constructor(private customerService: CustomerService,
+				private router: Router,
+				private spinner: NgxSpinnerService) { }
 
-  ngOnInit(): void {
-    this.spinner.show();
-    this.GetCustomers();
-  }
+	ngOnInit(): void {
+		this.spinner.show();
+		this.GetCustomers();
+	}
 
   GetCustomers(){
 		this.customerService.GetCustomers()
@@ -35,13 +34,9 @@ customer: Customer
 	}
 
   SearchCustomer(keyword: string){
-		this.customerService.SearchCustomer(keyword)
+    if(keyword !== ''){
+      this.customerService.SearchCustomer(keyword)
 			.subscribe((res) => this.customers = res);
+    }
 	}
-
-  // FindGender(){
-  //   if(this.customer.gender == true){
-      
-  //   }
-  // }
 }
