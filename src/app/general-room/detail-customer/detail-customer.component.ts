@@ -5,8 +5,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Customer } from 'src/app/_shared/models/customer.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 import { Observable } from 'rxjs';
-import { promise } from 'selenium-webdriver';
-
 
 @Component({
   selector: 'app-detail-customer',
@@ -14,17 +12,17 @@ import { promise } from 'selenium-webdriver';
   styleUrls: ['./detail-customer.component.scss']
 })
 export class DetailCustomerComponent implements OnInit {
-  customer: Customer
+  	customer: Customer
 	$customer: Observable<Customer>
 	formModify: FormGroup
-  update = false
-  constructor(private activatedRoute: ActivatedRoute,
-              private customerService: CustomerService,
-              private router: Router,
-              private spinner: NgxSpinnerService,
-              private formBuilder: FormBuilder) { }
+	update = false
+	constructor(private activatedRoute: ActivatedRoute,
+				private customerService: CustomerService,
+				private router: Router,
+				private spinner: NgxSpinnerService,
+				private formBuilder: FormBuilder) { }
 
-  async ngOnInit(): Promise<void> {
+  	async ngOnInit(): Promise<void> {
     this.spinner.show();
 		let customerId = this.activatedRoute.snapshot.paramMap.get("customerId")
 		this.$customer = this.getCustomer(customerId)
@@ -46,19 +44,18 @@ export class DetailCustomerComponent implements OnInit {
 			this.formModify.disable();
 			this.spinner.hide();
 		})
-  }
+  	}
 
-  getCustomer(id: string): Observable<Customer>{
+  	getCustomer(id: string): Observable<Customer>{
 		return this.customerService.GetCustomer(id)
 	}
   
-  openUpdate(){
+  	openUpdate(){
 		this.update = true
 		this.formModify.enable();
 	}
 
-  updateCustomerInfo(){
-	
+  	updateCustomerInfo(){
 		let updateCustomer: Customer = this.formModify.value as Customer
 		updateCustomer.customerId = this.customer.customerId
 		updateCustomer.gender = this.formModify.get("gender").value == 0 ? false : true
@@ -80,13 +77,11 @@ export class DetailCustomerComponent implements OnInit {
 	}
 
 	back(){
-		this.update = false,
-		() => {
-			this.restoreData()
-		}
+		this.formModify.disable();
+		this.restoreData();
 	}
 
-  	restoreData(){
+  	private restoreData(){
 		this.formModify.reset(
 			{
 				firstName: this.customer.firstName,
