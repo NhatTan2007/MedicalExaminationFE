@@ -24,6 +24,7 @@ export class CreateCustomerExaminationComponent implements OnInit {
 	selectedServices: MedicalService[] = []
 	servicesInMedicalRecord: AExaminationRooms[] = []
 	checkAll = false
+	showError = false;
 	newMedicalRecord: CreateMedicalRecordReq
 	constructor(private customerService: CustomerService,
 				private medicalService: MedicalServiceService,
@@ -35,7 +36,7 @@ export class CreateCustomerExaminationComponent implements OnInit {
 	ngOnInit(): void {
 		this.getMedicalServices();
 		this.medicalHistoryFrom = this.formBuilder.group({
-			reasonToExamination: ['', Validators.required],
+			reasonToExamination: ['', [Validators.required]],
 			medicalHistoryFamilyHaveOrNot: [false, [Validators.required]],
 			medicalHistoryFamilyDetails: [''],
 			medicalHistoryCustomerHaveOrNot: [false, [Validators.required]],
@@ -76,7 +77,10 @@ export class CreateCustomerExaminationComponent implements OnInit {
 
 	submitFirstStep(){
 		if(this.medicalHistoryFrom.valid){
+			this.showError = false;
 			this.bindingDataFirstStep();
+		} else {
+			this.showError = true;
 		}
 	}
 
