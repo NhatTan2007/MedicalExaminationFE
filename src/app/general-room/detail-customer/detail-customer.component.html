@@ -5,20 +5,16 @@
             <input  [class.is-invalid]='formModify.get("lastName").errors && formModify.get("lastName").touched'
                     type="text" class="form-control" 
                     formControlName="lastName"
-
                     #lastName [attr.disabled]="!update ? true : null">
             <div class="invalid-feedback">Họ của bệnh nhân không được để trống</div>
-
         </div>
         <div class="form-group col-6">
             <label for="#firstName">Tên</label>
             <input  [class.is-invalid]='formModify.get("firstName").errors && formModify.get("firstName").touched'
                     type="text" class="form-control" 
                     formControlName="firstName"
-
                     #firstName [attr.disabled]="!update ? true : null">
             <div class="invalid-feedback">Tên của bệnh nhân không được để trống</div>
-
         </div>
     </div>
     <div class="form-row">
@@ -37,13 +33,10 @@
         </div>
         <div class="form-group col-3">
             <label for="#dateOfBirth" class="control-label p-0" >Ngày sinh</label>
-
             <input [class.is-invalid]='formModify.get("dateOfBirth").errors && formModify.get("dateOfBirth").touched'
                     class="form-control" formControlName="dateOfBirth" type="date"
                     #dateOfBirth [attr.disabled]="!update ? true : null">
             <div class="invalid-feedback">Ngày sinh của bệnh nhân không được để trống</div>
-
-
         </div>   
         <div class="form-group col-6">
             <label for="#identityNumber">Số CMND/Hộ chiếu</label>
@@ -51,10 +44,8 @@
                     type="text" class="form-control" 
                     formControlName="identityNumber"
                     (input)="$event.target.value = $event.target.value.toUpperCase()"
-
                     #identityNumber [attr.disabled]="!update ? true : null">
             <div class="invalid-feedback">Số CMND/Hộ chiếu của bệnh nhân không được để trống</div>
-
         </div>
     </div>
     <div class="form-row">
@@ -63,27 +54,22 @@
             <input  [class.is-invalid]='formModify.get("dateOfIssuanceIdentityNumber").errors && formModify.get("dateOfIssuanceIdentityNumber").touched'
                     type="date" class="form-control" 
                     formControlName="dateOfIssuanceIdentityNumber"
-
                     #dateOfIssuanceIdentityNumber [attr.disabled]="!update ? true : null">
             <div class="invalid-feedback">Cấp ngày của bệnh nhân không được để trống</div>
-
         </div>
         <div class="form-group col-5">
             <label for="#placeOfIssuanceIdentityNumber">Nơi cấp</label>
             <input  [class.is-invalid]='formModify.get("placeOfIssuanceIdentityNumber").errors && formModify.get("placeOfIssuanceIdentityNumber").touched'
                     type="text" class="form-control" 
                     formControlName="placeOfIssuanceIdentityNumber"
-
                     #placeOfIssuanceIdentityNumber [attr.disabled]="!update ? true : null">
             <div class="invalid-feedback">Nơi cấp của bệnh nhân không được để trống</div>
-
         </div>
         <div class="form-group col-4">
             <label for="#phoneNumber">Điện thoại</label>
             <input  [class.is-invalid]='formModify.get("phoneNumber").errors && formModify.get("phoneNumber").touched'
                     type="text" class="form-control" 
                     formControlName="phoneNumber"
-
                     #phoneNumber [attr.disabled]="!update ? true : null">
             <div *ngIf="formModify.get('phoneNumber').hasError('required')"
                 class="invalid-feedback">Điện thoại của bệnh nhân không được để trống</div>
@@ -91,7 +77,6 @@
                 class="invalid-feedback">Số điện thoại tối thiểu là 10 số</div>
             <div *ngIf="formModify.get('phoneNumber').hasError('pattern')"
                 class="invalid-feedback">Điền đúng số điện thoại</div>
-
         </div>
     </div>
     <div class="form-group">
@@ -99,10 +84,7 @@
         <input  [class.is-invalid]='formModify.get("address").errors && formModify.get("address").touched'
                 type="text" class="form-control" 
                 formControlName="address"
-
                 #address [attr.disabled]="!update ? true : null">
-                
-
     </div>
     <div class="d-flex">
         <a  class="btn btn-primary"          

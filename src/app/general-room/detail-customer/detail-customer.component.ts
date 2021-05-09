@@ -58,25 +58,25 @@ export class DetailCustomerComponent implements OnInit {
 	}
 
   updateCustomerInfo(){
-		if(this.formModify){
-			this.update = false
-			let updateCustomer: Customer = this.formModify.value as Customer
-			updateCustomer.customerId = this.customer.customerId
-		console.log(updateCustomer)
-			this.customerService.UpdateCustomer(updateCustomer).subscribe(
-				(res) => {
-					if(res.success) this.customer = res.customer
-					for (let key in res){
-						if(res.hasOwnProperty(key)){
-							console.log(res[key])
-						}
-					}
-				},
-				() => {
-					this.restoreData()
-				  }
-			)
-		}
+	
+		let updateCustomer: Customer = this.formModify.value as Customer
+		updateCustomer.customerId = this.customer.customerId
+		updateCustomer.gender = this.formModify.get("gender").value == 0 ? false : true
+		this.customerService.UpdateCustomer(updateCustomer).subscribe(
+			(res) => {
+				this.formModify.disable();
+				// if(res.success) this.customer = res.customer
+				// for (let key in res){
+				// 	if(res.hasOwnProperty(key)){
+				// 		console.log(res[key])
+				// 	}
+				// }
+			},
+			(err) => {
+				console.log(err)
+				this.restoreData()
+      		}
+		)
 	}
 
 	back(){

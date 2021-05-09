@@ -24,9 +24,15 @@
 					<input class="form-control pb-0 pl-0 ml-2" type="text" 
 							style="border: 0px; border-bottom: 1px dotted black; border-radius: 0 !important;"
 
-							[class.is-invalid]="medicalHistoryFrom.get('reasonToExamination').errors
-							&& medicalHistoryFrom.get('reasonToExamination').touched"
+							[class.is-invalid]="(medicalHistoryFrom.get('reasonToExamination').errors
+							&& medicalHistoryFrom.get('reasonToExamination').touched) 
+							|| (showError && medicalHistoryFrom.get('reasonToExamination').hasError('required'))"
 							formControlName="reasonToExamination">
+				</div>
+				<div *ngIf="(medicalHistoryFrom.get('reasonToExamination').hasError('required')
+				&& medicalHistoryFrom.get('reasonToExamination').touched) 
+				|| (showError && medicalHistoryFrom.get('reasonToExamination').hasError('required'))" class="invalid-feedback d-block">
+					Lý do khám sức khỏe là bắt buộc
 				</div>
 				<div class="row d-flex justify-content-lg-center align-items-center">
 					<h2 class="m-1 text-center">TIỀN SỬ BỆNH CỦA ĐỐI TƯỢNG KHÁM SỨC KHỎE</h2>
