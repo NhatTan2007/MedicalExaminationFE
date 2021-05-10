@@ -12,8 +12,6 @@ import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/med
 })
 export class ImageAnalysationComponent implements OnInit {
 
-  imgDefault : "api.khamskdinhky.tech:5001/uploads/b98243bd-3604-457a-b9a1-67beeb4bbea4_bacsi.jpg";
-
   medicalRecord: MedicalRecord;
   constructor(
     private medicalRecordService: MedicalRecordService,

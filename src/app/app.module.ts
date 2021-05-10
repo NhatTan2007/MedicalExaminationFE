@@ -14,34 +14,34 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './_shared/components/login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { TokenInterceptor } from './_shared/interceptor/tokenInterceptor';
+import { AuthInterceptor } from './_shared/interceptor/authInterceptor';
 
 @NgModule({
-  declarations: [AppComponent, MainLayoutComponent, LoginComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    NgxSpinnerModule,
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true,
-    },
-  ],
-  bootstrap: [AppComponent],
-  exports: [FormsModule, ReactiveFormsModule],
+	declarations: [AppComponent, MainLayoutComponent, LoginComponent],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		NgbModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		FormsModule,
+		ReactiveFormsModule,
+		MatFormFieldModule,
+		MatInputModule,
+		MatIconModule,
+		MatButtonModule,
+		MatCheckboxModule,
+		NgxSpinnerModule,
+	],
+	schemas: [CUSTOM_ELEMENTS_SCHEMA],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true
+		}
+	],
+	bootstrap: [AppComponent],
+	exports: [FormsModule, ReactiveFormsModule],
 })
 export class AppModule {}

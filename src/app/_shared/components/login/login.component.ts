@@ -24,14 +24,17 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  loginSubmit() {
-    if (this.loginForm.valid) {
-      let loginData = this.loginForm.value as AccountLogin;
-      this.authService.login(loginData);
-    }
-    this.loginForm.patchValue({
-      username: this.loginForm.get('username').value,
-      password: '',
-    });
-  }
+	loginSubmit(){
+		if(this.loginForm.valid){
+			let loginData = this.loginForm.value as AccountLogin
+			this.authService.login(loginData);
+		} else{
+			this.loginForm.patchValue(
+				{
+					username: this.loginForm.get("username").value,
+					password: ""
+				}
+			)
+		}
+	}
 }

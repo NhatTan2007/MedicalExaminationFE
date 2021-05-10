@@ -38,18 +38,27 @@ export class MedicalRecordDetails {
   }
 }
 
-export abstract class AExaminationRooms {
-  departmentId: string;
-  mServiceId: number;
-  isRegistered: boolean;
-  price: number;
-  doctorId: string;
-  doctorName: string;
-  objName: string;
+export class MedicalRecordDetailsUpdate extends MedicalRecordDetails{
+    medicalRecordId: string
+    constructor(medicalRecordId: string){
+        super()
+        this.medicalRecordId = medicalRecordId
+    }
+}
 
-  constructor() {
-    this.isRegistered = false;
-  }
+export abstract class AExaminationRooms
+{
+    departmentId    : string
+    mServiceId 	    : number
+    isRegistered	: boolean
+    price			: number
+    doctorId        : string
+    doctorName      : string
+    objName         : string
+
+    constructor() {
+        this.isRegistered = false;
+    }
 }
 
 export class AbdominalUltrasound extends AExaminationRooms {

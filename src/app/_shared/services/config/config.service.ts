@@ -4,11 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ConfigService {
-  private domain = 'https://api.khamskdinhky.tech:5001';
-  tokenKey = '';
-  constructor() {}
+	private domain = "https://api.khamskdinhky.tech:5001"
+	tokenKey = ""
+    constructor() { }
 
-  getDomain(): string {
-    return this.domain;
-  }
+	getDomain(): string{
+		return this.domain;
+	}
 }
