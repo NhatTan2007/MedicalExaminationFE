@@ -79,7 +79,6 @@ export class DetailCustomerComponent implements OnInit {
 					// }
 				},
 				(err) => {
-					console.log(err)
 					this.restoreData()
 				}
 			)
