@@ -4,18 +4,22 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CreateCustomerReq } from 'src/app/_shared/models/customer.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
+import { FormService } from 'src/app/_shared/services/form-service/form.service';
 
 @Component({
 	selector: 'app-create-customer-information',
 	templateUrl: './create-customer-information.component.html',
-	styleUrls: ['./create-customer-information.component.scss']
+	styleUrls: ['./create-customer-information.component.scss'],
+	providers:  [ FormService ]
 })
 export class CreateCustomerInformationComponent implements OnInit {
 	createForm: FormGroup
+	showErrors = false
 	constructor(private customerService: CustomerService,
 				private formBuilder: FormBuilder,
 				private router: Router,
-				private spiner: NgxSpinnerService) { }
+				private spiner: NgxSpinnerService,
+				private formService: FormService) { }
 
 	ngOnInit(): void {
 		this.createForm = this.formBuilder.group({
@@ -30,19 +34,22 @@ export class CreateCustomerInformationComponent implements OnInit {
 			dateOfIssuanceIdentityNumber: ['', [Validators.required]],
 			placeOfIssuanceIdentityNumber: ['', [Validators.required]]
 		})
+		this.formService.form = this.createForm;
 	}
 
-	CreateCustomer(){
-		
+	createCustomer(){
 		if(this.createForm.valid){
+			this.showErrors = false;
 			this.spiner.show();
 			let newCustomer = this.createForm.value as CreateCustomerReq
-			newCustomer.gender = this.createForm.get("gender").value == 0 ? false : true
+			newCustomer.gender = this.createForm.get("gender").value==0 ? false : true
 			console.log(newCustomer);
 			this.customerService.CreateCustomer(this.createForm.value as CreateCustomerReq)
 				.subscribe((res) => {
 					if(res.success) this.router.navigate(['']);
 				},() => {}, () => {this.spiner.hide()})
+		} else {
+			this.showErrors = true
 		}
 	}
 
@@ -59,6 +66,18 @@ export class CreateCustomerInformationComponent implements OnInit {
 			dateOfIssuanceIdentityNumber: '',
 			placeOfIssuanceIdentityNumber: ''
 		})
+	}
+
+	isError(name: string){
+		return this.formService.isError(name);
+	}
+
+	isTouched(name: string){
+		return this.formService.isTouched(name);
+	}
+
+	hasError(name: string, errorName: string){
+		return this.formService.hasError(name, errorName);
 	}
 
 }
