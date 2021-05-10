@@ -5,22 +5,26 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Customer } from 'src/app/_shared/models/customer.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 import { Observable } from 'rxjs';
+import { FormService } from 'src/app/_shared/services/form-service/form.service';
 
 @Component({
   selector: 'app-detail-customer',
   templateUrl: './detail-customer.component.html',
-  styleUrls: ['./detail-customer.component.scss']
+  styleUrls: ['./detail-customer.component.scss'],
+  providers:  [ FormService ]
 })
 export class DetailCustomerComponent implements OnInit {
   	customer: Customer
 	$customer: Observable<Customer>
 	formModify: FormGroup
 	update = false
+	showErrors = false;
 	constructor(private activatedRoute: ActivatedRoute,
 				private customerService: CustomerService,
 				private router: Router,
 				private spinner: NgxSpinnerService,
-				private formBuilder: FormBuilder) { }
+				private formBuilder: FormBuilder,
+				private formService: FormService) { }
 
   	async ngOnInit(): Promise<void> {
     this.spinner.show();
@@ -33,14 +37,15 @@ export class DetailCustomerComponent implements OnInit {
 				firstName: [res.firstName,[Validators.required]],
 				lastName: [res.lastName,[Validators.required]],
 				dateOfBirth: [new Date(res.dateOfBirth).toISOString().substring(0,10),[Validators.required]],
-				email: [res.email,[Validators.required]],
+				email: [res.email],
 				address: [res.address,[Validators.required]],
-				phoneNumber: [res.phoneNumber,[Validators.required]],
+				phoneNumber: [res.phoneNumber,[Validators.required, Validators.minLength(10), Validators.pattern("^0+[0-9\\s]*")]],
 				identityNumber: [res.identityNumber,[Validators.required]],
 				gender: [res.gender,[Validators.required]],
 				dateOfIssuanceIdentityNumber: [new Date(res.dateOfIssuanceIdentityNumber).toISOString().substring(0,10),[Validators.required]],
 				placeOfIssuanceIdentityNumber: [res.placeOfIssuanceIdentityNumber,[Validators.required]],
 			})
+			this.formService.form = this.formModify;
 			this.formModify.disable();
 			this.spinner.hide();
 		})
@@ -56,28 +61,35 @@ export class DetailCustomerComponent implements OnInit {
 	}
 
   	updateCustomerInfo(){
-		let updateCustomer: Customer = this.formModify.value as Customer
-		updateCustomer.customerId = this.customer.customerId
-		updateCustomer.gender = this.formModify.get("gender").value == 0 ? false : true
-		this.customerService.UpdateCustomer(updateCustomer).subscribe(
-			(res) => {
-				this.formModify.disable();
-				// if(res.success) this.customer = res.customer
-				// for (let key in res){
-				// 	if(res.hasOwnProperty(key)){
-				// 		console.log(res[key])
-				// 	}
-				// }
-			},
-			(err) => {
-				console.log(err)
-				this.restoreData()
-      		}
-		)
+		if(this.formModify.valid){
+			this.showErrors = false;
+			let updateCustomer: Customer = this.formModify.value as Customer
+			updateCustomer.customerId = this.customer.customerId
+			updateCustomer.gender = this.formModify.get("gender").value == 0 ? false : true
+			this.customerService.UpdateCustomer(updateCustomer).subscribe(
+				(res) => {
+					console.log(res)
+					this.update = false;
+					this.formModify.disable();
+					// if(res.success) this.customer = res.customer
+					// for (let key in res){
+					// 	if(res.hasOwnProperty(key)){
+					// 		console.log(res[key])
+					// 	}
+					// }
+				},
+				(err) => {
+					this.restoreData()
+				}
+			)
+		} else {
+			this.showErrors = true;
+		}
 	}
 
 	back(){
 		this.formModify.disable();
+		this.update = false
 		this.restoreData();
 	}
 
@@ -98,4 +110,15 @@ export class DetailCustomerComponent implements OnInit {
 		);
 	}
 
+	isError(name: string){
+		return this.formService.isError(name);
+	}
+
+	isTouched(name: string){
+		return this.formService.isTouched(name);
+	}
+
+	hasError(name: string, errorName: string){
+		return this.formService.hasError(name, errorName);
+	}
 }

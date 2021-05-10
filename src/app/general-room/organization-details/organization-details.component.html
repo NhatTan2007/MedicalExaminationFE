@@ -1,11 +1,14 @@
 <form *ngIf="$organization | async" [formGroup] = "formModify" (ngSubmit)="updateOrganizationInfo()">
     <div class="form-group">
         <label for="#organizationName">Tên tổ chức:</label>
-        <input  [class.is-invalid]='formModify.get("organizationName").errors && formModify.get("organizationName").touched'
+        <input  [class.is-invalid]="(isError('organizationName') && isTouched('organizationName'))
+                || (showErrors && isError('organizationName'))"
                 type="text" class="form-control" 
                 formControlName="organizationName"
                 #organizationName [attr.disabled]="!update ? true : null">
-        <div class="invalid-feedback">Tên tổ chức không được để trống</div>	
+        <div class="invalid-feedback d-block" 
+            *ngIf="(isError('organizationName') && isTouched('organizationName'))
+            || (showErrors && isError('organizationName'))">Tên tổ chức không được để trống</div>	
     </div>
     <div class="form-row">
         <div class="form-group col-6">
@@ -23,45 +26,44 @@
     </div>
     <div class="form-group">
         <label for="#organizationAddress">Địa chỉ</label>
-        <input  [class.is-invalid]='formModify.get("organizationAddress").errors && formModify.get("organizationAddress").touched'
+        <input  [class.is-invalid]="formModify.get('organizationAddress').errors && formModify.get('organizationAddress').touched"
                 type="text" class="form-control" 
                 formControlName="organizationAddress"
                 #organizationAddress [attr.disabled]="!update ? true : null">
-        <div *ngIf="createForm.get('organizationAddress').hasError('required')"
-                class="invalid-feedback">Địa chỉ tổ chức không được để trống</div>
-        <div *ngIf="createForm.get('organizationAddress').hasError('minlength')"
-                class="invalid-feedback">Điền đầy đủ Địa chỉ tổ chức không được để trống</div>
+        <div *ngIf="formModify.get('organizationAddress').hasError('required')"
+                class="invalid-feedback d-block">Địa chỉ tổ chức không được để trống</div>
     </div>
     <div class="form-row">
         <div class="form-group col-6">
             <label for="#personContact">Người liên hệ</label>
-            <input  [class.is-invalid]='formModify.get("personContact").errors && formModify.get("personContact").touched'
+            <input  [class.is-invalid]="formModify.get('personContact').errors && formModify.get('personContact').touched"
                     type="text" class="form-control" 
                     formControlName="personContact"
                     #personContact [attr.disabled]="!update ? true : null">
-            <div class="invalid-feedback">Tên người liên hệ không được để trống</div>	
+            <div class="invalid-feedback d-block">Tên người liên hệ không được để trống</div>	
         </div>
         <div class="form-group col-6">
             <label for="#emailContact">Email người liên hệ</label>
-            <input  [class.is-invalid]='createForm.get("emailContact").errors && createForm.get("emailContact").touched'
+            <input  [class.is-invalid]="formModify.get('emailContact').errors && formModify.get('emailContact').touched"
                     type="text" class="form-control" 
                     formControlName="emailContact"
-                    #emailContact [attr.disabled]="!update ? true : null"  pattern="(^[\w])+([\w._])*\@([\w{2,}\-])+(\.[\w]{2,4})$">
-            <div class="invalid-feedback">Email người liên hệ không được để trống</div>
+                    #emailContact [attr.disabled]="!update ? true : null">
+            <div class="invalid-feedback d-block"
+                >Email người liên hệ không được để trống</div>
         </div>
     </div>
     <div class="form-group">
         <label for="#phoneContact">Điện thoại liên hệ</label>
-        <input  [class.is-invalid]='createForm.get("phoneContact").errors && createForm.get("phoneContact").touched'
+        <input  [class.is-invalid]="formModify.get('phoneContact').errors && formModify.get('phoneContact').touched"
                 type="text" class="form-control" 
                 formControlName="phoneContact"
                 #phoneContact [attr.disabled]="!update ? true : null">
-            <div *ngIf="createForm.get('phoneContact').hasError('required')"
-                class="invalid-feedback">Số điện thoại của người liên hệ</div>
-            <div *ngIf="createForm.get('phoneContact').hasError('minlength')"
-                class="invalid-feedback">Điền đầy đủ số điện thoại</div>
-            <div *ngIf="createForm.get('phoneContact').hasError('pattern')"
-                class="invalid-feedback">Điền đúng số điện thoại</div>
+            <div *ngIf="formModify.get('phoneContact').hasError('required')"
+                class="invalid-feedback d-block">Số điện thoại của người liên hệ</div>
+            <div *ngIf="formModify.get('phoneContact').hasError('minlength')"
+                class="invalid-feedback d-block">Điền đầy đủ số điện thoại</div>
+            <div *ngIf="formModify.get('phoneContact').hasError('pattern')"
+                class="invalid-feedback d-block">Điền đúng số điện thoại</div>
     </div>
     <div class="d-flex">
         <a  class="btn btn-primary"
