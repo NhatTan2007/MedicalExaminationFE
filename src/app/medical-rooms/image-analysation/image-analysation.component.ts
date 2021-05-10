@@ -12,7 +12,7 @@ export class ImageAnalysationComponent implements OnInit {
 	constructor(private medicalRecordService: MedicalRecordService) { }
 
 	ngOnInit(): void {
-		this.medicalRecord = this.medicalRecordService.medicalRecord
+		
 	}
 
 	getInfo(){

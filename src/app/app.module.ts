@@ -14,7 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './_shared/components/login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { TokenInterceptor } from './_shared/interceptor/tokenInterceptor';
+import { AuthInterceptor } from './_shared/interceptor/authInterceptor';
 
 
 @NgModule({
@@ -38,7 +38,7 @@ import { TokenInterceptor } from './_shared/interceptor/tokenInterceptor';
 	providers: [
 		{
 			provide: HTTP_INTERCEPTORS,
-			useClass: TokenInterceptor,
+			useClass: AuthInterceptor,
 			multi: true
 		}
 	],
