@@ -9,6 +9,7 @@ import { MedicalService } from 'src/app/_shared/models/medicalService.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 import { MedicalServiceService } from 'src/app/_shared/services/medical-service/medical-service.service';
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
 	selector: 'app-create-customer-examination',
@@ -23,7 +24,7 @@ export class CreateCustomerExaminationComponent implements OnInit {
 	medicalHistoryFrom: FormGroup
 	selectedServices: MedicalService[] = []
 	servicesInMedicalRecord: AExaminationRooms[] = []
-	checkAll = false
+	blockCreate = true
 	showError = false;
 	newMedicalRecord: CreateMedicalRecordReq
 	constructor(private customerService: CustomerService,
@@ -31,7 +32,8 @@ export class CreateCustomerExaminationComponent implements OnInit {
 				private medicalRecordService: MedicalRecordService,
 				private spiner: NgxSpinnerService,
 				private formBuilder: FormBuilder,
-				private router: Router) { }
+				private router: Router,
+				private dialog: MatDialog) { }
 
 	ngOnInit(): void {
 		this.getMedicalServices();
@@ -43,6 +45,14 @@ export class CreateCustomerExaminationComponent implements OnInit {
 			medicalHistoryCustomerDetails: [''],
 			medicationsIsUsing: [''],
 			pregnancyHistory: ['']
+		})
+	}
+
+	openBlockDialog(){
+		const dialogRef = this.dialog.open(BlockSubmitDialog);
+
+		dialogRef.afterClosed().subscribe(res => {
+			console.log()
 		})
 	}
 
@@ -94,6 +104,8 @@ export class CreateCustomerExaminationComponent implements OnInit {
 			this.selectedServices.splice(index, 1);
 			this.newMedicalRecord.totalAmount -= service.price
 		}
+		if(this.selectedServices.length > 0) this.blockCreate = false
+		else this.blockCreate = true
 	}
 
 	resetFirstStep(){
@@ -132,26 +144,34 @@ export class CreateCustomerExaminationComponent implements OnInit {
 	}
 
 	createMedicalRecord(){
-		for (let i = 0; i < this.servicesInMedicalRecord.length; i++) {
-			let index = this.isServiceRegisterd(this.servicesInMedicalRecord[i])
-			if(index != -1){
-				this.servicesInMedicalRecord[i].isRegistered = true
-				this.servicesInMedicalRecord[i].price = this.selectedServices[index].price
+		if(!this.blockCreate){
+			for (let i = 0; i < this.servicesInMedicalRecord.length; i++) {
+				let index = this.isServiceRegisterd(this.servicesInMedicalRecord[i])
+				if(index != -1){
+					this.servicesInMedicalRecord[i].isRegistered = true
+					this.servicesInMedicalRecord[i].price = this.selectedServices[index].price
+				}
 			}
-		}
-		this.newMedicalRecord.details = <MedicalRecordDetails>this.servicesInMedicalRecord.reduce((obj, value) => {
-											obj[value.objName] = value;
-											return obj;
-										}, {})
-		this.newMedicalRecord.isActive = true
-		this.newMedicalRecord.isPaid = true
-		this.medicalRecordService.CreateMedicalRecord(this.newMedicalRecord)
-			.subscribe((res) => {
-				res as CreateMedicalRecordRes
-			})
+			this.newMedicalRecord.details = <MedicalRecordDetails>this.servicesInMedicalRecord.reduce((obj, value) => {
+												obj[value.objName] = value;
+												return obj;
+											}, {})
+			this.newMedicalRecord.isActive = true
+			this.newMedicalRecord.isPaid = true
+			this.medicalRecordService.CreateMedicalRecord(this.newMedicalRecord)
+				.subscribe((res) => {
+					res as CreateMedicalRecordRes
+				})
+		} else {this.openBlockDialog()};
 	}
 
 	GetDetailCustomer(customerId: string){
 		this.router.navigate(['/auth/phong-tong-hop/chi-tiet-benh-nhan', customerId])
 	}
 }
+
+@Component({
+	selector: 'dialog-block',
+	templateUrl: 'content-block-dialog.html',
+})
+export class BlockSubmitDialog {}

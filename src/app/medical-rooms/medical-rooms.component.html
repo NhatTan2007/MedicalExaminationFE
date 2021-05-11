@@ -4,6 +4,9 @@
 		<app-list-active-medical-record></app-list-active-medical-record>
 	</div>
 	<div class="col-9">
+		<span class="mt-1" *ngIf="medicalRecord != null">
+			Tên bệnh nhân: {{medicalRecord.customerLastName}} {{medicalRecord.customerFirstName}}
+		</span>
 		<div class="d-flex flex-row justify-content-center">
 			<div class="p-3">
 			  <a href="#"> Hồ sơ bệnh nhân</a>
