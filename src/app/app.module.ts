@@ -16,7 +16,6 @@ import { LoginComponent } from './_shared/components/login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthInterceptor } from './_shared/interceptor/authInterceptor';
 
-
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent, LoginComponent],
 	imports: [

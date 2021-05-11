@@ -1,127 +1,99 @@
 <form [formGroup]="createForm" (ngSubmit)="createCustomer()">
-    <div class="form-row">
-        <div class="form-group col-6">
-            <label for="#lastName">Họ</label>
-            <input  [class.is-invalid]="(isError('lastName') && isTouched('lastName'))
-                    || (isError('lastName') && showErrors)"
-                    type="text" class="form-control" 
-                    formControlName="lastName"
-                    #lastName>
-            <div class="invalid-feedback d-block"
-            *ngIf="(isError('lastName') && isTouched('lastName'))
+  <div class="form-row">
+    <div class="form-group col-6">
+      <label for="#lastName">Họ</label>
+      <input [class.is-invalid]="(isError('lastName') && isTouched('lastName'))
+                    || (isError('lastName') && showErrors)" type="text" class="form-control" formControlName="lastName"
+        #lastName>
+      <div class="invalid-feedback d-block" *ngIf="(isError('lastName') && isTouched('lastName'))
             || (showErrors && isError('lastName'))">Họ của bệnh nhân không được để trống</div>
-        </div>
-        <div class="form-group col-6">
-            <label for="#firstName">Tên</label>
-            <input  [class.is-invalid]="(isError('firstName') && isTouched('firstName'))
-                    || (isError('firstName') && showErrors)"
-                    type="text" class="form-control" 
-                    formControlName="firstName"
-                    #firstName>
-            <div class="invalid-feedback d-block"
-            *ngIf="(isError('firstName') && isTouched('firstName'))
-            || (showErrors && isError('firstName'))">Tên của bệnh nhân không được để trống</div>
-        </div>
     </div>
-    <div class="form-row">
-        <div class="form-group col-3">
-            <label for="#gender" class="mr-2 w-100" >Giới tính:</label>
-            <mat-radio-group 
-                class="example-radio-group"
-                formControlName="gender" #gender>
-                <mat-radio-button class="mr-2" value=1>
-                    Nam
-                </mat-radio-button>
-                <mat-radio-button value=0>
-                    Nữ
-                </mat-radio-button>
-            </mat-radio-group>
-            <div class="invalid-feedback d-block" *ngIf="showErrors && isError('gender')">Xin mời chọn giới tính</div>
-        </div>
-        <div class="form-group col-3">
-            <label for="#dateOfBirth" class="control-label p-0" >Ngày sinh</label>
-            <input [class.is-invalid]="(isError('dateOfBirth') && isTouched('dateOfBirth'))
-                    || (isError('dateOfBirth') && showErrors)"
-                    #dateOfBirth 
-                    class="form-control" 
-                    formControlName="dateOfBirth" 
-                    type="date">
-            <div class="invalid-feedback d-block" *ngIf="(showErrors && isError('dateOfBirth'))
+    <div class="form-group col-6">
+      <label for="#firstName">Tên</label>
+      <input [class.is-invalid]="(isError('firstName') && isTouched('firstName'))
+                    || (isError('firstName') && showErrors)" type="text" class="form-control"
+        formControlName="firstName" #firstName>
+      <div class="invalid-feedback d-block" *ngIf="(isError('firstName') && isTouched('firstName'))
+            || (showErrors && isError('firstName'))">Tên của bệnh nhân không được để trống</div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-3">
+      <label for="#gender" class="mr-2 w-100">Giới tính:</label>
+      <mat-radio-group class="example-radio-group" formControlName="gender" #gender>
+        <mat-radio-button class="mr-2" value=1>
+          Nam
+        </mat-radio-button>
+        <mat-radio-button value=0>
+          Nữ
+        </mat-radio-button>
+      </mat-radio-group>
+      <div class="invalid-feedback d-block" *ngIf="showErrors && isError('gender')">Xin mời chọn giới tính</div>
+    </div>
+    <div class="form-group col-3">
+      <label for="#dateOfBirth" class="control-label p-0">Ngày sinh</label>
+      <input [class.is-invalid]="(isError('dateOfBirth') && isTouched('dateOfBirth'))
+                    || (isError('dateOfBirth') && showErrors)" #dateOfBirth class="form-control"
+        formControlName="dateOfBirth" type="date">
+      <div class="invalid-feedback d-block" *ngIf="(showErrors && isError('dateOfBirth'))
             || isError('dateOfBirth') && isTouched('dateOfBirth')">Xin mời nhập ngày sinh</div>
 
-        </div>   
-        <div class="form-group col-6">
-            <label for="#identityNumber">Số CMND/Hộ chiếu</label>
-            <input  [class.is-invalid]="(isError('identityNumber') && isTouched('identityNumber'))
-                    || (isError('identityNumber') && showErrors)"
-                    type="text" class="form-control" 
-                    formControlName="identityNumber"
-                    (input)="$event.target.value = $event.target.value.toUpperCase()"
-                    #identityNumber>
-            <div class="invalid-feedback d-block"
-            *ngIf="(isError('identityNumber') && isTouched('identityNumber'))
+    </div>
+    <div class="form-group col-6">
+      <label for="#identityNumber">Số CMND/Hộ chiếu</label>
+      <input [class.is-invalid]="(isError('identityNumber') && isTouched('identityNumber'))
+                    || (isError('identityNumber') && showErrors)" type="text" class="form-control"
+        formControlName="identityNumber" (input)="$event.target.value = $event.target.value.toUpperCase()"
+        #identityNumber>
+      <div class="invalid-feedback d-block" *ngIf="(isError('identityNumber') && isTouched('identityNumber'))
             || (showErrors && isError('identityNumber'))">Số CMND/Hộ chiếu không được để trống</div>
 
-        </div>
     </div>
-    <div class="form-row">
-        <div class="form-group col-3">
-            <label for="#dateOfIssuanceIdentityNumber">Cấp ngày</label>
-            <input  [class.is-invalid]="(isError('dateOfIssuanceIdentityNumber') && isTouched('dateOfIssuanceIdentityNumber'))
-                    || (isError('dateOfIssuanceIdentityNumber') && showErrors)"
-                    type="date" class="form-control" 
-                    formControlName="dateOfIssuanceIdentityNumber"
-                    #dateOfIssuanceIdentityNumber>
-            <div class="invalid-feedback d-block"
-            *ngIf="(isError('dateOfIssuanceIdentityNumber') && isTouched('dateOfIssuanceIdentityNumber'))
+  </div>
+  <div class="form-row">
+    <div class="form-group col-3">
+      <label for="#dateOfIssuanceIdentityNumber">Cấp ngày</label>
+      <input [class.is-invalid]="(isError('dateOfIssuanceIdentityNumber') && isTouched('dateOfIssuanceIdentityNumber'))
+                    || (isError('dateOfIssuanceIdentityNumber') && showErrors)" type="date" class="form-control"
+        formControlName="dateOfIssuanceIdentityNumber" #dateOfIssuanceIdentityNumber>
+      <div class="invalid-feedback d-block" *ngIf="(isError('dateOfIssuanceIdentityNumber') && isTouched('dateOfIssuanceIdentityNumber'))
             || (showErrors && isError('dateOfIssuanceIdentityNumber'))">Xin mời nhập ngày cấp CMND/Hộ chiếu</div>
-        </div>
-        <div class="form-group col-5">
-            <label for="#placeOfIssuanceIdentityNumber">Nơi cấp</label>
-            <input  [class.is-invalid]="(isError('placeOfIssuanceIdentityNumber') && isTouched('placeOfIssuanceIdentityNumber'))
-                    || (isError('placeOfIssuanceIdentityNumber') && showErrors)"
-                    type="text" class="form-control" 
-                    formControlName="placeOfIssuanceIdentityNumber"
-                    #placeOfIssuanceIdentityNumber>
-            <div class="invalid-feedback d-block"
-            *ngIf="(isError('placeOfIssuanceIdentityNumber') && isTouched('placeOfIssuanceIdentityNumber'))
+    </div>
+    <div class="form-group col-5">
+      <label for="#placeOfIssuanceIdentityNumber">Nơi cấp</label>
+      <input [class.is-invalid]="(isError('placeOfIssuanceIdentityNumber') && isTouched('placeOfIssuanceIdentityNumber'))
+                    || (isError('placeOfIssuanceIdentityNumber') && showErrors)" type="text" class="form-control"
+        formControlName="placeOfIssuanceIdentityNumber" #placeOfIssuanceIdentityNumber>
+      <div class="invalid-feedback d-block" *ngIf="(isError('placeOfIssuanceIdentityNumber') && isTouched('placeOfIssuanceIdentityNumber'))
             || (showErrors && isError('placeOfIssuanceIdentityNumber'))">Xin mời nhập nơi cấp CMND/Hộ chiếu</div>
-        </div>
-        <div class="form-group col-4">
-            <label for="#phoneNumber">Điện thoại</label>
-            <input  [class.is-invalid]="(isError('phoneNumber') && isTouched('phoneNumber'))
-                    || (isError('phoneNumber') && showErrors)"
-                    type="text" class="form-control" 
-                    formControlName="phoneNumber"
-                    #phoneNumber>
-            <div *ngIf="(hasError('phoneNumber', 'required') && isTouched('phoneNumber'))
-                || (showErrors && hasError('phoneNumber', 'required'))"
-                class="invalid-feedback d-block">Điện thoại của bệnh nhân không được để trống</div>
-            <div *ngIf="(hasError('phoneNumber', 'minlength') && isTouched('phoneNumber'))
-                || (showErrors && hasError('phoneNumber', 'minlength'))"
-                class="invalid-feedback d-block">Số điện thoại tối thiểu là 10 số</div>
-            <div *ngIf="(hasError('phoneNumber', 'pattern') && isTouched('phoneNumber'))
-                || (showErrors && hasError('phoneNumber', 'pattern'))"
-                class="invalid-feedback d-block">Số điện thoại bắt đầu bằng số 0</div>
-                    
-        </div>
     </div>
-    <div class="form-group">
-        <label for="#address">Địa chỉ</label>
-        <input  [class.is-invalid]="(isError('address') && isTouched('address'))
-                || (isError('address') && showErrors)"
-                type="text" class="form-control" 
-                formControlName="address"
-                #address>
-        <div class="invalid-feedback d-block"
-        *ngIf="(isError('address') && isTouched('address'))
+    <div class="form-group col-4">
+      <label for="#phoneNumber">Điện thoại</label>
+      <input [class.is-invalid]="(isError('phoneNumber') && isTouched('phoneNumber'))
+                    || (isError('phoneNumber') && showErrors)" type="text" class="form-control"
+        formControlName="phoneNumber" #phoneNumber>
+      <div *ngIf="(hasError('phoneNumber', 'required') && isTouched('phoneNumber'))
+                || (showErrors && hasError('phoneNumber', 'required'))" class="invalid-feedback d-block">Điện thoại của
+        bệnh nhân không được để trống</div>
+      <div *ngIf="(hasError('phoneNumber', 'minlength') && isTouched('phoneNumber'))
+                || (showErrors && hasError('phoneNumber', 'minlength'))" class="invalid-feedback d-block">Số điện thoại
+        tối thiểu là 10 số</div>
+      <div *ngIf="(hasError('phoneNumber', 'pattern') && isTouched('phoneNumber'))
+                || (showErrors && hasError('phoneNumber', 'pattern'))" class="invalid-feedback d-block">Số điện thoại
+        bắt đầu bằng số 0</div>
+
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="#address">Địa chỉ</label>
+    <input [class.is-invalid]="(isError('address') && isTouched('address'))
+                || (isError('address') && showErrors)" type="text" class="form-control" formControlName="address"
+      #address>
+    <div class="invalid-feedback d-block" *ngIf="(isError('address') && isTouched('address'))
             || (showErrors && isError('address'))">Địa chỉ của bệnh nhân không được để trống</div>
-    </div>
-    <button class="btn btn-primary mr-2" type="submit">Tạo mới</button>
-    <a class="btn btn-warning" (click)="resetForm()" type="submit">Xóa nội dung</a>
+  </div>
+  <button class="btn btn-primary mr-2" type="submit">Tạo mới</button>
+  <a class="btn btn-warning" (click)="resetForm()" type="submit">Xóa nội dung</a>
 </form>
-<ngx-spinner
-	fullScreen = false
-	color = "#fff"
-	type = "ball-clip-rotate">
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
 </ngx-spinner>
