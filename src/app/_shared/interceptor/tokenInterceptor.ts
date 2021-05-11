@@ -14,7 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
 	req = req.clone({
 		withCredentials: true
 	});
-      
+
       return next.handle(req);
   }
 }
