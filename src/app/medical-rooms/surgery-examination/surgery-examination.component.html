@@ -1,21 +1,26 @@
-<div class="d-flex flex-row justify-content-center">
-  <div class="p-3">
-    <a href="#"> Hồ sơ bệnh nhân</a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Chẩn đoán </a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Hình ảnh</a>
-  </div>
+<div *ngIf="medicalRecord != null">
+  <label for="obstetricsAndGynecologyExamination">Kiểm tra thể lực</label>
+  <form [formGroup]="updateForm" #obstetricsAndGynecologyExamination (ngSubmit)="onSubmit()">
+
+    <div class="form-group mt-3">
+      <label for="surgery">surgery</label>
+      <textarea #surgery class="form-control" rows="3" formControlName="surgery"></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="surgeryLevel">surgery Level</label>
+      <input type="number" #surgeryLevel class="form-control" formControlName="surgeryLevel">
+    </div>
+
+    <div class=" mt-2 d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+    </div>
+  </form>
 </div>
 
-<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-  <div class="form-group mt-3">
-    <label for="comment">Ngoại khoa</label>
-    <textarea class="form-control" rows="5" formControlName="result"></textarea>
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
-  </div>
-</form>
+<div *ngIf="medicalRecord == null" class="text-center">
+  <h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+</div>
+
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
+</ngx-spinner>
