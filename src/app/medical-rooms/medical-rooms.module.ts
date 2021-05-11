@@ -49,7 +49,7 @@ import { CustomerInformationComponent } from './customer-information/customer-in
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
   ],
 })
 export class MedicalRoomsModule {}
