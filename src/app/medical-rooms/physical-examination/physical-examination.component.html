@@ -1,21 +1,44 @@
-<div class="d-flex flex-row justify-content-center">
-  <div class="p-3">
-    <a href="#"> Hồ sơ bệnh nhân</a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Chẩn đoán </a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Hình ảnh</a>
-  </div>
+<div *ngIf="medicalRecord != null">
+  <label for="obstetricsAndGynecologyExamination">Kiểm tra thể lực</label>
+  <form [formGroup]="updateForm" #obstetricsAndGynecologyExamination (ngSubmit)="onSubmit()">
+    <div class="form-group mt-3">
+      <label for="height">height</label>
+      <textarea #height class="form-control" rows="3"
+        formControlName="height"></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="weight">weight</label>
+      <textarea #weight class="form-control" rows="3"
+        formControlName="weight"></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="bMIIndex">bMIIndex</label>
+      <textarea #bMIIndex class="form-control" rows="3"
+        formControlName="bMIIndex"></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="heartBeat">heartBeat</label>
+      <textarea #heartBeat class="form-control" rows="3"
+        formControlName="heartBeat"></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="physicalLevel">physical Level</label>
+      <input type="number" #physicalLevel class="form-control" formControlName="physicalLevel">
+    </div>
+
+    <div class=" mt-2 d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+    </div>
+  </form>
 </div>
 
-<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-  <div class="form-group mt-3">
-    <label for="comment">Thể lực</label>
-    <textarea class="form-control" rows="5" id="comment"></textarea>
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
-  </div>
-</form>
+<div *ngIf="medicalRecord == null" class="text-center">
+  <h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+</div>
+
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
+</ngx-spinner>
