@@ -1,21 +1,55 @@
-<div class="d-flex flex-row justify-content-center">
-  <div class="p-3">
-    <a href="#"> Hồ sơ bệnh nhân</a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Chẩn đoán </a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Hình ảnh</a>
-  </div>
+<div *ngIf="medicalRecord != null">
+  <label for="physicalExamination">Kiểm tra thể lực</label>
+  <form [formGroup]="updateForm" #physicalExamination (ngSubmit)="onSubmit()">
+    <div class="form-group mt-3">
+      <label for="height">height</label>
+      <textarea #height [class.is-invalid]="(isError('height') && isTouched('height'))
+      || (isError('height') && showErrors)" class="form-control" rows="3" formControlName="height"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('height') && isTouched('height'))
+        || (showErrors && isError('height'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="weight">weight</label>
+      <textarea #weight [class.is-invalid]="(isError('weight') && isTouched('weight'))
+      || (isError('weight') && showErrors)" class="form-control" rows="3" formControlName="weight"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('weight') && isTouched('weight'))
+        || (showErrors && isError('weight'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="bMIIndex">bMIIndex</label>
+      <textarea #bMIIndex [class.is-invalid]="(isError('bMIIndex') && isTouched('bMIIndex'))
+      || (isError('bMIIndex') && showErrors)" class="form-control" rows="3" formControlName="bMIIndex"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('bMIIndex') && isTouched('bMIIndex'))
+        || (showErrors && isError('bMIIndex'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="heartBeat">heartBeat</label>
+      <textarea #heartBeat [class.is-invalid]="(isError('heartBeat') && isTouched('heartBeat'))
+      || (isError('heartBeat') && showErrors)" class="form-control" rows="3" formControlName="heartBeat"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('heartBeat') && isTouched('heartBeat'))
+        || (showErrors && isError('heartBeat'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="physicalLevel">physical Level</label>
+      <input type="number" #physicalLevel [class.is-invalid]="(isError('physicalLevel') && isTouched('physicalLevel'))
+      || (isError('physicalLevel') && showErrors)" class="form-control" formControlName="physicalLevel">
+      <div class="invalid-feedback d-block" *ngIf="(isError('physicalLevel') && isTouched('physicalLevel'))
+        || (showErrors && isError('physicalLevel'))">Không được để trống</div>
+    </div>
+
+    <div class=" mt-2 d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+    </div>
+  </form>
 </div>
 
-<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-  <div class="form-group mt-3">
-    <label for="comment">Thể lực</label>
-    <textarea class="form-control" rows="5" id="comment"></textarea>
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
-  </div>
-</form>
+<div *ngIf="medicalRecord == null" class="text-center">
+  <h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+</div>
+
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
+</ngx-spinner>

@@ -1,21 +1,63 @@
-<div class="d-flex flex-row justify-content-center">
-  <div class="p-3">
-    <a href="#"> Hồ sơ bệnh nhân</a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Chẩn đoán </a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Hình ảnh</a>
-  </div>
+<div *ngIf="medicalRecord != null">
+  <label for="obstetricsAndGynecologyExamination">Chẩn đoán mắt</label>
+  <form [formGroup]="updateForm" #obstetricsAndGynecologyExamination (ngSubmit)="onSubmit()">
+    <div class="form-group mt-3">
+      <label for="rightEyeSightWithoutGlass">rightEyeSightWithoutGlass</label>
+      <textarea #rightEyeSightWithoutGlass [class.is-invalid]="(isError('rightEyeSightWithoutGlass') && isTouched('rightEyeSightWithoutGlass'))
+      || (isError('rightEyeSightWithoutGlass') && showErrors)" class="form-control" rows="3"
+        formControlName="rightEyeSightWithoutGlass"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('rightEyeSightWithoutGlass') && isTouched('rightEyeSightWithoutGlass'))
+        || (showErrors && isError('rightEyeSightWithoutGlass'))">Không được để trống</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="leftEyeSightWithoutGlass">leftEyeSightWithoutGlass</label>
+      <textarea #leftEyeSightWithoutGlass [class.is-invalid]="(isError('leftEyeSightWithoutGlass') && isTouched('leftEyeSightWithoutGlass'))
+      || (isError('leftEyeSightWithoutGlass') && showErrors)" class="form-control" rows="3"
+        formControlName="leftEyeSightWithoutGlass"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('leftEyeSightWithoutGlass') && isTouched('leftEyeSightWithoutGlass'))
+        || (showErrors && isError('leftEyeSightWithoutGlass'))">Không được để trống</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="rightEyeSightWithGlass">rightEyeSightWithGlass</label>
+      <textarea #rightEyeSightWithGlass [class.is-invalid]="(isError('rightEyeSightWithGlass') && isTouched('rightEyeSightWithGlass'))
+      || (isError('rightEyeSightWithGlass') && showErrors)" class="form-control" rows="3"
+        formControlName="rightEyeSightWithGlass"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('rightEyeSightWithGlass') && isTouched('rightEyeSightWithGlass'))
+        || (showErrors && isError('rightEyeSightWithGlass'))">Không được để trống</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="leftEyeSightWithGlass">rightEyeSightWithoutGlass</label>
+      <textarea #leftEyeSightWithGlass [class.is-invalid]="(isError('leftEyeSightWithGlass') && isTouched('leftEyeSightWithGlass'))
+      || (isError('leftEyeSightWithGlass') && showErrors)" class="form-control" rows="3"
+        formControlName="leftEyeSightWithGlass"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('leftEyeSightWithGlass') && isTouched('leftEyeSightWithGlass'))
+      || (showErrors && isError('leftEyeSightWithGlass'))">Không được để trống</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="eyeDiseases">eyeDiseases</label>
+      <textarea #eyeDiseases [class.is-invalid]="(isError('eyeDiseases') && isTouched('eyeDiseases'))
+      || (isError('eyeDiseases') && showErrors)" class="form-control" rows="3"
+        formControlName="eyeDiseases"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('eyeDiseases') && isTouched('eyeDiseases'))
+      || (showErrors && isError('eyeDiseases'))">Không được để trống</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="ophthalmologyLevel">ophthalmology Level</label>
+      <input type="number" #ophthalmologyLevel [class.is-invalid]="(isError('ophthalmologyLevel') && isTouched('ophthalmologyLevel'))
+      || (isError('ophthalmologyLevel') && showErrors)" class="form-control"
+        formControlName="ophthalmologyLevel">
+      <div class="invalid-feedback d-block" *ngIf="(isError('ophthalmologyLevel') && isTouched('ophthalmologyLevel'))
+      || (showErrors && isError('ophthalmologyLevel'))">Không được để trống</div>
+    </div>
+    <div class=" mt-2 d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+    </div>
+  </form>
 </div>
 
-<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-  <div class="form-group mt-3">
-    <label for="comment">Mắt</label>
-    <textarea class="form-control" rows="5" formControlName="result"></textarea>
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
-  </div>
-</form>
+<div *ngIf="medicalRecord == null" class="text-center">
+  <h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+</div>
+
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
+</ngx-spinner>

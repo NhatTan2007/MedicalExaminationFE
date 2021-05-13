@@ -4,27 +4,30 @@ import { AccountLogin } from '../../models/accountLogin.Model';
 import { AuthService } from '../../services/authService/auth-service.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-    loginForm : FormGroup
-	hide = true;
-    constructor(private formBuilder: FormBuilder,
-				private authService: AuthService) { }
+  loginForm: FormGroup;
+  hide = true;
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService
+  ) {}
 
-    ngOnInit(): void {
-		this.loginForm = this.formBuilder.group({
-			username: ["", [Validators.required]],
-			password: ["", [Validators.required]],
-			remember: [false, [Validators.required]]
-		})
-    }
+  ngOnInit(): void {
+    this.loginForm = this.formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      remember: [false, [Validators.required]],
+    });
+  }
 
 	loginSubmit(){
 		if(this.loginForm.valid){
 			let loginData = this.loginForm.value as AccountLogin
+      loginData.username = loginData.username.toLowerCase();
 			this.authService.login(loginData);
 		} else{
 			this.loginForm.patchValue(

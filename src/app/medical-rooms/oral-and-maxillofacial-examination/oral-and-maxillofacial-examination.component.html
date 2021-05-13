@@ -1,21 +1,50 @@
-<div class="d-flex flex-row justify-content-center">
-  <div class="p-3">
-    <a href="#"> Hồ sơ bệnh nhân</a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Chẩn đoán </a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Hình ảnh</a>
-  </div>
+<div *ngIf="medicalRecord != null">
+  <label for="obstetricsAndGynecologyExamination">Chẩn đoán răng hàm mặt</label>
+  <form [formGroup]="updateForm" #obstetricsAndGynecologyExamination (ngSubmit)="onSubmit()">
+
+    <div class="form-group mt-3">
+      <label for="upperJaw">upperJaw</label>
+      <textarea #upperJaw [class.is-invalid]="(isError('upperJaw') && isTouched('upperJaw'))
+      || (isError('upperJaw') && showErrors)" class="form-control" rows="3" formControlName="upperJaw"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('upperJaw') && isTouched('upperJaw'))
+      || (showErrors && isError('upperJaw'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="lowerJaw">lowerJaw</label>
+      <textarea #lowerJaw [class.is-invalid]="(isError('lowerJaw') && isTouched('lowerJaw'))
+      || (isError('lowerJaw') && showErrors)" class="form-control" rows="3" formControlName="lowerJaw"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('lowerJaw') && isTouched('lowerJaw'))
+      || (showErrors && isError('lowerJaw'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="oralAndMaxillofacialDiseases">oralAndMaxillofacialDiseases</label>
+      <textarea #oralAndMaxillofacialDiseases [class.is-invalid]="(isError('oralAndMaxillofacialDiseases') && isTouched('oralAndMaxillofacialDiseases'))
+      || (isError('oralAndMaxillofacialDiseases') && showErrors)" class="form-control" rows="3"
+        formControlName="oralAndMaxillofacialDiseases"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('oralAndMaxillofacialDiseases') && isTouched('oralAndMaxillofacialDiseases'))
+        || (showErrors && isError('oralAndMaxillofacialDiseases'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="oralAndMaxillofacialLevel">oralAndMaxillofacial Level</label>
+      <input type="number" #oralAndMaxillofacialLevel [class.is-invalid]="(isError('oralAndMaxillofacialLevel') && isTouched('oralAndMaxillofacialLevel'))
+      || (isError('oralAndMaxillofacialLevel') && showErrors)" class="form-control"
+        formControlName="oralAndMaxillofacialLevel">
+      <div class="invalid-feedback d-block" *ngIf="(isError('oralAndMaxillofacialDiseases') && isTouched('oralAndMaxillofacialDiseases'))
+        || (showErrors && isError('oralAndMaxillofacialDiseases'))">Không được để trống</div>
+    </div>
+
+    <div class=" mt-2 d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+    </div>
+  </form>
 </div>
 
-<form [formGroup]="createForm" (ngSubmit)="onSubmit()">
-  <div class="form-group mt-3">
-    <label for="comment">Răng hàm mặt</label>
-    <textarea class="form-control" rows="5" formControlName="result"></textarea>
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
-  </div>
-</form>
+<div *ngIf="medicalRecord == null" class="text-center">
+  <h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+</div>
+
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
+</ngx-spinner>
