@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CreateCustomerReq, Customer, CreateCustomerRes, UpdateCustomerRes, UpdateCustomerReq } from '../../models/customer.Models';
+import { CreateCustomerReq, Customer, CreateCustomerRes, UpdateCustomerRes, UpdateCustomerReq, QuerryCustomersRes } from '../../models/customer.Models';
 import { ConfigService } from '../config/config.service';
 
 @Injectable({
@@ -17,6 +17,12 @@ export class CustomerService {
 		return this.httpClient.get(`${this.apiDomain}`)
 			.pipe(map(res => (res as Customer[])
 										.map(c => ({...c, fullName: `${c.lastName} ${c.firstName}`}))));
+	}
+
+	
+	GetCustomersByPagination(currentPage: number, pageSize: number): Observable<QuerryCustomersRes>{
+		return this.httpClient.get(`${this.apiDomain}/currentPage/${currentPage}/pageSize/${pageSize}`)
+			.pipe(map(res => (res as QuerryCustomersRes)));
 	}
 
 	GetCustomer(customerId: string): Observable<Customer>{

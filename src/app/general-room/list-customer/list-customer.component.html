@@ -13,7 +13,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="w-100 mt-3">
+	<nz-select [(ngModel)]="pageSize" (ngModelChange)="changePageSize($event)" class="mt-3" >
+		<nz-option *ngFor="let size of listPageSize" [nzValue]="size" [nzLabel]="size.label"></nz-option>
+	</nz-select>
+	<div class="w-100 mt-3" *ngIf="customers$ | async">
 		<table class="table table-bordered table-hover">
 			<thead class="thead-light text-center">
 				<tr>
@@ -39,6 +42,8 @@
 				</tr>
 			</tbody>
 		</table>
+		<nz-pagination [(nzPageIndex)]="currentPage" [nzPageSize]="pageSize.value" 
+			[nzTotal]="totalCustomer" [nzResponsive]=true (nzPageIndexChange)="changePage(currentPage)"></nz-pagination>
 	</div>
 </div>
 
