@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog'; 
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 
@@ -25,6 +26,7 @@ import { CreateCustomerInformationComponent } from './create-customer-informatio
 import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
 import { ListCustomerComponent } from './list-customer/list-customer.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { BlockSubmitDialog } from "./create-customer-examination/create-customer-examination.component";
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -38,7 +40,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		CreateCustomerExaminationComponent,
 		CreateCustomerInformationComponent,
     	ListCustomerComponent,
-		DetailCustomerComponent
+		DetailCustomerComponent,
+		BlockSubmitDialog
 	],
 	imports: [
 		CommonModule,
@@ -57,6 +60,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		MatCheckboxModule,
 		NzPaginationModule,
 		NzSelectModule,
+		MatDialogModule,
 		NgxMaskModule.forRoot()
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

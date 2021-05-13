@@ -12,7 +12,7 @@
 		</div>
 	</div>
 	<div class="col-12 mt-3">
-		<table class="table table-hover table-bordered">
+		<table class="table table-hover table-bordered table-striped">
 			<thead class="thead-light">
 					<tr class="text-center text-uppercase">
 					<th class="p-1">STT</th>
@@ -36,9 +36,9 @@
 								class="w-100 d-flex align-items-center flex-row-reverse">{{service.price | mask: 'separator':'.'}}</div>
 						<input 	(keyup.enter)="updateMedicalServiceInfo(service)"
 								(change)="updatePrice($event.target.value, service)" 
-								type="text" class="form-control text-right" 
+								type="number" class="form-control text-right" 
 								[hidden]="!service.update" value="{{service.price}}"
-								style="height: 40px">
+								style="height: 40px" min="1000">
 						<button mat-icon-button [matMenuTriggerFor]="menu"
 								class="border-0 menu-action float-right"
 								style="background-color: transparent; top: 0; right: 0;">

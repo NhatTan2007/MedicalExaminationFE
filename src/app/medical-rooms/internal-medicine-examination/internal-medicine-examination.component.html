@@ -1,21 +1,93 @@
-<div class="d-flex flex-row justify-content-center">
-  <div class="p-3">
-    <a href="#"> Hồ sơ bệnh nhân</a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Chẩn đoán </a>
-  </div>
-  <div class="p-3">
-    <a href="#"> Hình ảnh</a>
-  </div>
+<div *ngIf="medicalRecord != null">
+  <label for="InternalMedicineExamination">Nội khoa</label>
+  <form [formGroup]="updateForm" #internalMedicineExamination (ngSubmit)="onSubmit()">
+    <div class="form-group mt-3">
+      <label for="circulatory">Circulatory</label>
+      <textarea #circulatory [class.is-invalid]="(isError('circulatory') && isTouched('circulatory'))
+      || (isError('circulatory') && showErrors)" class="form-control" rows="3"
+        formControlName="circulatory"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('circulatory') && isTouched('circulatory'))
+      || (showErrors && isError('circulatory'))">Không được để trống</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="circulatoryLevel">Circulatory Level</label>
+      <input type="number" #circulatoryLevel [class.is-invalid]="(isError('circulatoryLevel') && isTouched('circulatoryLevel'))
+      || (isError('circulatoryLevel') && showErrors)" class="form-control" formControlName="circulatoryLevel">
+      <div class="invalid-feedback d-block" *ngIf="(isError('circulatoryLevel') && isTouched('circulatoryLevel'))
+      || (showErrors && isError('circulatoryLevel'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="respiratory">respiratory</label>
+      <textarea #respiratory [class.is-invalid]="(isError('respiratory') && isTouched('respiratory'))
+      || (isError('respiratory') && showErrors)" class="form-control" rows="3"
+        formControlName="respiratory"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('respiratory') && isTouched('respiratory'))
+      || (showErrors && isError('respiratory'))">Không được để trống</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="respiratoryLevel">respiratory Level</label>
+      <input type="number" #respiratoryLevel [class.is-invalid]="(isError('respiratoryLevel') && isTouched('respiratoryLevel'))
+      || (isError('respiratoryLevel') && showErrors)" class="form-control" formControlName="respiratoryLevel">
+      <div class="invalid-feedback d-block" *ngIf="(isError('respiratoryLevel') && isTouched('respiratoryLevel'))
+      || (showErrors && isError('respiratoryLevel'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="alimentary">alimentary</label>
+      <textarea #alimentary [class.is-invalid]="(isError('alimentary') && isTouched('alimentary'))
+      || (isError('alimentary') && showErrors)" class="form-control" rows="3" formControlName="alimentary"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('alimentary') && isTouched('alimentary'))
+      || (showErrors && isError('alimentary'))">Không được để trống</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="alimentaryLevel">alimentary level</label>
+      <input type="number" #alimentaryLevel [class.is-invalid]="(isError('alimentaryLevel') && isTouched('alimentaryLevel'))
+      || (isError('alimentaryLevel') && showErrors)" class="form-control" formControlName="alimentaryLevel">
+      <div class="invalid-feedback d-block" *ngIf="(isError('alimentaryLevel') && isTouched('alimentaryLevel'))
+      || (showErrors && isError('alimentaryLevel'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="nephroUrology">nephroUrology</label>
+      <textarea #nephroUrology [class.is-invalid]="(isError('nephroUrology') && isTouched('nephroUrology'))
+      || (isError('nephroUrology') && showErrors)" class="form-control" rows="3"
+        formControlName="nephroUrology"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('nephroUrology') && isTouched('nephroUrology'))
+      || (showErrors && isError('nephroUrology'))">Không được để trống</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="nephroUrologyLevel">nephroUrology level</label>
+      <input type="number" #nephroUrologyLevel [class.is-invalid]="(isError('nephroUrologyLevel') && isTouched('nephroUrologyLevel'))
+      || (isError('nephroUrologyLevel') && showErrors)" class="form-control" formControlName="nephroUrologyLevel">
+      <div class="invalid-feedback d-block" *ngIf="(isError('nephroUrologyLevel') && isTouched('nephroUrologyLevel'))
+      || (showErrors && isError('nephroUrologyLevel'))">Không được để trống</div>
+    </div>
+
+    <div class="form-group mt-3">
+      <label for="musculoskeletal">musculoskeletal</label>
+      <textarea #musculoskeletal [class.is-invalid]="(isError('musculoskeletal') && isTouched('musculoskeletal'))
+      || (isError('musculoskeletal') && showErrors)" class="form-control" rows="3"
+        formControlName="musculoskeletal"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('musculoskeletal') && isTouched('musculoskeletal'))
+      || (showErrors && isError('musculoskeletal'))">Không được để trống</div>
+    </div>
+    <div class="form-group mt-3">
+      <label for="musculoskeletalLevel">musculoskeletal level</label>
+      <input type="number" #musculoskeletalLevel [class.is-invalid]="(isError('musculoskeletalLevel') && isTouched('musculoskeletalLevel'))
+      || (isError('musculoskeletalLevel') && showErrors)" class="form-control" formControlName="musculoskeletalLevel">
+      <div class="invalid-feedback d-block" *ngIf="(isError('musculoskeletalLevel') && isTouched('musculoskeletalLevel'))
+      || (showErrors && isError('musculoskeletalLevel'))">Không được để trống</div>
+    </div>
+    <div class=" mt-2 d-flex justify-content-end">
+      <button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+    </div>
+  </form>
 </div>
 
-<form [formGroup]="createForm">
-  <div class="form-group mt-3">
-    <label for="comment">Nội khoa</label>
-    <textarea class="form-control" rows="5" formControlName="result"></textarea>
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
-  </div>
-</form>
+<div *ngIf="medicalRecord == null" class="text-center">
+  <h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+</div>
+
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
+</ngx-spinner>

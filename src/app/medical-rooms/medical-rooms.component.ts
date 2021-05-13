@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./medical-rooms.component.scss']
 })
 export class MedicalRoomsComponent implements OnInit {
+	constructor() { }
 
-  constructor() { }
+	ngOnInit(): void {
 
-  ngOnInit(): void {
-  }
+	}
+
+  
 
 }

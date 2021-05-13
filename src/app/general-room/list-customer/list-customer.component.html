@@ -24,7 +24,6 @@
 					<th>Tên bệnh nhân</th>                 
                     <th>Số điện thoại</th>
                     <th>Số CMND/hộ chiếu</th>
-					<!-- <th></th> -->
 				</tr>
 			</thead>
 			<tbody>
@@ -33,12 +32,6 @@
 					<td><a (click)="GetDetailCustomer(cus.customerId)">{{cus.fullName}}</a></td>
                     <td class="text-right">{{cus.phoneNumber}}</td>
                     <td class="text-right">{{cus.identityNumber}}</td>
-					<!-- <td class="text-center" style="width: 120px;">
-						<a (click)="GetDetailCustomer(cus.customerId)"
-							class="btn btn-primary p-1">
-							Chi tiết
-						</a>
-					</td> -->
 				</tr>
 			</tbody>
 		</table>
