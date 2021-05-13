@@ -76,6 +76,7 @@ export interface MedicalRecordViewRes{
     customerFirstName: string
     customerLastName: string
     customerFullName: string
+    createDate: Date
     isActive: boolean
     isPaid: boolean
 }

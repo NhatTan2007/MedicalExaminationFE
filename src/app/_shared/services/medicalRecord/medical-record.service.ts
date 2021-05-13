@@ -64,5 +64,9 @@ export class MedicalRecordService {
 		return this.httpClient.get(`${this.apiDomain}/getActive`)
 			.pipe(map(res => res as MedicalRecordViewRes[]))
 	}
-	
+
+	getMedicalRecordsByCustomerId(customerId: string): Observable<MedicalRecordViewRes[]>{
+		return this.httpClient.get(`${this.apiDomain}/customer/${customerId}`)
+			.pipe(map(res => res as MedicalRecordViewRes[]))
+	}
 }

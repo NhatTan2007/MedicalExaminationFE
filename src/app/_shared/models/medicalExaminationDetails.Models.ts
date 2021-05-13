@@ -50,8 +50,8 @@ export abstract class AExaminationRooms
 {
     departmentId    : string
     mServiceId 	    : number
-    isRegistered	: boolean
-    price			: number
+    isRegistered	  : boolean
+    price			      : number
     doctorId        : string
     doctorName      : string
     objName         : string

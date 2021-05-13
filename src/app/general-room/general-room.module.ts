@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button'; 
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog'; 
 import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 import { GeneralRoomRoutingModule } from './general-room-routing.module';
@@ -23,6 +24,7 @@ import { CreateCustomerExaminationComponent } from './create-customer-examinatio
 import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
 import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
 import { ListCustomerComponent } from './list-customer/list-customer.component';
+import { BlockSubmitDialog } from "./create-customer-examination/create-customer-examination.component";
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -36,7 +38,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		CreateCustomerExaminationComponent,
 		CreateCustomerInformationComponent,
     	ListCustomerComponent,
-		DetailCustomerComponent
+		DetailCustomerComponent,
+		BlockSubmitDialog
 	],
 	imports: [
 		CommonModule,
@@ -53,6 +56,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		MatButtonModule,
 		MatStepperModule,
 		MatCheckboxModule,
+		MatDialogModule,
 		NgxMaskModule.forRoot()
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],

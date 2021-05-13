@@ -12,74 +12,76 @@ import { MedicalServiceService } from 'src/app/_shared/services/medical-service/
 	styleUrls: ['./services-list.component.scss']
 })
 export class ServicesListComponent implements OnInit {
-medicalServices: MedicalService[] = []
-medicalService: MedicalService
-constructor(private medicalServiceService: MedicalServiceService,
-			private router: Router,
-			private spinner: NgxSpinnerService) {}
+	medicalServices: MedicalService[] = []
+	medicalService: MedicalService
+	constructor(private medicalServiceService: MedicalServiceService,
+				private router: Router,
+				private spinner: NgxSpinnerService) {}
 
-ngOnInit(): void {
-	this.spinner.show();
-	this.getServicesList()
-}
+	ngOnInit(): void {
+		this.spinner.show();
+		this.getServicesList()
+	}
 
-getMedicalService(id: number): Observable<MedicalService>{
-	return this.medicalServiceService.GetMedicalService(id);
-}
+	getMedicalService(id: number): Observable<MedicalService>{
+		return this.medicalServiceService.GetMedicalService(id);
+	}
 
-getServicesList(){
-	this.medicalServiceService.GetMedicalServices()
-		.toPromise<MedicalService[]>().then((res) => {
-		this.medicalServices = res
-		this.spinner.hide();
-		}, () => {
+	getServicesList(){
+		this.medicalServiceService.GetMedicalServices()
+			.toPromise<MedicalService[]>().then((res) => {
+			this.medicalServices = res
 			this.spinner.hide();
-		})
-}
+			}, () => {
+				this.spinner.hide();
+			})
+	}
 
-seachMedicalService(keyword: string){
-	this.medicalServiceService.GetMedicalServiceByDepartmentId(keyword)
-							.subscribe((res) => this.medicalServices = res);
-}
+	seachMedicalService(keyword: string){
+		this.medicalServiceService.GetMedicalServiceByDepartmentId(keyword)
+								.subscribe((res) => this.medicalServices = res);
+	}
 
-openModify(service: MedicalService){
-	let index = this.medicalServices.indexOf(service)
-	if(index != -1){
-		service.update = true
+	openModify(service: MedicalService){
+		let index = this.medicalServices.indexOf(service)
+		if(index != -1){
+			service.update = true
+			}
+		}
+
+	async updateMedicalServiceInfo(service: MedicalService){
+		service.update = null
+		this.medicalServiceService.UpdateMedicalServices(service as UpdateMedicalServiceReq).subscribe(
+				(res) => {
+					if(res.success) {
+						service = res.medicalService
+						service.update = false
+					} else{
+						this.getServicesList()
+					}
+				},
+				() => {
+					this.getServicesList()
+				}
+			);
+	}
+
+	updatePrice(price: number, service: MedicalService){
+		let index = this.medicalServices.indexOf(service)
+		if(index != -1){
+			service.price = Number(price)
 		}
 	}
-
-async updateMedicalServiceInfo(service: MedicalService){
-	service.update = null
-	this.medicalServiceService.UpdateMedicalServices(service as UpdateMedicalServiceReq).subscribe(
-			(res) => {
-				if(res.success) {
-					service = res.medicalService
-					service.update = false
-				}
-			},
-			() => {
-				this.getServicesList()
-			}
-		);
-}
-
-updatePrice(price: number, service: MedicalService){
-	let index = this.medicalServices.indexOf(service)
-	if(index != -1){
-		service.price = Number(price)
+	activeService(isactive: MedicalService){
+		let index = this.medicalServices.indexOf(isactive)
+		if(index != -1){
+			isactive.isActive = true
+		}
 	}
-}
-activeService(isactive: MedicalService){
-	let index = this.medicalServices.indexOf(isactive)
-	if(index != -1){
-		isactive.isActive = true
+	deactiveService(isactive: MedicalService){
+		let index = this.medicalServices.indexOf(isactive)
+		if(index != -1){
+			isactive.isActive = false
+		}
 	}
-}
-deactiveService(isactive: MedicalService){
-	let index = this.medicalServices.indexOf(isactive)
-	if(index != -1){
-		isactive.isActive = false
-	}
-}
 }
