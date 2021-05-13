@@ -50,9 +50,7 @@ export class CreateCustomerExaminationComponent implements OnInit {
 
 	openBlockDialog(){
 		const dialogRef = this.dialog.open(BlockSubmitDialog);
-
 		dialogRef.afterClosed().subscribe(res => {
-			console.log()
 		})
 	}
 
@@ -161,6 +159,7 @@ export class CreateCustomerExaminationComponent implements OnInit {
 			this.medicalRecordService.CreateMedicalRecord(this.newMedicalRecord)
 				.subscribe((res) => {
 					res as CreateMedicalRecordRes
+					console.log(res)
 				})
 		} else {this.openBlockDialog()};
 	}

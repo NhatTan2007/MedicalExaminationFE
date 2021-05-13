@@ -6,6 +6,11 @@ import { Customer } from 'src/app/_shared/models/customer.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 import { Observable } from 'rxjs';
 import { FormService } from 'src/app/_shared/services/form-service/form.service';
+import { MedicalRecord, MedicalRecordViewRes } from 'src/app/_shared/models/medicalRecord.Models';
+import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
+import { AExaminationRooms } from 'src/app/_shared/models/medicalExaminationDetails.Models';
+import { MedicalService } from 'src/app/_shared/models/medicalService.Models';
+import { MedicalServiceService } from 'src/app/_shared/services/medical-service/medical-service.service';
 
 @Component({
   selector: 'app-detail-customer',
@@ -19,12 +24,20 @@ export class DetailCustomerComponent implements OnInit {
 	formModify: FormGroup
 	update = false
 	showErrors = false;
+	listMedicalRecord: MedicalRecordViewRes[]
+	medicalRecord: MedicalRecord = new MedicalRecord('')
+	medicalRecordDetails: AExaminationRooms[]
+	listServicesRegisted: MedicalService[] = []
+	totalAmount: number
+	private previousTarget: any
 	constructor(private activatedRoute: ActivatedRoute,
 				private customerService: CustomerService,
+				private medicalRecordService: MedicalRecordService,
 				private router: Router,
 				private spinner: NgxSpinnerService,
 				private formBuilder: FormBuilder,
-				private formService: FormService) { }
+				private formService: FormService,
+				private medicalService: MedicalServiceService) { }
 
   	async ngOnInit(): Promise<void> {
     this.spinner.show();
@@ -45,6 +58,7 @@ export class DetailCustomerComponent implements OnInit {
 				dateOfIssuanceIdentityNumber: [new Date(res.dateOfIssuanceIdentityNumber).toISOString().substring(0,10),[Validators.required]],
 				placeOfIssuanceIdentityNumber: [res.placeOfIssuanceIdentityNumber,[Validators.required]],
 			})
+			this.getMedicalRecordsByCustomerId(res.customerId);
 			this.formService.form = this.formModify;
 			this.formModify.disable();
 			this.spinner.hide();
@@ -91,6 +105,33 @@ export class DetailCustomerComponent implements OnInit {
 		this.formModify.disable();
 		this.update = false
 		this.restoreData();
+	}
+
+	getMedicalRecordsByCustomerId(customerId: string){
+		this.medicalRecordService.getMedicalRecordsByCustomerId(customerId)
+			.subscribe((res) => {
+				this.listMedicalRecord = res
+			})
+	}
+
+	getMedicalRecord(medicalRecordId: string){
+		this.medicalRecordService.GetMedicalRecord(medicalRecordId)
+			.subscribe(async (res) => {
+				this.listServicesRegisted = []
+				this.totalAmount = 0
+				this.medicalRecord = res
+				this.medicalRecordDetails = await this.medicalRecordService.getListServicesFromMedicalRecord(res.details)
+				this.medicalRecordDetails.forEach(s => {
+					if(s.isRegistered){
+						this.medicalService.GetMedicalService(s.mServiceId)
+							.subscribe((res) => {
+								this.listServicesRegisted.push(res)
+								this.totalAmount += s.price
+							})
+						
+					}
+				})
+			})
 	}
 
   	private restoreData(){

@@ -9,12 +9,14 @@
 <div class="border" style="border-radius: 5px;">
     <table class="table-sm w-100">
         <tbody>
-            <tr *ngFor="let medicalRecord of listActiveMedicalRecord">
-                <td>
-                    <a (click)="getMedicalRecord($event, medicalRecord.medicalRecordId)" href="javascript:;" 
-                        class="text-decoration-none">
-                        <span class="text-left d-block">{{medicalRecord.medicalRecordId}}</span>
-                        <span class="text-right d-block">{{medicalRecord.customerFullName}}</span>
+            <tr *ngFor="let mRecord of listActiveMedicalRecord">
+                <td [class.selected]="medicalRecord.medicalRecordId == mRecord.medicalRecordId"
+                    style="border-radius: 5px;">
+                    <a (click)="getMedicalRecord(mRecord.medicalRecordId)" href="javascript:;" 
+                        class="text-decoration-none"
+                        [class.text-white]="medicalRecord.medicalRecordId == mRecord.medicalRecordId">
+                        <span class="text-left d-block">{{mRecord.medicalRecordId}}</span>
+                        <span class="text-right d-block">{{mRecord.customerFullName}}</span>
                     </a>
                 </td>
             </tr>

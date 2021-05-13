@@ -46,3 +46,13 @@ export interface CreateUserRes{
     message: string,
     success: boolean
 }
+
+export interface UserInfoRes{
+    firstName:      string,
+    lastName:       string,
+    fullName:       string,
+    departmentId:   string,
+    departmentName: string,
+    titles:         string,
+    avatar:         string
+}

@@ -11,8 +11,7 @@ import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/med
 })
 export class ListActiveMedicalRecordComponent implements OnInit {
 	listActiveMedicalRecord: MedicalRecordViewRes[] = []
-	previousTarget: any
-	medicalRecord: MedicalRecord
+	medicalRecord: MedicalRecord = new MedicalRecord('a');
 	constructor(private medicalRecordService: MedicalRecordService,
 				private customerService: CustomerService,
 				private spiner: NgxSpinnerService) { }
@@ -30,19 +29,9 @@ export class ListActiveMedicalRecordComponent implements OnInit {
 			}, () => {this.spiner.hide()});
 	}
 
-	async getMedicalRecord($event: any, medicalRecordId: string){
-		let target = $event.target.parentElement.parentElement;
+	async getMedicalRecord(medicalRecordId: string){
 		await this.medicalRecordService.GetMedicalRecord(medicalRecordId)
 		.subscribe((res) => {
-			if(this.previousTarget == null) {
-				this.previousTarget = target
-			} else if(this.previousTarget != null){
-				this.previousTarget.style.backgroundColor = "transparent"
-				this.previousTarget.firstElementChild.style.color = "#343a40"
-				this.previousTarget = target
-			}
-			target.style.backgroundColor = "rgb(0 68 137 / 73%)"
-			target.firstElementChild.style.color = "#fff"
 			this.medicalRecord = res
 			this.medicalRecordService.emitMedicalRecord(res);
 		})

@@ -19,7 +19,7 @@ export class OrganizationDetailsComponent implements OnInit {
 	$organization: Observable<Organization>
 	formModify: FormGroup
 	showErrors = false
-
+	update = false
 	arr: AExaminationRooms[] = []
 	constructor(private activatedRoute: ActivatedRoute,
 				private organizationService: OrganizationService,
@@ -42,7 +42,7 @@ export class OrganizationDetailsComponent implements OnInit {
 				organizationAddress: [res.organizationAddress, [Validators.required]],
 				personContact: [res.personContact, [Validators.required]],
 				emailContact: [res.emailContact, [Validators.required, Validators.pattern("(^[\\w])+([\\w._])*\@([\\w{2,}\\-])+(\\.[\\w]{2,4})$")]],
-				phoneContact: [res.phoneContact, [Validators.required]]
+				phoneContact: [res.phoneContact, [Validators.required, Validators.minLength(10), Validators.pattern("^0+[0-9\\s]*")]]
 			})
 			this.formService.form = this.formModify;
 			this.formModify.disable();
