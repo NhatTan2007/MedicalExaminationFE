@@ -1,15 +1,21 @@
 <div *ngIf="medicalRecord != null">
-  <label for="obstetricsAndGynecologyExamination">Kiểm tra thể lực</label>
-  <form [formGroup]="updateForm" #obstetricsAndGynecologyExamination (ngSubmit)="onSubmit()">
+  <label for="sugeryExamination">surgery form (ko biet ten)</label>
+  <form [formGroup]="updateForm" #sugeryExamination (ngSubmit)="onSubmit()">
 
     <div class="form-group mt-3">
       <label for="surgery">surgery</label>
-      <textarea #surgery class="form-control" rows="3" formControlName="surgery"></textarea>
+      <textarea #surgery [class.is-invalid]="(isError('surgery') && isTouched('surgery'))
+      || (isError('surgery') && showErrors)" class="form-control" rows="3" formControlName="surgery"></textarea>
+      <div class="invalid-feedback d-block" *ngIf="(isError('surgery') && isTouched('surgery'))
+      || (showErrors && isError('surgery'))">Không được để trống</div>
     </div>
 
     <div class="form-group mt-3">
       <label for="surgeryLevel">surgery Level</label>
-      <input type="number" #surgeryLevel class="form-control" formControlName="surgeryLevel">
+      <input type="number" [class.is-invalid]="(isError('surgeryLevel') && isTouched('surgeryLevel'))
+      || (isError('surgeryLevel') && showErrors)" #surgeryLevel class="form-control" formControlName="surgeryLevel">
+      <div class="invalid-feedback d-block" *ngIf="(isError('surgeryLevel') && isTouched('surgeryLevel'))
+      || (showErrors && isError('surgeryLevel'))">Không được để trống</div>
     </div>
 
     <div class=" mt-2 d-flex justify-content-end">
