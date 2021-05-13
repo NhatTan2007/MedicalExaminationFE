@@ -4,7 +4,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { MedicalRoomsRoutingModule } from './medical-rooms-routing.module';
 import { MedicalRoomsComponent } from './medical-rooms.component';
@@ -50,6 +52,8 @@ import { CustomerInformationComponent } from './customer-information/customer-in
     MatInputModule,
     MatIconModule,
     NgxSpinnerModule,
+    MatButtonModule,
+    MatRadioModule
   ],
 })
 export class MedicalRoomsModule {}
