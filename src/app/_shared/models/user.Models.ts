@@ -48,6 +48,7 @@ export interface CreateUserRes{
 }
 
 export interface UserInfoRes{
+    userId:         string,
     firstName:      string,
     lastName:       string,
     fullName:       string,

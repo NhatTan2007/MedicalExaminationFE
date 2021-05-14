@@ -29,7 +29,6 @@ export class DetailCustomerComponent implements OnInit {
 	medicalRecordDetails: AExaminationRooms[]
 	listServicesRegisted: MedicalService[] = []
 	totalAmount: number
-	private previousTarget: any
 	constructor(private activatedRoute: ActivatedRoute,
 				private customerService: CustomerService,
 				private medicalRecordService: MedicalRecordService,

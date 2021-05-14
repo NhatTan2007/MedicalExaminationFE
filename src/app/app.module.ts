@@ -15,6 +15,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './_shared/components/login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthInterceptor } from './_shared/interceptor/authInterceptor';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
@@ -38,6 +39,7 @@ registerLocaleData(en);
 		MatButtonModule,
 		MatCheckboxModule,
 		NgxSpinnerModule,
+		NzNotificationModule
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	providers: [
