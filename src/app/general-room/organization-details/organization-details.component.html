@@ -36,38 +36,49 @@
     <div class="form-row">
         <div class="form-group col-6">
             <label for="#personContact">Người liên hệ</label>
-            <input  [class.is-invalid]="formModify.get('personContact').errors && formModify.get('personContact').touched"
+            <input  [class.is-invalid]="(isError('personContact') && isTouched('personContact'))
+                    || (isError('personContact') && showErrors)"
                     type="text" class="form-control" 
                     formControlName="personContact"
                     #personContact [attr.disabled]="!update ? true : null">
-            <div class="invalid-feedback d-block">Tên người liên hệ không được để trống</div>	
+            <div class="invalid-feedback d-block"
+                *ngIf="(isError('personContact') && isTouched('personContact'))
+                || (isError('personContact') && showErrors)">Tên người liên hệ không được để trống</div>	
         </div>
         <div class="form-group col-6">
             <label for="#emailContact">Email người liên hệ</label>
-            <input  [class.is-invalid]="formModify.get('emailContact').errors && formModify.get('emailContact').touched"
+            <input  [class.is-invalid]="(isError('emailContact') && isTouched('emailContact'))
+                    || (isError('emailContact') && showErrors)"
                     type="text" class="form-control" 
                     formControlName="emailContact"
                     #emailContact [attr.disabled]="!update ? true : null">
             <div class="invalid-feedback d-block"
-                >Email người liên hệ không được để trống</div>
+                *ngIf="(hasError('emailContact', 'required') && isTouched('emailContact'))
+                || (hasError('emailContact', 'required') && showErrors)">Email người liên hệ không được để trống</div>
+                <div class="invalid-feedback d-block"
+                *ngIf="(hasError('emailContact', 'pattern') && isTouched('emailContact'))
+                || (hasError('emailContact', 'pattern') && showErrors)">Định dạng email đã nhập không đúng</div>
         </div>
     </div>
     <div class="form-group">
         <label for="#phoneContact">Điện thoại liên hệ</label>
-        <input  [class.is-invalid]="formModify.get('phoneContact').errors && formModify.get('phoneContact').touched"
+        <input  [class.is-invalid]="(isError('phoneContact') && isTouched('phoneContact'))
+                || (isError('phoneContact') && showErrors)"
                 type="text" class="form-control" 
                 formControlName="phoneContact"
                 #phoneContact [attr.disabled]="!update ? true : null">
-            <div *ngIf="formModify.get('phoneContact').hasError('required')"
+            <div *ngIf="(hasError('phoneContact', 'required') && isTouched('phoneContact'))
+                || (hasError('phoneContact', 'required') && showErrors)"
                 class="invalid-feedback d-block">Số điện thoại của người liên hệ</div>
-            <div *ngIf="formModify.get('phoneContact').hasError('minlength')"
-                class="invalid-feedback d-block">Điền đầy đủ số điện thoại</div>
-            <div *ngIf="formModify.get('phoneContact').hasError('pattern')"
-                class="invalid-feedback d-block">Điền đúng số điện thoại</div>
+            <div *ngIf="(hasError('phoneContact', 'minlength') && isTouched('phoneContact'))
+                || (hasError('phoneContact', 'minlength') && showErrors)"
+                class="invalid-feedback d-block">Số điện thoại có độ dài tối thiểu 10 số</div>
+            <div *ngIf="(hasError('phoneContact', 'pattern') && isTouched('phoneContact'))
+            || (hasError('phoneContact', 'pattern') && showErrors)"
+                class="invalid-feedback d-block">Số điện thoại bắt đầu bằng số 0 và chỉ bao gồm chữ số</div>
     </div>
     <div class="d-flex">
         <a  class="btn btn-primary"
-            
             (click)="openUpdate()"
             *ngIf="!update">Chỉnh sửa</a>
         <button class="btn btn-primary" type="submit"

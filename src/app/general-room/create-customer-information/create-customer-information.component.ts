@@ -79,5 +79,4 @@ export class CreateCustomerInformationComponent implements OnInit {
 	hasError(name: string, errorName: string){
 		return this.formService.hasError(name, errorName);
 	}
-
 }

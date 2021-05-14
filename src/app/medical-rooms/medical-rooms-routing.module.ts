@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'mat', component: OphthalmologyExaminationComponent },
   { path: 'rang-ham-mat',component:OralAndMaxillofacialExaminationComponent},
   { path: 'noi-khoa', component:InternalMedicineExaminationComponent},
-  { path: 'thai-san', component:ObstetricsAndGynecologyExaminationComponent},
+  { path: 'phu-san', component:ObstetricsAndGynecologyExaminationComponent},
   { path: 'tai-mui-hong', component:OtorhinolaryngologyExaminationComponent},
   { path: 'the-luc', component:PhysicalExaminationComponent},
   { path: 'ngoai-khoa',component:SurgeryExaminationComponent},

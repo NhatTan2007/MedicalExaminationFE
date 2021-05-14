@@ -1,3 +1,4 @@
+<h2>Thông tin chi tiết bệnh nhân</h2>
 <form *ngIf="$customer | async" [formGroup] = "formModify" (ngSubmit)="updateCustomerInfo()">
     <div class="form-row">
         <div class="form-group col-6 pl-0">
@@ -128,33 +129,40 @@
         *ngIf="update">Trở Lại</a>
         </div>
 </form>
-    <hr>
-    <strong >lịch sử khám bệnh</strong>
-
-    <form class="mt-2">
-    <div class="row">
-        <div class="col-2 border">
-            <div class="list-group">
-                <h6>Đợt khám</h6>
-                <ul>
-                    <li>bla bla</li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-3 border">
-            <div class="list-group">
-                <h6>Lý do khám bệnh</h6>
-
-            </div>
-        </div>
-        <div class="col-7 border">
-            <div class="list-group">
-                <h6>Danh sách dịch vụ</h6>
-
-            </div>
-        </div>
+<div class="mt-2 form-row bg-light" style="border-radius: 5px;" *ngIf="listMedicalRecord != null">
+    <div class="col-3 p-0">
+        <h2 class="text-center">Đợt khám bệnh</h2>
+        <p *ngFor="let mRecord of listMedicalRecord"
+            class="text-center p-2"
+            style="border-radius: 5px;"
+            [class.selected]="medicalRecord.medicalRecordId == mRecord.medicalRecordId">
+            <a class="text-decoration-none d-block" (click)="getMedicalRecord(mRecord.medicalRecordId)" href="javascript:;"
+                [class.text-white]="medicalRecord.medicalRecordId == mRecord.medicalRecordId">
+                {{mRecord.createDate | date :'dd/MM/yyyy'}}
+            </a>
+        </p>
     </div>
-</form>
+    <div class="col-9 fomr-group"
+        *ngIf="listServicesRegisted.length > 0">
+        <h2 class="text-center">Dịch vụ đăng ký</h2>
+        <table class="table table-bordered m-0">
+            <tbody>
+                <tr *ngFor="let service of listServicesRegisted">
+                    <td>{{service.mServiceName}}</td>
+                    <td class="text-right">{{service.price | mask: 'separator':'.'}} VNĐ</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr class="font-weight-bold">
+                    <td class="text-center">Tổng tiền</td>
+                    <td class="text-right">{{totalAmount | mask: 'separator':'.'}} VNĐ</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+
 <ngx-spinner
 	fullScreen = false
 	color = "#fff"

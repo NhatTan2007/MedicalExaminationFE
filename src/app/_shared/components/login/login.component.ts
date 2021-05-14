@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
 	loginSubmit(){
 		if(this.loginForm.valid){
 			let loginData = this.loginForm.value as AccountLogin
+      loginData.username = loginData.username.toLowerCase();
 			this.authService.login(loginData);
 		} else{
 			this.loginForm.patchValue(

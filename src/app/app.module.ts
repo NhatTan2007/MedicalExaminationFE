@@ -15,6 +15,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './_shared/components/login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthInterceptor } from './_shared/interceptor/authInterceptor';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+
+registerLocaleData(en);
 
 @NgModule({
 	declarations: [AppComponent, MainLayoutComponent, LoginComponent],
@@ -39,7 +45,8 @@ import { AuthInterceptor } from './_shared/interceptor/authInterceptor';
 			provide: HTTP_INTERCEPTORS,
 			useClass: AuthInterceptor,
 			multi: true
-		}
+		},
+		{ provide: NZ_I18N, useValue: en_US }
 	],
 	bootstrap: [AppComponent],
 	exports: [FormsModule, ReactiveFormsModule],

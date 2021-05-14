@@ -11,7 +11,7 @@ import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/med
 })
 export class ListActiveMedicalRecordComponent implements OnInit {
 	listActiveMedicalRecord: MedicalRecordViewRes[] = []
-	medicalRecord: MedicalRecord
+	medicalRecord: MedicalRecord = new MedicalRecord('a');
 	constructor(private medicalRecordService: MedicalRecordService,
 				private customerService: CustomerService,
 				private spiner: NgxSpinnerService) { }
@@ -24,7 +24,7 @@ export class ListActiveMedicalRecordComponent implements OnInit {
 	async getActiveMedicalRecord(){
 		this.medicalRecordService.GetActiveMedicalRecord()
 			.toPromise().then((res) => {
-				this.listActiveMedicalRecord = <MedicalRecordViewRes[]>res
+				this.listActiveMedicalRecord = <MedicalRecordViewRes[]>res;
 				this.spiner.hide()
 			}, () => {this.spiner.hide()});
 	}

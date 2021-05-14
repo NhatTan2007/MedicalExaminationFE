@@ -32,7 +32,7 @@ export class NeurologyExaminationComponent implements OnInit {
 		this.updateForm = this.formBuilder.group({
 			neurosurgery: ['', [Validators.required]],
 			neurosurgeryLevel: ['', [Validators.required]],
-      psychiatry: ['', [Validators.required]],
+      		psychiatry: ['', [Validators.required]],
 			psychiatryLevel: ['', [Validators.required]]
 		});
 	}
@@ -40,7 +40,7 @@ export class NeurologyExaminationComponent implements OnInit {
 	onSubmit(): void {
 		this.medicalRecord.details.neurologyExamination.neurosurgery = this.updateForm.get("neurosurgery").value
 		this.medicalRecord.details.neurologyExamination.neurosurgeryLevel = Number(this.updateForm.get("neurosurgeryLevel").value)
-    this.medicalRecord.details.neurologyExamination.psychiatry = this.updateForm.get("psychiatry").value
+    	this.medicalRecord.details.neurologyExamination.psychiatry = this.updateForm.get("psychiatry").value
 		this.medicalRecord.details.neurologyExamination.psychiatryLevel = Number(this.updateForm.get("psychiatryLevel").value)
     
     console.log("success");
