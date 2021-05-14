@@ -24,6 +24,7 @@ import { SurgeryExaminationComponent } from './surgery-examination/surgery-exami
 import { NeurologyExaminationComponent } from './neurology-examination/neurology-examination.component';
 import { ListActiveMedicalRecordComponent } from './list-active-medical-record/list-active-medical-record.component';
 import { CustomerInformationComponent } from './customer-information/customer-information.component';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { CustomerInformationComponent } from './customer-information/customer-in
     MatIconModule,
     NgxSpinnerModule,
     MatButtonModule,
-    MatRadioModule
+    MatRadioModule,
+    NzNotificationModule
   ],
 })
 export class MedicalRoomsModule {}

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/internal/Subject';
 import { map } from 'rxjs/operators';
-import { AExaminationRooms, MedicalRecordDetails } from '../../models/medicalExaminationDetails.Models';
+import { AExaminationRooms, DermatologyExamination, MedicalRecordDetails } from '../../models/medicalExaminationDetails.Models';
 import { CreateMedicalRecordReq,
 			CreateMedicalRecordRes,
 			MedicalRecord,
@@ -68,5 +68,11 @@ export class MedicalRecordService {
 	getMedicalRecordsByCustomerId(customerId: string): Observable<MedicalRecordViewRes[]>{
 		return this.httpClient.get(`${this.apiDomain}/customer/${customerId}`)
 			.pipe(map(res => res as MedicalRecordViewRes[]))
+	}
+
+	//Update result of examination
+	updateDermatologyExamination(dermatologyExamination: DermatologyExamination, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/dermatologyExamination`, dermatologyExamination)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
 	}
 }
