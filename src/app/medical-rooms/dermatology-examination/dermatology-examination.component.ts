@@ -7,7 +7,10 @@ import { MedicalRecord } from 'src/app/_shared/models/medicalRecord.Models';
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
 import { FormService } from 'src/app/_shared/services/form-service/form.service';
 import { AuthService } from 'src/app/_shared/services/authService/auth-service.service';
+<<<<<<< HEAD
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+=======
+>>>>>>> dev
 
 @Component({
 	selector: 'app-dermatology-examination',
@@ -24,8 +27,12 @@ export class DermatologyExaminationComponent implements OnInit {
 				private medicalRecordService: MedicalRecordService,
 				private spiner: NgxSpinnerService,
         		private formService: FormService,
+<<<<<<< HEAD
 				private authService: AuthService,
 				private notification: NzNotificationService) {}
+=======
+				private authService: AuthService) {}
+>>>>>>> dev
 
 	ngOnInit(): void {
 		this.medicalRecord$ = this.medicalRecordService.getMedicalRecord$();
