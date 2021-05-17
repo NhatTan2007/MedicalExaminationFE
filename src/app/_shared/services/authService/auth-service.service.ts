@@ -1,15 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AccountLogin, AccountLoginRes } from '../../models/accountLogin.Model';
 import { DepartmentId } from '../../models/department.Models';
-import { NotificationStatus } from '../../models/system.Models';
 import { UserInfoRes } from '../../models/user.Models';
 import { ConfigService } from '../config/config.service';
-import { NotificationService } from '../notification-service/notification.service';
 
 @Injectable({
     providedIn: 'root'
@@ -20,27 +17,11 @@ export class AuthService {
 	navigateList: any[] = []
 	constructor(private config: ConfigService,
                 private httpClient: HttpClient,
-				private notificationService: NotificationService,
-				private router: Router,
-				private spiner: NgxSpinnerService) { }
+				private router: Router) { }
 
-	login(dataLogin: AccountLogin){
-		this.spiner.show();
-		this.httpClient.post(`${this.apiDomain}/login`, dataLogin)
-			.subscribe(
-				(data: AccountLoginRes) => {
-					this.notificationService.emitNotification({message: "Đăng nhập thành công", status: NotificationStatus.Success})
-					this.getUserInfo();
-				},
-				(error) => {
-					if(error.status == 401){
-						this.notificationService.emitNotification({message: "Sai tên đăng nhập hoặc mật khẩu", status: NotificationStatus.Failed})
-					}
-					this.spiner.hide();
-				},() => {
-					this.spiner.hide();
-				}
-			);
+	login(dataLogin: AccountLogin): Observable<AccountLoginRes>{
+		return this.httpClient.post(`${this.apiDomain}/login`, dataLogin)
+			.pipe(map(res => res as AccountLoginRes))
 	}
 
 	logout(){
@@ -54,7 +35,6 @@ export class AuthService {
 		this.httpClient.get(`${this.apiDomain}/userInfo`)
 			.pipe(map(res => res as UserInfoRes)).subscribe((res) => {
 				this.userInfo = res as UserInfoRes
-				console.log(res)
 				switch (res.departmentId) {
 					case DepartmentId.da_lieu:
 						this.router.navigateByUrl('auth/phong-kham/da-lieu')
@@ -86,8 +66,8 @@ export class AuthService {
 					case DepartmentId.rang_ham_mat:
 						this.router.navigateByUrl('auth/phong-kham/rang-ham-mat')
 						break;
-
 					default:
+						this.router.navigateByUrl('auth/phong-tong-hop')
 						break;
 				}
 			},(err) => {

@@ -47,6 +47,7 @@ export class CreateMedicalRecordReq{
     wasFinishedExamination: boolean
     customerId: string
     reasonToExamination: string
+    servicesRegisted: number
     
     constructor(customerId: string){
         this.medicalHistory = new MedicalHistoryForm();
@@ -57,11 +58,14 @@ export class CreateMedicalRecordReq{
         this.isPaid = false;
         this.isGroup = false;
         this.totalAmount = 0;
+        this.servicesRegisted = 0;
     }
 }
 
 export class MedicalRecord extends CreateMedicalRecordReq{
     medicalRecordId: string
+    serviceUsed: number
+    reasonCancel: string
 }
 
 
@@ -76,9 +80,10 @@ export interface MedicalRecordViewRes{
     customerFirstName: string
     customerLastName: string
     customerFullName: string
-    createDate: Date
+    createDate: number
     isActive: boolean
     isPaid: boolean
+    reasonCancel: string
 }
 
 export interface UpdateMedicalRecordRes{

@@ -13,6 +13,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog'; 
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import { GeneralRoomRoutingModule } from './general-room-routing.module';
 import { GeneralRoomComponent } from './general-room.component';
@@ -57,6 +58,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		MatStepperModule,
 		MatCheckboxModule,
 		MatDialogModule,
+		NzNotificationModule,
 		NgxMaskModule.forRoot()
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
