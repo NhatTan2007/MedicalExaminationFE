@@ -24,7 +24,6 @@ import { OtorhinolaryngologyExaminationComponent } from './otorhinolaryngology-e
 import { PhysicalExaminationComponent } from './physical-examination/physical-examination.component';
 import { SurgeryExaminationComponent } from './surgery-examination/surgery-examination.component';
 import { NeurologyExaminationComponent } from './neurology-examination/neurology-examination.component';
-<<<<<<< HEAD
 
 @NgModule({
 	declarations: [
@@ -56,42 +55,5 @@ import { NeurologyExaminationComponent } from './neurology-examination/neurology
 		MatTabsModule,
 		SharedModule
 	]
-=======
-import { ListActiveMedicalRecordComponent } from './list-active-medical-record/list-active-medical-record.component';
-import { CustomerInformationComponent } from './customer-information/customer-information.component';
-import { NzNotificationModule } from 'ng-zorro-antd/notification';
-
-@NgModule({
-  declarations: [
-    MedicalRoomsComponent,
-    NeurologyExaminationComponent,
-    MedicalGeneralDoctorComponent,
-    ImageAnalysationComponent,
-    TestComponent,
-    OphthalmologyExaminationComponent,
-    OralAndMaxillofacialExaminationComponent,
-    DermatologyExaminationComponent,
-    InternalMedicineExaminationComponent,
-    ObstetricsAndGynecologyExaminationComponent,
-    OtorhinolaryngologyExaminationComponent,
-    PhysicalExaminationComponent,
-    SurgeryExaminationComponent,
-    ListActiveMedicalRecordComponent,
-    CustomerInformationComponent,
-  ],
-  imports: [
-    CommonModule,
-    MedicalRoomsRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
-    NgxSpinnerModule,
-    MatButtonModule,
-    MatRadioModule,
-    NzNotificationModule
-  ],
->>>>>>> dev
 })
 export class MedicalRoomsModule { }

@@ -17,7 +17,6 @@ export class CustomerInformationComponent implements OnInit {
 		this.medicalRecord$ = this.medicalRecordService.getMedicalRecord$();
 		this.medicalRecord$.subscribe((res) => {
 			this.medicalRecord = res
-			console.log(res.medicalHistory)
 		})
 	}
 
