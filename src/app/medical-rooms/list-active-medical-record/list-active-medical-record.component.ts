@@ -26,7 +26,10 @@ export class ListActiveMedicalRecordComponent implements OnInit {
 			.toPromise().then((res) => {
 				this.listActiveMedicalRecord = <MedicalRecordViewRes[]>res;
 				this.spiner.hide()
-			}, () => {this.spiner.hide()});
+			}, (err) => {
+				console.error(err)
+				this.spiner.hide()
+			});
 	}
 
 	async getMedicalRecord(medicalRecordId: string){

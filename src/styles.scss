@@ -72,3 +72,16 @@ label{
     background-color: rgb(0 68 137 / 73%);
     color: #fff;
 }
+
+.error{
+    background-color: rgba(231, 76, 60, 0.85)
+}
+
+.success{
+    background-color: rgba(46, 204, 113, 0.85);
+}
+
+.ant-notification-notice-message{
+    color: white !important;
+    font-weight: 500;
+}
