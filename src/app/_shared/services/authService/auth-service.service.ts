@@ -66,9 +66,12 @@ export class AuthService {
 					case DepartmentId.rang_ham_mat:
 						this.router.navigateByUrl('auth/phong-kham/rang-ham-mat')
 						break;
-					default:
-						this.router.navigateByUrl('auth/phong-tong-hop')
+					case DepartmentId.the_chat:
+						this.router.navigateByUrl('auth/phong-kham/the-chat')
 						break;
+					// default:
+					// 	this.router.navigateByUrl('auth/phong-tong-hop/tao-thong-tin-benh-nhan')
+					// 	break;
 				}
 			},(err) => {
 				if(err.status == 401){

@@ -23,12 +23,12 @@ export class AnotherQuestions{
 export class MedicalHistoryForm{
     medicalHistoryCustomer: MedicalHistory
     medicalHistoryFamily: MedicalHistory
-    anotherQuetions: AnotherQuestions
+    anotherQuestions: AnotherQuestions
 
     constructor(){
         this.medicalHistoryCustomer = new MedicalHistory();
         this.medicalHistoryFamily = new MedicalHistory();
-        this.anotherQuetions = new AnotherQuestions();
+        this.anotherQuestions = new AnotherQuestions();
     }
 }
 

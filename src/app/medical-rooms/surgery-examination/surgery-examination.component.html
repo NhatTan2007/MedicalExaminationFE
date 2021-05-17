@@ -1,31 +1,36 @@
-<div *ngIf="medicalRecord != null">
-  <label for="sugeryExamination">surgery form (ko biet ten)</label>
-  <form [formGroup]="updateForm" #sugeryExamination (ngSubmit)="onSubmit()">
+<div *ngIf="medicalRecord != null" class="mt-2">
+	<label for="sugeryExamination" class="btn btn-info">Chẩn đoán ngoại khoa</label>
+	<form [formGroup]="updateForm" #sugeryExamination (ngSubmit)="onSubmit()"
+	*ngIf="medicalRecord.details.surgeryExamination.isRegistered">
+		<div class="form-group">
+			<label for="surgery">Ngoại khoa</label>
+			<textarea #surgery [class.is-invalid]="(isError('surgery') && isTouched('surgery'))
+      		|| (isError('surgery') && showErrors)" class="form-control" rows="2" formControlName="surgery"></textarea>
+			<span class="invalid-feedback d-block" *ngIf="(hasError('surgery', 'required') && isTouched('surgery'))
+			|| (showErrors && hasError('surgery', 'required'))">Không được để trống</span>
+		</div>
 
-    <div class="form-group mt-3">
-      <label for="surgery">surgery</label>
-      <textarea #surgery [class.is-invalid]="(isError('surgery') && isTouched('surgery'))
-      || (isError('surgery') && showErrors)" class="form-control" rows="3" formControlName="surgery"></textarea>
-      <div class="invalid-feedback d-block" *ngIf="(isError('surgery') && isTouched('surgery'))
-      || (showErrors && isError('surgery'))">Không được để trống</div>
-    </div>
+		<div class="form-group">
+			<label for="surgeryLevel">Phân loại</label>
+			<input type="number" min="1" [class.is-invalid]="(isError('surgeryLevel') && isTouched('surgeryLevel'))
+      		|| (isError('surgeryLevel') && showErrors)" #surgeryLevel class="form-control" formControlName="surgeryLevel">
+		  	<span class="invalid-feedback d-block" *ngIf="(hasError('surgeryLevel', 'required') && isTouched('surgeryLevel'))
+		  	|| (showErrors && hasError('surgeryLevel', 'required'))">Không được để trống</span>
+			<span class="invalid-feedback d-block" *ngIf="(hasError('surgeryLevel', 'min') && isTouched('surgeryLevel'))
+		  	|| (showErrors && hasError('surgeryLevel', 'min'))">Giá trị nhập không được nhỏ hơn 1</span>
+		</div>
 
-    <div class="form-group mt-3">
-      <label for="surgeryLevel">surgery Level</label>
-      <input type="number" [class.is-invalid]="(isError('surgeryLevel') && isTouched('surgeryLevel'))
-      || (isError('surgeryLevel') && showErrors)" #surgeryLevel class="form-control" formControlName="surgeryLevel">
-      <div class="invalid-feedback d-block" *ngIf="(isError('surgeryLevel') && isTouched('surgeryLevel'))
-      || (showErrors && isError('surgeryLevel'))">Không được để trống</div>
-    </div>
-
-    <div class=" mt-2 d-flex justify-content-end">
-      <button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
-    </div>
-  </form>
+		<div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+		</div>
+	</form>
+	<div *ngIf="!medicalRecord.details.surgeryExamination.isRegistered" class="text-center">
+		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
+	</div>
 </div>
 
 <div *ngIf="medicalRecord == null" class="text-center">
-  <h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+	<h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
 </div>
 
 <ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">

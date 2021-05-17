@@ -1,9 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/internal/Subject';
 import { map } from 'rxjs/operators';
-import { AExaminationRooms, DermatologyExamination, MedicalRecordDetails } from '../../models/medicalExaminationDetails.Models';
+import { AbdominalUltrasound, AExaminationRooms,
+	BloodTests,
+	BreastUltrasound,
+	CardiacUltrasoundProbes,
+	ChestXray,
+	ClinicalUrineTests,
+		DermatologyExamination,
+		InternalMedicineExamination,
+		MedicalRecordDetails,
+		NeurologyExamination,
+		ObstetricsAndGynecologyExamination,
+		OphthalmologyExamination,
+		OralAndMaxillofacialExamination, 
+		OtorhinolaryngologyExamination,
+		PhysicalExamination,
+		SurgeryExamination,
+		ThyroidUltrasound} from '../../models/medicalExaminationDetails.Models';
 import { CreateMedicalRecordReq,
 			CreateMedicalRecordRes,
 			MedicalRecord,
@@ -19,9 +36,10 @@ export class MedicalRecordService {
 	medicalRecord: MedicalRecord
 	medicalRecord$: Subject<MedicalRecord> = new Subject<MedicalRecord>();
     constructor(private config: ConfigService,
-                private httpClient: HttpClient) { }
+                private httpClient: HttpClient,
+				private notification: NzNotificationService) { }
 
-	async getListServicesFromMedicalRecord(medicalRecordDetails: MedicalRecordDetails): Promise<AExaminationRooms[]>{ 
+	getListServicesFromMedicalRecord(medicalRecordDetails: MedicalRecordDetails): AExaminationRooms[]{ 
 		let services: AExaminationRooms[] = []
 		for(let serviceName in medicalRecordDetails){  
 			if(medicalRecordDetails.hasOwnProperty(serviceName)){  
@@ -75,4 +93,80 @@ export class MedicalRecordService {
 		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/dermatologyExamination`, dermatologyExamination)
 			.pipe(map(res => res as UpdateMedicalRecordRes))
 	}
+
+	updateNeurologyExamination(neurologyExamination: NeurologyExamination, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/neurologyExamination`, neurologyExamination)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateInternalMedicineExamination(internalMedicineExamination: InternalMedicineExamination, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/internalMedicineExamination`, internalMedicineExamination)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateObstetricsAndGynecologyExamination(obstetricsAndGynecologyExamination: ObstetricsAndGynecologyExamination, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/obstetricsAndGynecologyExamination`, obstetricsAndGynecologyExamination)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateOphthalmologyExamination(ophthalmologyExamination: OphthalmologyExamination, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/ophthalmologyExamination`, ophthalmologyExamination)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateOralAndMaxillofacialExamination(oralAndMaxillofacialExamination: OralAndMaxillofacialExamination, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/oralAndMaxillofacialExamination`, oralAndMaxillofacialExamination)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateOtorhinolaryngologyExamination(otorhinolaryngologyExamination: OtorhinolaryngologyExamination, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/otorhinolaryngologyExamination`, otorhinolaryngologyExamination)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+	
+	updatePhysicalExamination(physicalExamination: PhysicalExamination, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/physicalExamination`, physicalExamination)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateSurgeryExamination(surgeryExamination: SurgeryExamination, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/surgeryExamination`, surgeryExamination)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateBloodTests(bloodTests: BloodTests, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/bloodTests`, bloodTests)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateClinicalUrineTests(clinicalUrineTests: ClinicalUrineTests, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/clinicalUrineTests`, clinicalUrineTests)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateAbdominalUltrasound(abdominalUltrasound: AbdominalUltrasound, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/abdominalUltrasound`, abdominalUltrasound)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateThyroidUltrasound(thyroidUltrasound: ThyroidUltrasound, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/thyroidUltrasound`, thyroidUltrasound)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateBreastUltrasound(breastUltrasound: BreastUltrasound, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/breastUltrasound`, breastUltrasound)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateCardiacUltrasoundProbes(cardiacUltrasoundProbes: CardiacUltrasoundProbes, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/cardiacUltrasoundProbes`, cardiacUltrasoundProbes)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateChestXray(chestXray: ChestXray, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/chestXray`, chestXray)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+	
 }

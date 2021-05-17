@@ -1,73 +1,141 @@
-<div class="col-md-6 offset-md-3">
-  <h3>Choose File</h3>
-  <div class="form-group">
-    <input type="file" name="image" (change)="fileProgress($event)" />
-  </div>
-  <div *ngIf="fileUploadProgress">
-    Upload progress: {{ fileUploadProgress }}
-  </div>
-  <div class="image-preview mb-3" *ngIf="previewUrl">
-    <img [src]="previewUrl" height="300" />
-  </div>
+<!-- <div class="col-md-6 offset-md-3">
+	<h3>Choose File</h3>
+	<div class="form-group">
+		<input type="file" name="image" (change)="fileProgress($event)" />
+	</div>
+	<div *ngIf="fileUploadProgress">
+		Upload progress: {{ fileUploadProgress }}
+	</div>
+	<div class="image-preview mb-3" *ngIf="previewUrl">
+		<img [src]="previewUrl" height="300" />
+	</div>
 
-  <div class="mb-3" *ngIf="uploadedFilePath">
-    {{uploadedFilePath}}
-  </div>
+	<div class="mb-3" *ngIf="uploadedFilePath">
+		{{uploadedFilePath}}
+	</div>
 
-  <div class="form-group">
-    <button class="btn btn-primary" (click)="onSubmit()">Upload File</button>
-  </div>
+	<div class="form-group">
+		<button class="btn btn-primary" (click)="onSubmit()">Upload File</button>
+	</div>
 
+</div> -->
+
+<section class="mt-2 image-analysation-content" *ngIf="medicalRecord != null">
+	<label for="abdominalUltrasound" class="btn btn-info">Chẩn đoán kết quả siêu âm bụng</label>
+	<form [formGroup]="updateAbdominalUltrasoundForm" #abdominalUltrasound (ngSubmit)="onSubmitAbdominalUltrasound()"
+		*ngIf="this.medicalRecord.details.abdominalUltrasound.isRegistered">
+		<div class="form-group col-sm-6 pl-0">
+			<textarea #abdominalUltrasoundResult [class.is-invalid]="(isError(updateAbdominalUltrasoundForm, 'abdominalUltrasoundResult')
+			&& isTouched(updateAbdominalUltrasoundForm, 'abdominalUltrasoundResult'))
+			|| (isError(updateAbdominalUltrasoundForm, 'abdominalUltrasoundResult') && showAbdominalUltrasoundErrors)"
+			class="form-control" rows="2" formControlName="abdominalUltrasoundResult">
+			</textarea>
+			<span class="invalid-feedback d-block" *ngIf="(isError(updateAbdominalUltrasoundForm, 'abdominalUltrasoundResult')
+			&& isTouched(updateAbdominalUltrasoundForm, 'abdominalUltrasoundResult'))
+			|| (showAbdominalUltrasoundErrors && isError(updateAbdominalUltrasoundForm, 'abdominalUltrasoundResult'))">Không được để trống</span>
+		</div>
+		<div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-2 ">Ghi nội dung</button>
+		</div>
+	</form>
+	<div *ngIf="!this.medicalRecord.details.abdominalUltrasound.isRegistered" class="text-center">
+		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
+	</div>
+
+	<label for="thyroidUltrasound" class="btn btn-info">Chẩn đoán kết quả siêu âm tuyến giáp</label>
+	<form [formGroup]="updateThyroidUltrasoundForm" #thyroidUltrasound (ngSubmit)="onSubmitThyroidUltrasound()"
+		*ngIf="this.medicalRecord.details.thyroidUltrasound.isRegistered">
+		<div class="form-group col-sm-6 pl-0">
+			<textarea #thyroidUltrasoundResult [class.is-invalid]="(isError(updateThyroidUltrasoundForm, 'thyroidUltrasoundResult')
+			&& isTouched(updateThyroidUltrasoundForm, 'thyroidUltrasoundResult'))
+			|| (isError(updateThyroidUltrasoundForm, 'thyroidUltrasoundResult') && showThyroidUltrasoundErrors)"
+			class="form-control" rows="2" formControlName="thyroidUltrasoundResult">
+			</textarea>
+			<span class="invalid-feedback d-block" *ngIf="(isError(updateThyroidUltrasoundForm, 'thyroidUltrasoundResult')
+			&& isTouched(updateThyroidUltrasoundForm, 'thyroidUltrasoundResult'))
+			|| (showThyroidUltrasoundErrors && isError(updateThyroidUltrasoundForm, 'thyroidUltrasoundResult'))">Không được để trống</span>
+		</div>
+		<div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-2 ">Ghi nội dung</button>
+		</div>
+	</form>
+	<div *ngIf="!this.medicalRecord.details.thyroidUltrasound.isRegistered" class="text-center">
+		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
+	</div>
+
+	<label for="breastUltrasound" class="btn btn-info">Chẩn đoán kết quả siêu âm tuyến vú</label>
+	<form [formGroup]="updateBreastUltrasoundForm" #breastUltrasound (ngSubmit)="onSubmitBreastUltrasound()"
+		*ngIf="this.medicalRecord.details.breastUltrasound.isRegistered">
+		<div class="form-group col-sm-6 pl-0">
+			<textarea #breastUltrasoundResult [class.is-invalid]="(isError(updateBreastUltrasoundForm, 'breastUltrasoundResult')
+				&& isTouched(updateBreastUltrasoundForm, 'breastUltrasoundResult'))
+				|| (isError(updateBreastUltrasoundForm, 'breastUltrasoundResult') && showBreastUltrasoundErrors)"
+				class="form-control" rows="2" formControlName="breastUltrasoundResult">
+				</textarea>
+				<span class="invalid-feedback d-block" *ngIf="(isError(updateBreastUltrasoundForm, 'breastUltrasoundResult')
+				&& isTouched(updateBreastUltrasoundForm, 'breastUltrasoundResult'))
+				|| (showBreastUltrasoundErrors && isError(updateBreastUltrasoundForm, 'breastUltrasoundResult'))">
+				Không được để trống
+			</span>
+		</div>
+		<div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-2 ">Ghi nội dung</button>
+		</div>
+	</form>
+	<div *ngIf="!this.medicalRecord.details.breastUltrasound.isRegistered" class="text-center">
+		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
+	</div>
+
+	<label for="cardiacUltrasoundProbes" class="btn btn-info">Chẩn đoán kết quả thăm dò tim mạch</label>
+	<form [formGroup]="updateCardiacUltrasoundProbesForm" #cardiacUltrasoundProbes (ngSubmit)="onSubmitCardiacUltrasoundProbes()"
+		*ngIf="this.medicalRecord.details.cardiacUltrasoundProbes.isRegistered">
+		<div class="form-group col-sm-6 pl-0">
+			<textarea #cardiacUltrasoundProbesResult [class.is-invalid]="(isError(updateCardiacUltrasoundProbesForm, 'cardiacUltrasoundProbesResult')
+				&& isTouched(updateCardiacUltrasoundProbesForm, 'cardiacUltrasoundProbesResult'))
+				|| (isError(updateCardiacUltrasoundProbesForm, 'cardiacUltrasoundProbesResult') && showCardiacUltrasoundProbesErrors)"
+				class="form-control" rows="2" formControlName="cardiacUltrasoundProbesResult">
+			</textarea>
+			<span class="invalid-feedback d-block" *ngIf="(isError(updateCardiacUltrasoundProbesForm, 'cardiacUltrasoundProbesResult')
+				&& isTouched(updateCardiacUltrasoundProbesForm, 'cardiacUltrasoundProbesResult'))
+				|| (showCardiacUltrasoundProbesErrors && isError(updateCardiacUltrasoundProbesForm, 'cardiacUltrasoundProbesResult'))">
+				Không được để trống
+			</span>
+		</div>
+		<div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-2 ">Ghi nội dung</button>
+		</div>
+	</form>
+	<div *ngIf="!this.medicalRecord.details.cardiacUltrasoundProbes.isRegistered" class="text-center">
+		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
+	</div>
+
+	<label for="breastUltrasound" class="btn btn-info">Chẩn đoán kết quả X quang ngực</label>
+	<form [formGroup]="updateChestXrayForm" #chestXray (ngSubmit)="onSubmitChestXray()"
+		*ngIf="this.medicalRecord.details.chestXray.isRegistered">
+		<div class="form-group col-sm-6 pl-0">
+			<textarea #chestXrayResult [class.is-invalid]="(isError(updateChestXrayForm, 'chestXrayResult')
+				&& isTouched(updateChestXrayForm, 'chestXrayResult'))
+				|| (isError(updateChestXrayForm, 'chestXrayResult') && showChestXrayErrors)"
+				class="form-control" rows="2" formControlName="chestXrayResult">
+			</textarea>
+			<span class="invalid-feedback d-block" *ngIf="(isError(updateChestXrayForm, 'chestXrayResult')
+				&& isTouched(updateChestXrayForm, 'chestXrayResult'))
+				|| (showChestXrayErrors && isError(updateChestXrayForm, 'chestXrayResult'))">
+				Không được để trống
+			</span>
+		</div>
+		<div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-2 ">Ghi nội dung</button>
+		</div>
+	</form>
+	<div *ngIf="!this.medicalRecord.details.chestXray.isRegistered" class="text-center">
+		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
+	</div>
+
+</section>
+
+<div *ngIf="medicalRecord == null" class="text-center">
+	<h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
 </div>
-
-<!-- <form (ngSubmit)="getInfo()"> -->
-<form>
-  <!-- <label for="comment">Siêu âm bụng</label>
-    <textarea class="form-control" rows="5"></textarea> -->
-  <div class="form-group mt-3">
-    <label for="comment">Siêu âm tuyến vú</label>
-    <textarea class="form-control" rows="5"></textarea>
-
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit " class="btn btn-primary">Submit</button>
-  </div>
-
-  <div class="form-group mt-3">
-    <label for="comment">Thăm dò tim mạch</label>
-    <textarea class="form-control" rows="5"></textarea>
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
-  </div>
-
-  <div class="form-group mt-3">
-    <label for="comment">Siêu âm tuyến giáp</label>
-    <textarea class="form-control" rows="5"></textarea>
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
-  </div>
-
-
-  <div class="form-group mt-3">
-    <label for="comment">Xquang ngực</label>
-    <textarea class="form-control" rows="5"></textarea>
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
-  </div>
-
-
-
-
-  <div class="form-group mt-3">
-    <label for="comment">Chẩn đoán hình ảnh y tế</label>
-    <textarea class="form-control" rows="5" id="comment"></textarea>
-  </div>
-  <div class=" mt-2 d-flex justify-content-end">
-    <button type="submit" class="btn btn-primary mb-5 ">Submit</button>
-  </div>
-
-
-</form>
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
+</ngx-spinner>

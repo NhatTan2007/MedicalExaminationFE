@@ -76,14 +76,14 @@ export class AbdominalUltrasound extends AExaminationRooms {
 
 export class BloodTests extends AExaminationRooms {
   //Xét nghiệm máu
-  hCAmount: number; //Số lượng HC
+  hcAmount: number; //Số lượng HC
   leukocytesAmount: number; // Số lượng bạch cầu
   plateletsAmount: number; // Số lượng tiểu cầu
   bloodSugar: number; //Đường huyết
   ure: number;
   creatinin: number;
-  aSATGOT: number;
-  aLATGPT: number;
+  asatgot: number;
+  alatgpt: number;
 
   constructor() {
     super();
@@ -92,14 +92,14 @@ export class BloodTests extends AExaminationRooms {
     this.departmentId = '';
     this.doctorId = '';
     this.doctorName = '';
-    this.hCAmount = 0;
+    this.hcAmount = 0;
     this.leukocytesAmount = 0;
     this.plateletsAmount = 0;
     this.bloodSugar = 0;
     this.ure = 0;
     this.creatinin = 0;
-    this.aSATGOT = 0;
-    this.aLATGPT = 0;
+    this.asatgot = 0;
+    this.alatgpt = 0;
   }
 }
 
@@ -344,8 +344,9 @@ export class PhysicalExamination extends AExaminationRooms {
   //Thể lực
   height: number;
   weight: number;
-  bMIIndex: number;
+  bmiIndex: number;
   heartBeat: number;
+  bloodPressure: string;
   physicalLevel: number;
 
   constructor() {
@@ -357,8 +358,9 @@ export class PhysicalExamination extends AExaminationRooms {
     this.doctorName = '';
     this.height = 0;
     this.weight = 0;
-    this.bMIIndex = 0;
+    this.bmiIndex = 0;
     this.heartBeat = 0;
+    this.bloodPressure = '';
     this.physicalLevel = 0;
   }
 }

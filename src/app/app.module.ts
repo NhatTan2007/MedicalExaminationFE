@@ -5,14 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MainLayoutComponent } from './_shared/components/main-layout/main-layout.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { LoginComponent } from './_shared/components/login/login.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthInterceptor } from './_shared/interceptor/authInterceptor';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
@@ -20,6 +18,10 @@ import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
+
+import { LoginComponent } from './_shared/components/login/login.component';
+import { MainLayoutComponent } from './_shared/components/main-layout/main-layout.component';
+import { SharedModule } from "./_shared/shared-module.module";
 
 registerLocaleData(en);
 
@@ -32,6 +34,7 @@ registerLocaleData(en);
 		BrowserAnimationsModule,
 		HttpClientModule,
 		FormsModule,
+		SharedModule,
 		ReactiveFormsModule,
 		MatFormFieldModule,
 		MatInputModule,
