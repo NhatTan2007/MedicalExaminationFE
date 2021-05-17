@@ -5,7 +5,8 @@ import { CreateMedicalServiceRes,
 			UpdateMedicalServiceRes,
           	CreateMedicalServiceReq,
           	UpdateMedicalServiceReq,
-			MedicalService} from "../../models/medicalService.Models";
+			MedicalService,
+			QuerryMSerciceRes} from "../../models/medicalService.Models";
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 @Injectable({
@@ -35,6 +36,11 @@ export class MedicalServiceService {
 		return this.httpClient.get(`${this.apiDomain}/active`)
 			.pipe(map(res => <MedicalService[]>res))
 	}
+	GetActiveMedicalServicesByPagination(currentPage: number, pageSize: number):Observable<QuerryMSerciceRes>{
+		return this.httpClient.get(`${this.apiDomain}/active/currentPage/${currentPage}/pageSize/${pageSize}`)
+				.pipe(map(res => (res as QuerryMSerciceRes)));
+	}
+
 
 	CreateMedicalServices(medicalService: CreateMedicalServiceReq): Observable<CreateMedicalServiceRes>{
 		return this.httpClient.post(`${this.apiDomain}/create`, medicalService)
@@ -50,4 +56,11 @@ export class MedicalServiceService {
 		return this.httpClient.get(`${this.apiDomain}/search/${search}`)
 		.pipe(map(res => res as MedicalService[]))
 	}
+
+	SearchMedicalService(keyword: string,currentPage: number, pageSize: number): Observable<QuerryMSerciceRes>{
+		return this.httpClient.get(`${this.apiDomain}/search/${keyword}/currentPage/${currentPage}/pageSize/${pageSize}`)
+		.pipe(map(res => (res as QuerryMSerciceRes)))
+	}
+
+
 }
