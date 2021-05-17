@@ -11,17 +11,20 @@ import { Observable } from 'rxjs';
 	styleUrls: ['./list-customer.component.scss']
 })
 export class ListCustomerComponent implements OnInit {
-customers: Customer[] =[]
-customers$: Observable<QuerryCustomersRes>
-listPageSize = [
-	{label: "10", value: 10},
-	{label: "25", value: 25},
-	{label: "50", value: 50},
-	{label: "100", value: 100}]
-pageSize = this.listPageSize[0]
-currentPage = 1
-totalCustomer = 0
-customer: Customer
+	customers: Customer[] = []
+	customersSearch$: Observable<QuerryCustomersRes>
+	customers$: Observable<QuerryCustomersRes>
+	listPageSize = [
+		{label: "10", value: 10},
+		{label: "20", value: 20},
+		{label: "50", value: 50},
+		{label: "100", value: 100}]
+	pageSize = this.listPageSize[0]
+	currentPage = 1
+	totalCustomer = 0
+	key = ''
+	customer: Customer
+	ordinalNumber = (this.currentPage - 1) * this.pageSize.value
 	constructor(private customerService: CustomerService,
 				private router: Router,
 				private spinner: NgxSpinnerService) { }
@@ -31,9 +34,21 @@ customer: Customer
 		this.GetCustomers(this.currentPage, this.pageSize.value);
 	}
 
-  	GetCustomers(currentPage, pageSize){
+	GetCustomers(currentPage: number, pageSize: number){
 		this.customers$ = this.customerService.GetCustomersByPagination(currentPage, pageSize);
 		this.customers$.subscribe((res) => {
+			this.customers = res.customers
+			this.totalCustomer = res.totalCustomer
+			this.customers = this.customers.map(c => ({...c, fullName : `${c.lastName} ${c.firstName}`}))
+			this.spinner.hide();
+		}, (err) => {
+			this.spinner.hide();
+		})
+	}
+
+  	SearchCustomers(key: string, currentPage: number, pageSize: number){
+		this.customersSearch$ = this.customerService.SearchCustomer(key, currentPage, pageSize);
+		this.customersSearch$.subscribe((res) => {
 			this.customers = res.customers
 			this.totalCustomer = res.totalCustomer
 			this.customers = this.customers.map(c => ({...c, fullName : `${c.lastName} ${c.firstName}`}))
@@ -47,20 +62,31 @@ customer: Customer
 		this.router.navigate(['/auth/phong-tong-hop/chi-tiet-benh-nhan', customerId])
 	}
 
-  	SearchCustomer(keyword: string){
-		if(keyword !== ''){
-		this.customerService.SearchCustomer(keyword)
-				.subscribe((res) => this.customers = res);
-		}
-	}
 
 	changePageSize(value: any){
 		this.pageSize = value
 		this.currentPage = 1
-		this.GetCustomers(1, value.value)
+		if(this.key.trim() == ''){
+			this.GetCustomers(this.currentPage, this.pageSize.value);
+		} else{
+			this.SearchCustomers(this.key, this.currentPage, this.pageSize.value);
+		}
+	}
+	changePage(){
+		this.ordinalNumber = (this.currentPage - 1) * this.pageSize.value
+		if(this.key.trim() == ''){
+			this.GetCustomers(this.currentPage, this.pageSize.value);
+		} else{
+			this.SearchCustomers(this.key, this.currentPage, this.pageSize.value);
+		}
 	}
 
-	changePage(){
-		this.GetCustomers(this.currentPage, this.pageSize.value);
+	InputSearch(key: string){
+		this.key = key.trim();
+		if(this.key.trim() == ''){
+			this.GetCustomers(this.currentPage, this.pageSize.value);
+		} else{
+			this.SearchCustomers(this.key, this.currentPage, this.pageSize.value);
+		}
 	}
 }

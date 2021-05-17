@@ -33,3 +33,8 @@ export interface UpdateMedicalServiceRes{
     message     : string;
     success     : boolean;
 }
+
+export interface QuerryMSerciceRes{
+    medicalService:  MedicalService[]
+    totalMedicalSevices:  number
+}

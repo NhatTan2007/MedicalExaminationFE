@@ -40,10 +40,10 @@ export class CustomerService {
 		.pipe(map(res => res as UpdateCustomerRes));
 	}
 
-	SearchCustomer(keyword: string): Observable<Customer[]>{
-		return this.httpClient.get(`${this.apiDomain}/search/${keyword}`)
-			.pipe(map(res => (res as Customer[])
-										.map(c => ({...c, fullName: `${c.lastName} ${c.firstName}`}))));
+	SearchCustomer(keyword: string,currentPage: number, pageSize: number): Observable<QuerryCustomersRes>{
+		return this.httpClient.get(`${this.apiDomain}/search/${keyword}/currentPage/${currentPage}/pageSize/${pageSize}`)
+			.pipe(map(res => (res as QuerryCustomersRes)));
+									
 	}
 
 	GetCustomerByIdentityNumber(identityNumber: string): Observable<Customer>{

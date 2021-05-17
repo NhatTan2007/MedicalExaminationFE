@@ -2,13 +2,13 @@
     <div class="w-100">
 		<div class="mt-1">
 			<div class="input-group">
-				<input (change)="SearchCustomer($event.target.value)" 
+				<input (change)="InputSearch($event.target.value)" 
 						class="form-control py-2" 
 						placeholder="Tìm kiếm theo tên bệnh nhân hoặc CMND/Hộ chiếu" 
 						type="search" #searchPatient>
 				<span class="input-group-append">
 					<i class="fa fa-search input-group-text pt-0 pb-0"
-						style="cursor: pointer;" (click)="SearchCustomer(searchPatient.value)"></i>
+						style="cursor: pointer;" (click)="InputSearch($event.target.value)"></i>
 				</span>
 			</div>
 		</div>
@@ -28,7 +28,7 @@
 			</thead>
 			<tbody>
 				<tr *ngFor="let cus of customers; let idx = index">
-					<td style="width: 10px">{{idx + 1}}</td>
+					<td style="width: 10px" class="text-center">{{ordinalNumber + idx + 1}}</td>
 					<td><a (click)="GetDetailCustomer(cus.customerId)">{{cus.fullName}}</a></td>
                     <td class="text-right">{{cus.phoneNumber}}</td>
                     <td class="text-right">{{cus.identityNumber}}</td>
