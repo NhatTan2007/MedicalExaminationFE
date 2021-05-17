@@ -25,3 +25,8 @@ export class UpdateOrganizationRes{
     message: string
     success: boolean
 }
+
+export interface QuerryOrganizationRes{
+    organization:  Organization[]
+    totalOrganization:  number
+}

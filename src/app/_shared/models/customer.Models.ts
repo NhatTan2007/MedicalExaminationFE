@@ -13,7 +13,7 @@ export class CreateCustomerReq{
 
 export class Customer extends CreateCustomerReq{
     customerId: string
-    fullName = `${this.lastName} ${this.firstName}`
+    fullName: string
 }
 
 export class UpdateCustomerReq extends Customer{
@@ -29,4 +29,9 @@ export interface UpdateCustomerRes{
     customer        : Customer
     message         : string
     success         : boolean
+}
+
+export interface QuerryCustomersRes{
+    customers:  Customer[]
+    totalCustomer:  number
 }

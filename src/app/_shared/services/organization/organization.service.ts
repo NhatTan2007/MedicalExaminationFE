@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CreateOrganizationReq, CreateOrganizationRes, Organization, UpdateOrganizationReq, UpdateOrganizationRes } from '../../models/organization.Models';
+import { CreateOrganizationReq, CreateOrganizationRes, Organization, UpdateOrganizationReq, UpdateOrganizationRes, QuerryOrganizationRes } from '../../models/organization.Models';
 import { ConfigService } from '../config/config.service';
 
 @Injectable({
@@ -18,15 +18,22 @@ export class OrganizationService {
 			.pipe(map(res => res as Organization[]))
 	}
 
+	GetOrganizationsByPagination(currentPage: number, pageSize: number): Observable<QuerryOrganizationRes>{
+		return this.httpClient.get(`${this.apiDomain}/currentPage/${currentPage}/pageSize/${pageSize}`)
+			.pipe(map(res => (res as QuerryOrganizationRes)));
+	}
+
 	GetOrganization(organizationId: string): Observable<Organization>{
 		return this.httpClient.get(`${this.apiDomain}/${organizationId}`)
 		.pipe(map(res => res as Organization))
 	}
 
-	SearchOrganizationByNameASC(search: string): Observable<Organization[]>{
-		return this.httpClient.get(`${this.apiDomain}/search/${search}/orderASCByName`)
-		.pipe(map(res => res as Organization[]))
+	SearchOrganization(keyword: string,currentPage: number, pageSize: number): Observable<QuerryOrganizationRes>{
+		return this.httpClient.get(`${this.apiDomain}/search/${keyword}/currentPage/${currentPage}/pageSize/${pageSize}`)
+		.pipe(map(res => (res as QuerryOrganizationRes)))
 	}
+
+
 
 	SearchOrganizationByNameDESC(search: string): Observable<Organization[]>{
 		return this.httpClient.get(`${this.apiDomain}/search/${search}/orderDESCByName`)
