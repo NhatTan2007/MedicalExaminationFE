@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DermatologyExaminationComponent } from './dermatology-examination/dermatology-examination.component';
 import { ImageAnalysationComponent } from './image-analysation/image-analysation.component';
 import { InternalMedicineExaminationComponent } from './internal-medicine-examination/internal-medicine-examination.component';
-import { MedicalGeneralDoctorComponent } from './medical-general-doctor/medical-general-doctor.component';
 import { NeurologyExaminationComponent } from './neurology-examination/neurology-examination.component';
 import { ObstetricsAndGynecologyExaminationComponent } from './obstetrics-and-gynecology-examination/obstetrics-and-gynecology-examination.component';
 import { OphthalmologyExaminationComponent } from './ophthalmology-examination/ophthalmology-examination.component';
@@ -14,7 +13,6 @@ import { SurgeryExaminationComponent } from './surgery-examination/surgery-exami
 import { TestComponent } from './test/test.component';
 
 const routes: Routes = [
-  { path: 'bac-si-tong-quat', component: MedicalGeneralDoctorComponent },
   { path: 'chan-doan-hinh-anh', component: ImageAnalysationComponent },
   { path: 'xet-nghiem', component: TestComponent },
   { path: 'da-lieu', component:DermatologyExaminationComponent},
@@ -24,7 +22,7 @@ const routes: Routes = [
   { path: 'noi-khoa', component:InternalMedicineExaminationComponent},
   { path: 'phu-san', component:ObstetricsAndGynecologyExaminationComponent},
   { path: 'tai-mui-hong', component:OtorhinolaryngologyExaminationComponent},
-  { path: 'the-luc', component:PhysicalExaminationComponent},
+  { path: 'the-chat', component:PhysicalExaminationComponent},
   { path: 'ngoai-khoa',component:SurgeryExaminationComponent},
 ];
 

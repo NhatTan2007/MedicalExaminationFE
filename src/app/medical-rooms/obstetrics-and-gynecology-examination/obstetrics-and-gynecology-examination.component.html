@@ -1,28 +1,36 @@
-<div *ngIf="medicalRecord != null">
-  <label for="obstetricsAndGynecologyExamination">Chẩn đoán thần kinh</label>
-  <form [formGroup]="updateForm" #obstetricsAndGynecologyExamination (ngSubmit)="onSubmit()">
-    <div class="form-group mt-3">
-      <label for="obstetricsAndGynecology">obstetricsAndGynecology</label>
-      <textarea #obstetricsAndGynecology [class.is-invalid]="(isError('obstetricsAndGynecology') && isTouched('obstetricsAndGynecology'))
-      || (isError('circulatory') && showErrors)" class="form-control" rows="3" formControlName="obstetricsAndGynecology"></textarea>
-      <div class="invalid-feedback d-block" *ngIf="(isError('obstetricsAndGynecology') && isTouched('obstetricsAndGynecology'))
-      || (showErrors && isError('obstetricsAndGynecology'))">Không được để trống</div>
-    </div>
-    <div class="form-group mt-3">
-      <label for="obstetricsAndGynecologyLevel">obstetricsAndGynecology level</label>
-      <input type="number" #obstetricsAndGynecologyLevel [class.is-invalid]="(isError('obstetricsAndGynecologyLevel') && isTouched('obstetricsAndGynecologyLevel'))
-      || (isError('obstetricsAndGynecologyLevel') && showErrors)" class="form-control" formControlName="obstetricsAndGynecologyLevel">
-      <div class="invalid-feedback d-block" *ngIf="(isError('obstetricsAndGynecologyLevel') && isTouched('obstetricsAndGynecologyLevel'))
-      || (showErrors && isError('obstetricsAndGynecologyLevel'))">Không được để trống</div>
-    </div>
-    <div class=" mt-2 d-flex justify-content-end">
-      <button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
-    </div>
-  </form>
+<div *ngIf="medicalRecord != null" class="mt-2">
+	<label for="obstetricsAndGynecologyExamination" class="btn btn-info">Chẩn đoán sản phụ khoa</label>
+	<form [formGroup]="updateForm" #obstetricsAndGynecologyExamination (ngSubmit)="onSubmit()"
+		*ngIf="this.medicalRecord.details.obstetricsAndGynecologyExamination.isRegistered">
+		<div class="form-group mt-3">
+			<label for="obstetricsAndGynecology">Sản phụ khoa</label>
+			<textarea #obstetricsAndGynecology [class.is-invalid]="(isError('obstetricsAndGynecology') && isTouched('obstetricsAndGynecology'))
+      		|| (isError('obstetricsAndGynecology') && showErrors)" class="form-control" rows="2"
+				formControlName="obstetricsAndGynecology"></textarea>
+			<div class="invalid-feedback d-block" *ngIf="(isError('obstetricsAndGynecology') && isTouched('obstetricsAndGynecology'))
+      		|| (showErrors && isError('obstetricsAndGynecology'))">Không được để trống</div>
+		</div>
+		<div class="form-group mt-3">
+			<label for="obstetricsAndGynecologyLevel">Phân loại</label>
+			<input type="number" min="1" #obstetricsAndGynecologyLevel [class.is-invalid]="(isError('obstetricsAndGynecologyLevel') && isTouched('obstetricsAndGynecologyLevel'))
+      		|| (isError('obstetricsAndGynecologyLevel') && showErrors)" class="form-control"
+				formControlName="obstetricsAndGynecologyLevel">
+			<span class="invalid-feedback d-block" *ngIf="(hasError('obstetricsAndGynecologyLevel', 'required') && isTouched('obstetricsAndGynecologyLevel'))
+      		|| (showErrors && hasError('obstetricsAndGynecologyLevel', 'required'))">Không được để trống</span>
+			<span class="invalid-feedback d-block" *ngIf="(hasError('obstetricsAndGynecologyLevel', 'min') && isTouched('obstetricsAndGynecologyLevel'))
+      		|| (showErrors && hasError('obstetricsAndGynecologyLevel', 'min'))">Giá trị nhập không được nhỏ hơn 1</span>
+		</div>
+		<div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+		</div>
+	</form>
+	<div *ngIf="!this.medicalRecord.details.obstetricsAndGynecologyExamination.isRegistered" class="text-center">
+		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
+	</div>
 </div>
 
 <div *ngIf="medicalRecord == null" class="text-center">
-  <h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+	<h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
 </div>
 
 <ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">

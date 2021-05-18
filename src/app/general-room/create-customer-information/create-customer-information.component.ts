@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CreateCustomerReq } from 'src/app/_shared/models/customer.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
@@ -19,7 +20,8 @@ export class CreateCustomerInformationComponent implements OnInit {
 				private formBuilder: FormBuilder,
 				private router: Router,
 				private spiner: NgxSpinnerService,
-				private formService: FormService) { }
+				private formService: FormService,
+				private notification: NzNotificationService) { }
 
 	ngOnInit(): void {
 		this.createForm = this.formBuilder.group({
@@ -45,6 +47,11 @@ export class CreateCustomerInformationComponent implements OnInit {
 			newCustomer.gender = this.createForm.get("gender").value == 0 ? false : true
 			this.customerService.CreateCustomer(this.createForm.value as CreateCustomerReq)
 				.subscribe((res) => {
+					if(res.success) {
+						this.notification.blank('Thành công', res.message, {nzClass: "success text-white", nzAnimate: true})
+					} else{
+						this.notification.blank('Thất bại', res.message, {nzClass: "error text-white", nzAnimate: true})
+					}
 					if(res.success) this.router.navigate(['']);
 				},() => {}, () => {this.spiner.hide()})
 		} else {

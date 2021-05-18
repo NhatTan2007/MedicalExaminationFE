@@ -5,7 +5,5 @@ export class AccountLogin{
 }
 
 export class AccountLoginRes{
-    departmentId: string
     fullName: string
-    userId: string
 }

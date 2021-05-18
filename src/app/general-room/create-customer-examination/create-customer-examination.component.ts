@@ -10,6 +10,7 @@ import { CustomerService } from 'src/app/_shared/services/customer/customer.serv
 import { MedicalServiceService } from 'src/app/_shared/services/medical-service/medical-service.service';
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
 import { MatDialog } from '@angular/material/dialog';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
 	selector: 'app-create-customer-examination',
@@ -33,7 +34,8 @@ export class CreateCustomerExaminationComponent implements OnInit {
 				private spiner: NgxSpinnerService,
 				private formBuilder: FormBuilder,
 				private router: Router,
-				private dialog: MatDialog) { }
+				private dialog: MatDialog,
+				private notification: NzNotificationService) { }
 
 	ngOnInit(): void {
 		this.getMedicalServices();
@@ -130,8 +132,8 @@ export class CreateCustomerExaminationComponent implements OnInit {
 		this.newMedicalRecord.medicalHistory.medicalHistoryFamily.details = this.getValueFromField("medicalHistoryFamilyDetails", this.medicalHistoryFrom);
 		this.newMedicalRecord.medicalHistory.medicalHistoryCustomer.haveOrNot = this.getValueFromField("medicalHistoryCustomerHaveOrNot", this.medicalHistoryFrom) == 0 ? false : true;
 		this.newMedicalRecord.medicalHistory.medicalHistoryCustomer.details = this.getValueFromField("medicalHistoryCustomerDetails", this.medicalHistoryFrom);
-		this.newMedicalRecord.medicalHistory.anotherQuetions.medicationsIsUsing = this.getValueFromField("medicationsIsUsing", this.medicalHistoryFrom);
-		this.newMedicalRecord.medicalHistory.anotherQuetions.pregnancyHistory = this.getValueFromField("pregnancyHistory", this.medicalHistoryFrom);
+		this.newMedicalRecord.medicalHistory.anotherQuestions.medicationsIsUsing = this.getValueFromField("medicationsIsUsing", this.medicalHistoryFrom);
+		this.newMedicalRecord.medicalHistory.anotherQuestions.pregnancyHistory = this.getValueFromField("pregnancyHistory", this.medicalHistoryFrom);
 	}
 
 	private isServiceRegisterd(service: AExaminationRooms): number{
@@ -159,8 +161,13 @@ export class CreateCustomerExaminationComponent implements OnInit {
 			this.newMedicalRecord.servicesRegisted = this.selectedServices.length;
 			this.medicalRecordService.CreateMedicalRecord(this.newMedicalRecord)
 				.subscribe((res) => {
-					res as CreateMedicalRecordRes
-					console.log(res)
+					if(res.success) {
+						this.notification.blank('Thành công', res.message, {nzClass: "success text-white", nzAnimate: true})
+					} else{
+						this.notification.blank('Thất bại', res.message, {nzClass: "error text-white", nzAnimate: true})
+					}
+				},(err) => {
+					this.notification.blank('Thất bại', "Xin mời liên lạc với Quản trị viên", {nzClass: "error text-white", nzAnimate: true})
 				})
 		} else {this.openBlockDialog()};
 	}
