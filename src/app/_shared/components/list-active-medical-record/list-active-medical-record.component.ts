@@ -3,6 +3,8 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { MedicalRecord, MedicalRecordViewRes } from 'src/app/_shared/models/medicalRecord.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
+import { DepartmentId } from '../../models/department.Models';
+import { AuthService } from '../../services/authService/auth-service.service';
 
 @Component({
   selector: 'app-list-active-medical-record',
@@ -13,30 +15,42 @@ export class ListActiveMedicalRecordComponent implements OnInit {
 	listActiveMedicalRecord: MedicalRecordViewRes[] = []
 	medicalRecord: MedicalRecord = new MedicalRecord('a');
 	constructor(private medicalRecordService: MedicalRecordService,
-				private customerService: CustomerService,
+				private authService: AuthService,
 				private spiner: NgxSpinnerService) { }
 
-	async ngOnInit(): Promise<void> {
+	ngOnInit(): void{
 		this.spiner.show();
-		await this.getActiveMedicalRecord();
+		this.authService.getUserInfo$().subscribe((res) => {
+			if(res.departmentId == DepartmentId.tong_hop) this.getActiveMedicalRecordFinishedExamination()
+			else this.getActiveMedicalRecord();
+		})
 	}
 
-	async getActiveMedicalRecord(){
+	getActiveMedicalRecord(){
 		this.medicalRecordService.GetActiveMedicalRecord()
-			.toPromise().then((res) => {
+			.subscribe((res) => {
 				this.listActiveMedicalRecord = <MedicalRecordViewRes[]>res;
 				this.spiner.hide()
 			}, (err) => {
-				console.error(err)
 				this.spiner.hide()
 			});
 	}
 
-	async getMedicalRecord(medicalRecordId: string){
-		await this.medicalRecordService.GetMedicalRecord(medicalRecordId)
-		.subscribe((res) => {
-			this.medicalRecord = res
-			this.medicalRecordService.emitMedicalRecord(res);
-		})
+	getActiveMedicalRecordFinishedExamination(){
+		this.medicalRecordService.GetActiveMedicalRecordFinishedExamination()
+			.subscribe((res) => {
+				this.listActiveMedicalRecord = <MedicalRecordViewRes[]>res;
+				this.spiner.hide()
+			}, (err) => {
+				this.spiner.hide()
+			});
+	}
+
+	getMedicalRecord(medicalRecordId: string){
+		this.medicalRecordService.GetMedicalRecord(medicalRecordId)
+			.subscribe((res) => {
+				this.medicalRecord = res
+				this.medicalRecordService.emitMedicalRecord(res);
+			})
 	}
 }

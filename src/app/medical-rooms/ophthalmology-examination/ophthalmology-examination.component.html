@@ -1,5 +1,5 @@
 <div *ngIf="medicalRecord != null">
-	<label for="obstetricsAndGynecologyExamination" class="btn btn-info">Chẩn đoán mắt</label>
+	<label for="ophthalmologyExamination" class="btn btn-info">Chẩn đoán mắt</label>
 	<form [formGroup]="updateForm" #ophthalmologyExamination (ngSubmit)="onSubmit()"
 		*ngIf="medicalRecord.details.ophthalmologyExamination.isRegistered">
 		<div class="form-row">

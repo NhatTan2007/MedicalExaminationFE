@@ -11,6 +11,7 @@ import { AbdominalUltrasound, AExaminationRooms,
 	ChestXray,
 	ClinicalUrineTests,
 		DermatologyExamination,
+		FinalExaminationResult,
 		InternalMedicineExamination,
 		MedicalRecordDetails,
 		NeurologyExamination,
@@ -41,8 +42,8 @@ export class MedicalRecordService {
 
 	getListServicesFromMedicalRecord(medicalRecordDetails: MedicalRecordDetails): AExaminationRooms[]{ 
 		let services: AExaminationRooms[] = []
-		for(let serviceName in medicalRecordDetails){  
-			if(medicalRecordDetails.hasOwnProperty(serviceName)){  
+		for(let serviceName in medicalRecordDetails){
+			if(medicalRecordDetails.hasOwnProperty(serviceName) && medicalRecordDetails[serviceName] != null){  
 				medicalRecordDetails[serviceName].objName = serviceName
 				services.push(medicalRecordDetails[serviceName]);  
 			}  
@@ -80,6 +81,11 @@ export class MedicalRecordService {
 
 	GetActiveMedicalRecord(): Observable<MedicalRecordViewRes[]>{
 		return this.httpClient.get(`${this.apiDomain}/getActive`)
+			.pipe(map(res => res as MedicalRecordViewRes[]))
+	}
+
+	GetActiveMedicalRecordFinishedExamination(): Observable<MedicalRecordViewRes[]>{
+		return this.httpClient.get(`${this.apiDomain}/getActive/finished`)
 			.pipe(map(res => res as MedicalRecordViewRes[]))
 	}
 
@@ -166,6 +172,11 @@ export class MedicalRecordService {
 
 	updateChestXray(chestXray: ChestXray, mRecordId: string): Observable<UpdateMedicalRecordRes>{
 		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/chestXray`, chestXray)
+			.pipe(map(res => res as UpdateMedicalRecordRes))
+	}
+
+	updateFinalExaminationResult(finalExaminationResult: FinalExaminationResult, mRecordId: string): Observable<UpdateMedicalRecordRes>{
+		return this.httpClient.put(`${this.apiDomain}/${mRecordId}/finalExaminationResult`, finalExaminationResult)
 			.pipe(map(res => res as UpdateMedicalRecordRes))
 	}
 	

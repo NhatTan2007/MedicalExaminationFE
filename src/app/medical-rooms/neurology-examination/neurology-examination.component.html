@@ -2,7 +2,7 @@
 	<label for="neurologyExamination" class="btn btn-info">Chẩn đoán thần kinh</label>
 	<form [formGroup]="updateForm" #neurologyExamination (ngSubmit)="onSubmit()"
 		*ngIf="medicalRecord.details.neurologyExamination.isRegistered">
-		<div class="form-group mt-3">
+		<div class="form-group">
 			<label for="neurosurgery">Thần kinh</label>
 			<textarea #neurosurgery class="form-control" rows="2" formControlName="neurosurgery"
 			[class.is-invalid]="(isError('neurosurgery') && isTouched('neurosurgery'))
@@ -10,7 +10,7 @@
 			<span class="invalid-feedback d-block" *ngIf="(isError('neurosurgery') && isTouched('neurosurgery'))
             || (showErrors && isError('neurosurgery'))">Không được để trống</span>
 		</div>
-		<div class="form-group mt-3">
+		<div class="form-group">
 			<label for="neurosurgeryLevel">Phân loại</label>
 			<input type="number" min="1" #neurosurgeryLevel class="form-control" formControlName="neurosurgeryLevel">
 			<span class="invalid-feedback d-block" *ngIf="(hasError('neurosurgeryLevel', 'required') && isTouched('neurosurgeryLevel'))
@@ -18,14 +18,13 @@
 		  <span class="invalid-feedback d-block" *ngIf="(hasError('neurosurgeryLevel', 'min') && isTouched('neurosurgeryLevel'))
 			|| (showErrors && hasError('neurosurgeryLevel', 'min'))">Giá trị nhập không được nhỏ hơn 1</span>
 		</div>
-
-		<div class="form-group mt-3">
+		<div class="form-group">
 			<label for="psychiatry">Tâm thần</label>
 			<textarea #psychiatry class="form-control" rows="2" formControlName="psychiatry"></textarea>
 			<span class="invalid-feedback d-block" *ngIf="(isError('psychiatry') && isTouched('psychiatry'))
             || (showErrors && isError('psychiatry'))">Không được để trống</span>
 		</div>
-		<div class="form-group mt-3">
+		<div class="form-group">
 			<label for="psychiatryLevel">Phân loại</label>
 			<input type="number" min="1" #psychiatryLevel class="form-control" formControlName="psychiatryLevel">
 			<span class="invalid-feedback d-block" *ngIf="(hasError('psychiatryLevel', 'required') && isTouched('psychiatryLevel'))

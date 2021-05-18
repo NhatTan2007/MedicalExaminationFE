@@ -13,6 +13,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog'; 
 import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import { GeneralRoomRoutingModule } from './general-room-routing.module';
@@ -25,6 +26,7 @@ import { CreateCustomerExaminationComponent } from './create-customer-examinatio
 import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
 import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
 import { ListCustomerComponent } from './list-customer/list-customer.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import { BlockSubmitDialog } from "./create-customer-examination/create-customer-examination.component";
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
@@ -57,6 +59,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		MatButtonModule,
 		MatStepperModule,
 		MatCheckboxModule,
+		NzPaginationModule,
+		NzSelectModule,
 		MatDialogModule,
 		NzNotificationModule,
 		NgxMaskModule.forRoot()

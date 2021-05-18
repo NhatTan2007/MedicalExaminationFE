@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AccountLogin, AccountLoginRes } from '../../models/accountLogin.Model';
 import { DepartmentId } from '../../models/department.Models';
@@ -31,9 +31,13 @@ export class AuthService {
 			})
 	}
 
+	getUserInfo$(){
+		return this.httpClient.get(`${this.apiDomain}/userInfo`)
+			.pipe(map(res => res as UserInfoRes))
+	}
+	
 	getUserInfo(){
-		this.httpClient.get(`${this.apiDomain}/userInfo`)
-			.pipe(map(res => res as UserInfoRes)).subscribe((res) => {
+		this.getUserInfo$().subscribe((res) => {
 				this.userInfo = res as UserInfoRes
 				switch (res.departmentId) {
 					case DepartmentId.da_lieu:
@@ -69,6 +73,8 @@ export class AuthService {
 					case DepartmentId.the_chat:
 						this.router.navigateByUrl('auth/phong-kham/the-chat')
 						break;
+					case DepartmentId.tong_hop:
+						this.router.navigateByUrl('auth/bac-si-tong-hop')
 					// default:
 					// 	this.router.navigateByUrl('auth/phong-tong-hop/tao-thong-tin-benh-nhan')
 					// 	break;

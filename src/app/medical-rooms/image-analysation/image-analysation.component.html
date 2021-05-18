@@ -109,7 +109,7 @@
 		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
 	</div>
 
-	<label for="breastUltrasound" class="btn btn-info">Chẩn đoán kết quả X quang ngực</label>
+	<label for="chestXray" class="btn btn-info">Chẩn đoán kết quả X quang ngực</label>
 	<form [formGroup]="updateChestXrayForm" #chestXray (ngSubmit)="onSubmitChestXray()"
 		*ngIf="this.medicalRecord.details.chestXray.isRegistered">
 		<div class="form-group col-sm-6 pl-0">
