@@ -5,7 +5,6 @@ import { OrganizationDetailsComponent } from './organization-details/organizatio
 import { CreateOgranizationComponent } from './create-ogranization/create-ogranization.component';
 import { OgranizationListComponent } from './ogranization-list/ogranization-list.component';
 import { ServicesListComponent } from './services-list/services-list.component';
-
 import { CreateCustomerExaminationComponent } from './create-customer-examination/create-customer-examination.component';
 import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
 import { ListCustomerComponent } from './list-customer/list-customer.component';

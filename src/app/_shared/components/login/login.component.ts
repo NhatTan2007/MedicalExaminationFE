@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 			let loginData = this.loginForm.value as AccountLogin
       		loginData.username = loginData.username.toLowerCase();
 			this.authService.login(loginData).subscribe((res) => {
-				this.notification.blank('Đăng nhập thành công', `Chào mừng ${res.fullName}`, {nzClass: "success text-white", nzAnimate: true})
+				this.notification.blank('Đăng nhập thành công', `Chào ${res.fullName} quay trở lại`, {nzClass: "success text-white", nzAnimate: true})
 				this.authService.getUserInfo();
 			}, (err) => {
 				if(err.status == 401){

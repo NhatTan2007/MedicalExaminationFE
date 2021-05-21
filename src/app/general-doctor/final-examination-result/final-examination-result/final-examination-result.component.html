@@ -1,0 +1,28 @@
+<div *ngIf="medicalRecord != null">
+    <label for="finalExaminationResult" class="btn btn-danger text-uppercase d-block">Kết luận</label>
+    <form [formGroup]="updateForm" #finalExaminationResult class="final-examination" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="healthyLevel">Phân loại sức khỏe</label>
+            <input type="number" min="1" #healthyLevel class="form-control" formControlName="healthyLevel"
+            [class.is-invalid]="(isError('healthyLevel') && isTouched('healthyLevel')) || (isError('healthyLevel') && showErrors)">
+            <span class="invalid-feedback d-block" *ngIf="(hasError('healthyLevel', 'required') && isTouched('healthyLevel'))
+            || (showErrors && hasError('healthyLevel', 'required'))">Không được để trống</span>
+        <span class="invalid-feedback d-block" *ngIf="(hasError('healthyLevel', 'min') && isTouched('healthyLevel'))
+            || (showErrors && hasError('healthyLevel', 'min'))">Giá trị nhập không được nhỏ hơn 1</span>
+        </div>
+        <div class="form-group">
+            <label for="otherDiseases">Các bệnh, tật (nếu có)</label>
+            <textarea type="number" min="1" #otherDiseases class="form-control" rows="20" formControlName="otherDiseases"
+            [class.is-invalid]="(isError('otherDiseases') && isTouched('otherDiseases')) || (isError('otherDiseases') && showErrors)"></textarea>
+            <span class="invalid-feedback d-block" *ngIf="(hasError('otherDiseases', 'required') && isTouched('otherDiseases'))
+            || (showErrors && hasError('otherDiseases', 'required'))">Không được để trống</span>
+        </div>
+        <div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-2 ">Ghi nội dung</button>
+		</div>
+    </form>
+</div>
+
+<div *ngIf="medicalRecord == null" class="text-center">
+	<h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+</div>

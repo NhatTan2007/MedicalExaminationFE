@@ -85,3 +85,17 @@ label{
     color: white !important;
     font-weight: 500;
 }
+
+.mat-tab-body-content{
+    overflow: hidden !important;
+}
+
+.mat-body p, .mat-body-1 p, .mat-typography p{
+    margin: 0px 0 6px;
+}
+
+nav{
+    position: sticky !important;
+    top: 0;
+    z-index: 99;
+}

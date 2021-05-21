@@ -1,5 +1,5 @@
-<div class="row">
-	<div class="col-12">
+<div class="form-row">
+	<div class="w-100">
 		<div class="mt-1">
 			<div class="input-group">
 				<input (change)="InputSearch($event.target.value)" 
@@ -17,13 +17,13 @@
 	<nz-select [(ngModel)]="pageSize" (ngModelChange)="changePageSize($event)" class="mt-3" >
 		<nz-option *ngFor="let size of listPageSize" [nzValue]="size" [nzLabel]="size.label"></nz-option>
 	</nz-select>
-	<div class="col-12 mt-3"  *ngIf="medicalService$ | async">
+	<div class="w-100 mt-3"  *ngIf="medicalService$ | async">
 		<table class="table table-hover table-bordered table-striped">
 			<thead class="thead-light">
 					<tr class="text-center text-uppercase">
 					<th class="p-1">STT</th>
 					<th class="p-1" >Tên dịch vụ</th>
-					<th class="p-1 w-25" >Giá</th>
+					<th class="p-1 w-25" >Giá (VNĐ)</th>
 				</tr>
 			</thead>
 			<tbody>

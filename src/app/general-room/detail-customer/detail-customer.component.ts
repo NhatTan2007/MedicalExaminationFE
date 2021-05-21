@@ -115,11 +115,12 @@ export class DetailCustomerComponent implements OnInit {
 
 	getMedicalRecord(medicalRecordId: string){
 		this.medicalRecordService.GetMedicalRecord(medicalRecordId)
-			.subscribe(async (res) => {
+			.subscribe((res) => {
 				this.listServicesRegisted = []
 				this.totalAmount = 0
 				this.medicalRecord = res
-				this.medicalRecordDetails = await this.medicalRecordService.getListServicesFromMedicalRecord(res.details)
+				console.log(res)
+				this.medicalRecordDetails = this.medicalRecordService.getListServicesFromMedicalRecord(res.details)
 				this.medicalRecordDetails.forEach(s => {
 					if(s.isRegistered){
 						this.medicalService.GetMedicalService(s.mServiceId)
