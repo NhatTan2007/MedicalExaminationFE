@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
-import { Organization, QuerryOrganizationRes } from 'src/app/_shared/models/organization.Models';
+import { Organization, QueryOrganizationRes } from 'src/app/_shared/models/organization.Models';
 import { OrganizationService } from 'src/app/_shared/services/organization/organization.service';
 
 @Component({
@@ -13,8 +13,8 @@ import { OrganizationService } from 'src/app/_shared/services/organization/organ
 export class OgranizationListComponent implements OnInit {
 	createOrganizationPath = "/auth/phong-tong-hop/tao-to-chuc"
 	organizations: Organization[] = []
-	organizationsSearch$: Observable<QuerryOrganizationRes>
-	organization$: Observable<QuerryOrganizationRes>
+	organizationsSearch$: Observable<QueryOrganizationRes>
+	organization$: Observable<QueryOrganizationRes>
 	listPageSize = [
 		{label: "10", value: 10},
 		{label: "20", value: 20},
@@ -85,7 +85,7 @@ export class OgranizationListComponent implements OnInit {
 	}
 
 
-	InputSearch(key: string){
+	inputSearch(key: string){
 		this.key = key.trim();
 		if(this.key.trim() == ''){
 			this.GetOrganizations(this.currentPage, this.pageSize.value);

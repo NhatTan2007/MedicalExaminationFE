@@ -56,7 +56,6 @@ export class OphthalmologyExaminationComponent implements OnInit {
 			if(this.updateForm.get('leftEyeSightWithoutGlass').value == this.updateForm.get('leftEyeSightWithGlass').value
 			&&  this.updateForm.get('leftEyeSightWithoutGlass').value == '') this.leftError = true
 			else this.leftError = false
-			console.log(`left: ${this.leftError}, right: ${this.rightError}`);
 		})
 
 	}
@@ -76,6 +75,7 @@ export class OphthalmologyExaminationComponent implements OnInit {
 			this.medicalRecordService.updateOphthalmologyExamination(this.medicalRecord.details.ophthalmologyExamination, this.medicalRecord.medicalRecordId)
 				.subscribe((res) => {
 					if(res.success) {
+						this.medicalRecordService.getActiveMedicalRecord();
 						this.notification.blank('Thành công', res.message, {nzClass: "success text-white", nzAnimate: true})
 					} else{
 						this.notification.blank('Thất bại', res.message, {nzClass: "error text-white", nzAnimate: true})
@@ -96,7 +96,6 @@ export class OphthalmologyExaminationComponent implements OnInit {
 		if(this.updateForm.get('leftEyeSightWithoutGlass').value == this.updateForm.get('leftEyeSightWithGlass').value
 		&&  this.updateForm.get('leftEyeSightWithoutGlass').value == '') this.leftError = true
 		else this.leftError = false
-		console.log(`left: ${this.leftError}, right: ${this.rightError}`);
 	}
 
 	isError(name: string) {

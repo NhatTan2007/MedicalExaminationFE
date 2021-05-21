@@ -11,6 +11,7 @@ import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/med
 import { AExaminationRooms } from 'src/app/_shared/models/medicalExaminationDetails.Models';
 import { MedicalService } from 'src/app/_shared/models/medicalService.Models';
 import { MedicalServiceService } from 'src/app/_shared/services/medical-service/medical-service.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   selector: 'app-detail-customer',
@@ -36,7 +37,8 @@ export class DetailCustomerComponent implements OnInit {
 				private spinner: NgxSpinnerService,
 				private formBuilder: FormBuilder,
 				private formService: FormService,
-				private medicalService: MedicalServiceService) { }
+				private medicalService: MedicalServiceService,
+				private notification: NzNotificationService) { }
 
   	async ngOnInit(): Promise<void> {
     this.spinner.show();
@@ -79,22 +81,20 @@ export class DetailCustomerComponent implements OnInit {
 			let updateCustomer: Customer = this.formModify.value as Customer
 			updateCustomer.customerId = this.customer.customerId
 			updateCustomer.gender = this.formModify.get("gender").value == 0 ? false : true
-			this.customerService.UpdateCustomer(updateCustomer).subscribe(
-				(res) => {
-					console.log(res)
-					this.update = false;
-					this.formModify.disable();
-					// if(res.success) this.customer = res.customer
-					// for (let key in res){
-					// 	if(res.hasOwnProperty(key)){
-					// 		console.log(res[key])
-					// 	}
-					// }
-				},
-				(err) => {
+			this.customerService.UpdateCustomer(updateCustomer)
+			.subscribe((res) => {
+				this.update = false;
+				this.formModify.disable();
+				if(res.success) {
+					this.notification.blank('Thành công', res.message, {nzClass: "success text-white", nzAnimate: true})
+				} else{
 					this.restoreData()
+					this.notification.blank('Thất bại', res.message, {nzClass: "error text-white", nzAnimate: true})
 				}
-			)
+			},(err) => {
+				this.restoreData()
+				this.notification.blank('Thất bại', "Xin mời liên lạc với Quản trị viên", {nzClass: "error text-white", nzAnimate: true})
+			})
 		} else {
 			this.showErrors = true;
 		}
@@ -115,20 +115,20 @@ export class DetailCustomerComponent implements OnInit {
 
 	getMedicalRecord(medicalRecordId: string){
 		this.medicalRecordService.GetMedicalRecord(medicalRecordId)
-			.subscribe((res) => {
+			.subscribe((data) => {
 				this.listServicesRegisted = []
 				this.totalAmount = 0
-				this.medicalRecord = res
-				console.log(res)
-				this.medicalRecordDetails = this.medicalRecordService.getListServicesFromMedicalRecord(res.details)
+				this.medicalRecord = data
+				this.medicalRecordDetails = this.medicalRecordService.getListServicesFromMedicalRecord(data.details)
 				this.medicalRecordDetails.forEach(s => {
 					if(s.isRegistered){
 						this.medicalService.GetMedicalService(s.mServiceId)
 							.subscribe((res) => {
-								this.listServicesRegisted.push(res)
-								this.totalAmount += s.price
+								if(res != null){
+									this.listServicesRegisted.push(res)
+									this.totalAmount += s.price
+								}
 							})
-						
 					}
 				})
 			})

@@ -52,7 +52,7 @@ export class CreateCustomerInformationComponent implements OnInit {
 					} else{
 						this.notification.blank('Thất bại', res.message, {nzClass: "error text-white", nzAnimate: true})
 					}
-					if(res.success) this.router.navigate(['']);
+					if(res.success) this.router.navigateByUrl('/auth/phong-tong-hop/ds-benh-nhan');
 				},() => {}, () => {this.spiner.hide()})
 		} else {
 			this.showErrors = true

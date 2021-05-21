@@ -28,6 +28,7 @@ import { DetailCustomerComponent } from './detail-customer/detail-customer.compo
 import { ListCustomerComponent } from './list-customer/list-customer.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { BlockSubmitDialog } from "./create-customer-examination/create-customer-examination.component";
+import { MedicalRecordListComponent } from './medical-record-list/medical-record-list/medical-record-list.component';
 
 export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
@@ -42,7 +43,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 		CreateCustomerInformationComponent,
     	ListCustomerComponent,
 		DetailCustomerComponent,
-		BlockSubmitDialog
+		BlockSubmitDialog,
+  MedicalRecordListComponent
 	],
 	imports: [
 		CommonModule,

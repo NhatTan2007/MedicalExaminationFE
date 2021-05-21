@@ -75,9 +75,10 @@ export class AuthService {
 						break;
 					case DepartmentId.tong_hop:
 						this.router.navigateByUrl('auth/bac-si-tong-hop')
-					// default:
-					// 	this.router.navigateByUrl('auth/phong-tong-hop/tao-thong-tin-benh-nhan')
-					// 	break;
+						break;
+					default:
+						this.router.navigateByUrl('auth/phong-tong-hop/tao-thong-tin-benh-nhan')
+						break;
 				}
 			},(err) => {
 				if(err.status == 401){

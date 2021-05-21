@@ -16,8 +16,8 @@ import { FinalExaminationResultComponent } from './final-examination-result/fina
 @NgModule({
 	declarations: [
 		GeneralDoctorComponent,
-  ExaminationResultComponent,
-  FinalExaminationResultComponent
+		ExaminationResultComponent,
+		FinalExaminationResultComponent
 	],
 	imports: [
 		CommonModule,

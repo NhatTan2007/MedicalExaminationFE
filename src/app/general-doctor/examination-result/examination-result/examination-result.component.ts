@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { MedicalRecordDetailsUpdate } from 'src/app/_shared/models/medicalExaminationDetails.Models';
 import { MedicalRecord } from 'src/app/_shared/models/medicalRecord.Models';
-import { AuthService } from 'src/app/_shared/services/authService/auth-service.service';
-import { FormService } from 'src/app/_shared/services/form-service/form.service';
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
 
 @Component({
@@ -25,7 +21,7 @@ export class ExaminationResultComponent implements OnInit {
 			this.medicalRecord$ = this.medicalRecordService.getMedicalRecord$();
 			this.medicalRecord$.subscribe((res) => {
 					this.spiner.show();
-					this.medicalRecordDetailsUpdate = new MedicalRecordDetailsUpdate(res.medicalRecordId); // tao medical detai
+					this.medicalRecordDetailsUpdate = new MedicalRecordDetailsUpdate(res.medicalRecordId);
 					this.medicalRecordDetailsUpdate.finalExaminationResult = res.details.finalExaminationResult
 					this.medicalRecord = res
 					this.spiner.hide();

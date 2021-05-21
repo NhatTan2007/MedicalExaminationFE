@@ -34,7 +34,7 @@ export interface UpdateMedicalServiceRes{
     success     : boolean;
 }
 
-export interface QuerryMSerciceRes{
+export interface QueryMServiceRes{
     medicalService:  MedicalService[]
     totalMedicalSevices:  number
 }

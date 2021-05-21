@@ -1,7 +1,7 @@
 <div *ngIf="medicalRecord != null" class="mt-2">
 	<label for="InternalMedicineExamination" class="btn btn-info">Nội khoa</label>
 	<form [formGroup]="updateForm" #internalMedicineExamination (ngSubmit)="onSubmit()"
-		*ngIf="medicalRecord.details.internalMedicineExamination.isRegisted">
+		*ngIf="medicalRecord.details.internalMedicineExamination.isRegistered">
 		<div class="form-content form-row">
 			<div class="col-sm-6">
 				<div class="form-group">

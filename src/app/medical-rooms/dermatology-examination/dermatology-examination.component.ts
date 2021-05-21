@@ -57,6 +57,7 @@ export class DermatologyExaminationComponent implements OnInit {
 												this.medicalRecord.medicalRecordId)
 					.subscribe((res) => {
 						if(res.success) {
+							this.medicalRecordService.getActiveMedicalRecord();
 							this.notification.blank('Thành công', res.message, {nzClass: "success text-white", nzAnimate: true})
 						} else{
 							this.notification.blank('Thất bại', res.message, {nzClass: "error text-white", nzAnimate: true})
