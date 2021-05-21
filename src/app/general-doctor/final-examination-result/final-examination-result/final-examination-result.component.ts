@@ -4,7 +4,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { FinalExaminationResult, MedicalRecordDetailsUpdate } from 'src/app/_shared/models/medicalExaminationDetails.Models';
-import { MedicalRecord, MedicalRecordViewRes } from 'src/app/_shared/models/medicalRecord.Models';
+import { MedicalRecord } from 'src/app/_shared/models/medicalRecord.Models';
 import { AuthService } from 'src/app/_shared/services/authService/auth-service.service';
 import { FormService } from 'src/app/_shared/services/form-service/form.service';
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';

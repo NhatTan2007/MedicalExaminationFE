@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Customer } from 'src/app/_shared/models/customer.Models';
 import { AExaminationRooms, MedicalRecordDetails } from 'src/app/_shared/models/medicalExaminationDetails.Models';
-import { CreateMedicalRecordReq, CreateMedicalRecordRes } from 'src/app/_shared/models/medicalRecord.Models';
+import { CreateMedicalRecordReq } from 'src/app/_shared/models/medicalRecord.Models';
 import { MedicalService } from 'src/app/_shared/models/medicalService.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 import { MedicalServiceService } from 'src/app/_shared/services/medical-service/medical-service.service';
