@@ -26,11 +26,11 @@
     </div>
     <div class="form-group">
         <label for="#organizationAddress">Địa chỉ</label>
-        <input  [class.is-invalid]="formModify.get('organizationAddress').errors && formModify.get('organizationAddress').touched"
+        <input  [class.is-invalid]="isError('organizationAddress') && isTouched('organizationAddress')"
                 type="text" class="form-control" 
                 formControlName="organizationAddress"
                 #organizationAddress [attr.disabled]="!update ? true : null">
-        <div *ngIf="formModify.get('organizationAddress').hasError('required')"
+        <div *ngIf="hasError('organizationAddress', 'required')"
                 class="invalid-feedback d-block">Địa chỉ tổ chức không được để trống</div>
     </div>
     <div class="form-row">
@@ -86,8 +86,8 @@
         <a type="button" class="btn btn-info ml-2 mr-2">Xuất chi tiết đợt khám</a>
         <a type="submit" class="btn btn-success">Tạo đợt khám mới</a>
         </div>
-    </form>
-    <form class="mt-2">
+</form>
+<form class="mt-2">
     <div class="row">
         <div class="col-2 border">
             <div class="list-group">

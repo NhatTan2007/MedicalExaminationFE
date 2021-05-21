@@ -6,13 +6,13 @@
 		</div>
 		<div class="mt-1">
 			<div class="input-group">
-				<input (change)="InputSearch($event.target.value)" 
+				<input (change)="inputSearch($event.target.value)" 
 						class="form-control py-2" 
 						placeholder="Tìm kiếm theo tên tổ chức" 
 						type="search" #searchPatient>
 				<span class="input-group-append">
 					<i class="fa fa-search input-group-text pt-0 pb-0"
-						style="cursor: pointer;" (click)="InputSearch($event.target.value)"></i>
+						style="cursor: pointer;" (click)="inputSearch($event.target.value)"></i>
 				</span>
 			</div>
 		</div>

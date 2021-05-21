@@ -11,6 +11,7 @@ import { MedicalServiceService } from 'src/app/_shared/services/medical-service/
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
 import { MatDialog } from '@angular/material/dialog';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-create-customer-examination',
@@ -21,6 +22,7 @@ export class CreateCustomerExaminationComponent implements OnInit {
 	customer: Customer
 	customerIdentityNumber= ''
 	isSearch = false
+	getMedicalServices$: Observable<MedicalService[]>
 	services: MedicalService[] = []
 	medicalHistoryFrom: FormGroup
 	selectedServices: MedicalService[] = []
@@ -38,16 +40,7 @@ export class CreateCustomerExaminationComponent implements OnInit {
 				private notification: NzNotificationService) { }
 
 	ngOnInit(): void {
-		this.getMedicalServices();
-		this.medicalHistoryFrom = this.formBuilder.group({
-			reasonToExamination: ['', [Validators.required]],
-			medicalHistoryFamilyHaveOrNot: [false, [Validators.required]],
-			medicalHistoryFamilyDetails: [''],
-			medicalHistoryCustomerHaveOrNot: [false, [Validators.required]],
-			medicalHistoryCustomerDetails: [''],
-			medicationsIsUsing: [''],
-			pregnancyHistory: ['']
-		})
+		this.getMedicalServices$ = this.medicalService.GetActiveMedicalServices();
 	}
 
 	openBlockDialog(){
@@ -62,6 +55,19 @@ export class CreateCustomerExaminationComponent implements OnInit {
 			.toPromise().then(async (res) => {
 				this.customer = res
 				if(this.customer != null){
+					this.getMedicalServices$.subscribe((res) => {
+						this.services = res
+						this.medicalHistoryFrom = this.formBuilder.group({
+							reasonToExamination: ['', [Validators.required]],
+							medicalHistoryFamilyHaveOrNot: [false, [Validators.required]],
+							medicalHistoryFamilyDetails: [''],
+							medicalHistoryCustomerHaveOrNot: [false, [Validators.required]],
+							medicalHistoryCustomerDetails: [''],
+							medicationsIsUsing: [''],
+							pregnancyHistory: ['']
+						})
+					})
+
 					this.customer.fullName = `${this.customer.lastName} ${this.customer.firstName}`
 					this.newMedicalRecord = new CreateMedicalRecordReq(this.customer.customerId);
 					this.isSearch = false;
@@ -77,12 +83,6 @@ export class CreateCustomerExaminationComponent implements OnInit {
 	cancelCreate(){
 		this.customer = null
 		this.newMedicalRecord = null
-	}
-
-	getMedicalServices(){
-		this.medicalService.GetActiveMedicalServices().toPromise().then((res) => {
-			this.services = res
-		})
 	}
 
 	submitFirstStep(){
@@ -163,6 +163,7 @@ export class CreateCustomerExaminationComponent implements OnInit {
 				.subscribe((res) => {
 					if(res.success) {
 						this.notification.blank('Thành công', res.message, {nzClass: "success text-white", nzAnimate: true})
+						this.router.navigateByUrl('auth/phong-tong-hop/danh-sach-benh-an');
 					} else{
 						this.notification.blank('Thất bại', res.message, {nzClass: "error text-white", nzAnimate: true})
 					}

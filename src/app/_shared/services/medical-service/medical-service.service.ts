@@ -6,7 +6,7 @@ import { CreateMedicalServiceRes,
           	CreateMedicalServiceReq,
           	UpdateMedicalServiceReq,
 			MedicalService,
-			QuerryMSerciceRes} from "../../models/medicalService.Models";
+			QueryMServiceRes} from "../../models/medicalService.Models";
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 @Injectable({
@@ -24,7 +24,13 @@ export class MedicalServiceService {
 						.map(e => ({...e, update: false}))
 						)
 				)
-			
+	}
+
+	GetMedicalServicesByPagination(currentPage: number, pageSize: number): Observable<QueryMServiceRes>{
+		return this.httpClient.get(`${this.apiDomain}/currentPage/${currentPage}/pageSize/${pageSize}`)
+			.pipe(
+					map(res => (<QueryMServiceRes>res))
+				)
 	}
 
 	GetMedicalService(medicalServiceId: number): Observable<MedicalService>{
@@ -36,11 +42,10 @@ export class MedicalServiceService {
 		return this.httpClient.get(`${this.apiDomain}/active`)
 			.pipe(map(res => <MedicalService[]>res))
 	}
-	GetActiveMedicalServicesByPagination(currentPage: number, pageSize: number):Observable<QuerryMSerciceRes>{
+	GetActiveMedicalServicesByPagination(currentPage: number, pageSize: number):Observable<QueryMServiceRes>{
 		return this.httpClient.get(`${this.apiDomain}/active/currentPage/${currentPage}/pageSize/${pageSize}`)
-				.pipe(map(res => (res as QuerryMSerciceRes)));
+				.pipe(map(res => (res as QueryMServiceRes)));
 	}
-
 
 	CreateMedicalServices(medicalService: CreateMedicalServiceReq): Observable<CreateMedicalServiceRes>{
 		return this.httpClient.post(`${this.apiDomain}/create`, medicalService)
@@ -57,9 +62,9 @@ export class MedicalServiceService {
 		.pipe(map(res => res as MedicalService[]))
 	}
 
-	SearchMedicalService(keyword: string,currentPage: number, pageSize: number): Observable<QuerryMSerciceRes>{
+	SearchMedicalService(keyword: string,currentPage: number, pageSize: number): Observable<QueryMServiceRes>{
 		return this.httpClient.get(`${this.apiDomain}/search/${keyword}/currentPage/${currentPage}/pageSize/${pageSize}`)
-		.pipe(map(res => (res as QuerryMSerciceRes)))
+		.pipe(map(res => (res as QueryMServiceRes)))
 	}
 
 

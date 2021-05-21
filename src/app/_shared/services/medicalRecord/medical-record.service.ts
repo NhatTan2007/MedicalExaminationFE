@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/internal/Subject';
 import { map } from 'rxjs/operators';
@@ -10,22 +11,23 @@ import { AbdominalUltrasound, AExaminationRooms,
 	CardiacUltrasoundProbes,
 	ChestXray,
 	ClinicalUrineTests,
-		DermatologyExamination,
-		FinalExaminationResult,
-		InternalMedicineExamination,
-		MedicalRecordDetails,
-		NeurologyExamination,
-		ObstetricsAndGynecologyExamination,
-		OphthalmologyExamination,
-		OralAndMaxillofacialExamination, 
-		OtorhinolaryngologyExamination,
-		PhysicalExamination,
-		SurgeryExamination,
-		ThyroidUltrasound} from '../../models/medicalExaminationDetails.Models';
+	DermatologyExamination,
+	FinalExaminationResult,
+	InternalMedicineExamination,
+	MedicalRecordDetails,
+	NeurologyExamination,
+	ObstetricsAndGynecologyExamination,
+	OphthalmologyExamination,
+	OralAndMaxillofacialExamination, 
+	OtorhinolaryngologyExamination,
+	PhysicalExamination,
+	SurgeryExamination,
+	ThyroidUltrasound} from '../../models/medicalExaminationDetails.Models';
 import { CreateMedicalRecordReq,
 			CreateMedicalRecordRes,
 			MedicalRecord,
 			MedicalRecordViewRes,
+			QueryMedicalRecordsRes,
 			UpdateMedicalRecordRes } from '../../models/medicalRecord.Models';
 import { ConfigService } from '../config/config.service';
 
@@ -36,9 +38,10 @@ export class MedicalRecordService {
     protected apiDomain = `${this.config.getDomain()}/MedicalRecord`
 	medicalRecord: MedicalRecord
 	medicalRecord$: Subject<MedicalRecord> = new Subject<MedicalRecord>();
+	listActiveMedicalRecord$: Subject<MedicalRecordViewRes[]> = new Subject<MedicalRecordViewRes[]>()
     constructor(private config: ConfigService,
                 private httpClient: HttpClient,
-				private notification: NzNotificationService) { }
+				private spiner: NgxSpinnerService) { }
 
 	getListServicesFromMedicalRecord(medicalRecordDetails: MedicalRecordDetails): AExaminationRooms[]{ 
 		let services: AExaminationRooms[] = []
@@ -57,6 +60,32 @@ export class MedicalRecordService {
 
 	emitMedicalRecord(medicalRecord: MedicalRecord): void{
 		this.medicalRecord$.next(medicalRecord);
+	}
+
+	emitListActiveMedicalRecord(data: MedicalRecordViewRes[]){
+		this.listActiveMedicalRecord$.next(data);
+	}
+
+	getActiveMedicalRecordFinishedExamination(){
+		this.spiner.show();
+		this.GetActiveMedicalRecordFinishedExamination()
+			.subscribe((res) => {
+				this.emitListActiveMedicalRecord(<MedicalRecordViewRes[]>res);
+				this.spiner.hide()
+			}, (err) => {
+				this.spiner.hide()
+			});
+	}
+
+	getActiveMedicalRecord(){
+		this.spiner.show();
+		this.GetActiveMedicalRecord()
+			.subscribe((res) => {
+				this.emitListActiveMedicalRecord(<MedicalRecordViewRes[]>res);
+				this.spiner.hide()
+			}, (err) => {
+				this.spiner.hide()
+			});
 	}
 
 	CreateMedicalRecord(medicalRecord: CreateMedicalRecordReq): Observable<CreateMedicalRecordRes>{
@@ -82,6 +111,16 @@ export class MedicalRecordService {
 	GetActiveMedicalRecord(): Observable<MedicalRecordViewRes[]>{
 		return this.httpClient.get(`${this.apiDomain}/getActive`)
 			.pipe(map(res => res as MedicalRecordViewRes[]))
+	}
+
+	GetMedicalRecordsWithPagination(currentPage: number, pageSize: number): Observable<QueryMedicalRecordsRes>{
+		return this.httpClient.get(`${this.apiDomain}/currentPage/${currentPage}/pageSize/${pageSize}`)
+			.pipe(map(res => res as QueryMedicalRecordsRes))
+	}
+
+	SearchMedicalRecordsWithPagination(searchKey: string, currentPage: number, pageSize: number): Observable<QueryMedicalRecordsRes>{
+		return this.httpClient.get(`${this.apiDomain}/search/${searchKey}currentPage/${currentPage}/pageSize/${pageSize}`)
+			.pipe(map(res => res as QueryMedicalRecordsRes))
 	}
 
 	GetActiveMedicalRecordFinishedExamination(): Observable<MedicalRecordViewRes[]>{

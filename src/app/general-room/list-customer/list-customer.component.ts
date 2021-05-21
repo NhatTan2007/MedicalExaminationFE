@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Customer, QuerryCustomersRes } from 'src/app/_shared/models/customer.Models';
+import { Customer, QueryCustomersRes } from 'src/app/_shared/models/customer.Models';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -12,8 +12,8 @@ import { Observable } from 'rxjs';
 })
 export class ListCustomerComponent implements OnInit {
 	customers: Customer[] = []
-	customersSearch$: Observable<QuerryCustomersRes>
-	customers$: Observable<QuerryCustomersRes>
+	customersSearch$: Observable<QueryCustomersRes>
+	customers$: Observable<QueryCustomersRes>
 	listPageSize = [
 		{label: "10", value: 10},
 		{label: "20", value: 20},

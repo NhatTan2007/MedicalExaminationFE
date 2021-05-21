@@ -1,8 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
-import { MedicalService, QuerryMSerciceRes, UpdateMedicalServiceReq } from 'src/app/_shared/models/medicalService.Models';
+import { MedicalService, QueryMServiceRes, UpdateMedicalServiceReq } from 'src/app/_shared/models/medicalService.Models';
 import { MedicalServiceService } from 'src/app/_shared/services/medical-service/medical-service.service';
 
 
@@ -14,8 +15,8 @@ import { MedicalServiceService } from 'src/app/_shared/services/medical-service/
 export class ServicesListComponent implements OnInit {
 	medicalServices: MedicalService[] = []
 	medicalService: MedicalService
-	medicalServicesSearch$: Observable<QuerryMSerciceRes>
-	medicalService$: Observable<QuerryMSerciceRes>
+	medicalServicesSearch$: Observable<QueryMServiceRes>
+	medicalService$: Observable<QueryMServiceRes>
 		listPageSize = [
 		{label: "10", value: 10},
 		{label: "20", value: 20},
@@ -29,7 +30,8 @@ export class ServicesListComponent implements OnInit {
 
 	constructor(private medicalServiceService: MedicalServiceService,
 				private router: Router,
-				private spinner: NgxSpinnerService) {}
+				private spinner: NgxSpinnerService,
+				private notification: NzNotificationService) {}
 
 	ngOnInit(): void {
 		this.spinner.show();
@@ -42,11 +44,10 @@ export class ServicesListComponent implements OnInit {
 
 
 	getServicesList(currentPage: number, pageSize: number){
-		this.medicalService$ = this.medicalServiceService.GetActiveMedicalServicesByPagination(currentPage, pageSize);
+		this.medicalService$ = this.medicalServiceService.GetMedicalServicesByPagination(currentPage, pageSize);
 		this.medicalService$.subscribe((res) =>{
 			this.medicalServices = res.medicalService
 			this.totalMedicalSevices = res.totalMedicalSevices
-			console.log(res)
 			this.spinner.hide();
 		}, () => {
 			this.spinner.hide();
@@ -63,21 +64,22 @@ export class ServicesListComponent implements OnInit {
 			}
 		}
 
-	async updateMedicalServiceInfo(service: MedicalService){
+	updateMedicalServiceInfo(service: MedicalService){
 		service.update = null
-		this.medicalServiceService.UpdateMedicalServices(service as UpdateMedicalServiceReq).subscribe(
-				(res) => {
-					if(res.success) {
-						service = res.medicalService
-						service.update = false
-					} else{
-						this.getServicesList(this.currentPage, this.pageSize.value)
-					}
-				},
-				() => {
-					this.getServicesList(this.currentPage, this.pageSize.value)
-				}
-			);
+		this.medicalServiceService.UpdateMedicalServices(service as UpdateMedicalServiceReq)
+		.subscribe((res) => {
+			if(res.success) {
+				service = res.medicalService
+				service.update = false
+				this.notification.blank('Thành công', res.message, {nzClass: "success text-white", nzAnimate: true})
+			} else{
+				this.getServicesList(this.currentPage, this.pageSize.value)
+				this.notification.blank('Thất bại', res.message, {nzClass: "error text-white", nzAnimate: true})
+			}
+		},(err) => {
+			this.getServicesList(this.currentPage, this.pageSize.value)
+			this.notification.blank('Thất bại', "Xin mời liên lạc với Quản trị viên", {nzClass: "error text-white", nzAnimate: true})
+		})
 	}
 
 	updatePrice(price: number, service: MedicalService){
@@ -90,12 +92,14 @@ export class ServicesListComponent implements OnInit {
 		let index = this.medicalServices.indexOf(isactive)
 		if(index != -1){
 			isactive.isActive = true
+			this.updateMedicalServiceInfo(this.medicalServices[index])
 		}
 	}
 	deactiveService(isactive: MedicalService){
 		let index = this.medicalServices.indexOf(isactive)
 		if(index != -1){
 			isactive.isActive = false
+			this.updateMedicalServiceInfo(this.medicalServices[index])
 		}
 	}
 
@@ -110,8 +114,6 @@ export class ServicesListComponent implements OnInit {
 			this.spinner.hide();
 		})
 	}
-
-
 
 	changePageSize(value: any){
 		this.pageSize = value
@@ -132,7 +134,7 @@ export class ServicesListComponent implements OnInit {
 		}
 	}
 
-	InputSearch(key: string){
+	inputSearch(key: string){
 		this.key = key.trim();
 		if(this.key.trim() == ''){
 			this.getServicesList(this.currentPage, this.pageSize.value);

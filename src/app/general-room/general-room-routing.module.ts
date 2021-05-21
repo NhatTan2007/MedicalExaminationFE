@@ -9,6 +9,7 @@ import { CreateCustomerExaminationComponent } from './create-customer-examinatio
 import { CreateCustomerInformationComponent } from './create-customer-information/create-customer-information.component';
 import { ListCustomerComponent } from './list-customer/list-customer.component';
 import { DetailCustomerComponent } from './detail-customer/detail-customer.component';
+import { MedicalRecordListComponent } from './medical-record-list/medical-record-list/medical-record-list.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,10 @@ const routes: Routes = [
 	{
 		path:"chi-tiet-benh-nhan/:customerId",
 		component: DetailCustomerComponent
+	},
+	{
+		path:"danh-sach-benh-an",
+		component: MedicalRecordListComponent
 	}
 
 ];

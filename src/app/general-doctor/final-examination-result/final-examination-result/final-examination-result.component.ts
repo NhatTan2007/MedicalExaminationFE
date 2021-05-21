@@ -4,7 +4,7 @@ import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { FinalExaminationResult, MedicalRecordDetailsUpdate } from 'src/app/_shared/models/medicalExaminationDetails.Models';
-import { MedicalRecord } from 'src/app/_shared/models/medicalRecord.Models';
+import { MedicalRecord, MedicalRecordViewRes } from 'src/app/_shared/models/medicalRecord.Models';
 import { AuthService } from 'src/app/_shared/services/authService/auth-service.service';
 import { FormService } from 'src/app/_shared/services/form-service/form.service';
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
@@ -28,9 +28,9 @@ export class FinalExaminationResultComponent implements OnInit {
 		private notification: NzNotificationService) { }
 
 	ngOnInit(): void {
+		this.spiner.show();
 		this.medicalRecord$ = this.medicalRecordService.getMedicalRecord$();
 		this.medicalRecord$.subscribe((res) => {
-			this.spiner.show();
 			this.medicalRecordDetailsUpdate = new MedicalRecordDetailsUpdate(res.medicalRecordId); // tao medical detai
 			this.medicalRecord = res
 			this.medicalRecord.details.finalExaminationResult = this.medicalRecordDetailsUpdate.finalExaminationResult =
@@ -59,6 +59,7 @@ export class FinalExaminationResultComponent implements OnInit {
 											this.medicalRecord.medicalRecordId)
 				.subscribe((res) => {
 					if(res.success) {
+						this.medicalRecordService.getActiveMedicalRecordFinishedExamination();
 						this.notification.blank('Thành công', res.message, {nzClass: "success text-white", nzAnimate: true})
 					} else{
 						this.notification.blank('Thất bại', res.message, {nzClass: "error text-white", nzAnimate: true})

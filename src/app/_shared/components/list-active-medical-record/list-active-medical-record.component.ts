@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Subject } from 'rxjs';
 import { MedicalRecord, MedicalRecordViewRes } from 'src/app/_shared/models/medicalRecord.Models';
 import { CustomerService } from 'src/app/_shared/services/customer/customer.service';
 import { MedicalRecordService } from 'src/app/_shared/services/medicalRecord/medical-record.service';
@@ -12,7 +13,7 @@ import { AuthService } from '../../services/authService/auth-service.service';
   styleUrls: ['./list-active-medical-record.component.scss']
 })
 export class ListActiveMedicalRecordComponent implements OnInit {
-	listActiveMedicalRecord: MedicalRecordViewRes[] = []
+	listActiveMedicalRecord: MedicalRecordViewRes[]
 	medicalRecord: MedicalRecord = new MedicalRecord('a');
 	constructor(private medicalRecordService: MedicalRecordService,
 				private authService: AuthService,
@@ -21,29 +22,13 @@ export class ListActiveMedicalRecordComponent implements OnInit {
 	ngOnInit(): void{
 		this.spiner.show();
 		this.authService.getUserInfo$().subscribe((res) => {
-			if(res.departmentId == DepartmentId.tong_hop) this.getActiveMedicalRecordFinishedExamination()
-			else this.getActiveMedicalRecord();
+			if(res.departmentId == DepartmentId.tong_hop) this.medicalRecordService.getActiveMedicalRecordFinishedExamination()
+			else this.medicalRecordService.getActiveMedicalRecord();
 		})
-	}
-
-	getActiveMedicalRecord(){
-		this.medicalRecordService.GetActiveMedicalRecord()
-			.subscribe((res) => {
-				this.listActiveMedicalRecord = <MedicalRecordViewRes[]>res;
-				this.spiner.hide()
-			}, (err) => {
-				this.spiner.hide()
-			});
-	}
-
-	getActiveMedicalRecordFinishedExamination(){
-		this.medicalRecordService.GetActiveMedicalRecordFinishedExamination()
-			.subscribe((res) => {
-				this.listActiveMedicalRecord = <MedicalRecordViewRes[]>res;
-				this.spiner.hide()
-			}, (err) => {
-				this.spiner.hide()
-			});
+		this.medicalRecordService.listActiveMedicalRecord$.asObservable()
+			.subscribe(data => {
+				this.listActiveMedicalRecord = data
+			})
 	}
 
 	getMedicalRecord(medicalRecordId: string){
