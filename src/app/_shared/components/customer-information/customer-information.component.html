@@ -1,0 +1,67 @@
+<section *ngIf="medicalRecord$ | async" class="mt-2">
+    <ng-template matStepLabel>Khai báo thông tin tiền sử bệnh</ng-template>
+    <div class="form-group d-flex">
+        <label class="d-flex align-items-end mb-0 p-0" style="width: 200px;">Lý do khám sức
+            khỏe:</label>
+        <input class="form-control pb-0 pl-0 ml-2" type="text"
+            style="border: 0px; border-bottom: 1px dotted black; border-radius: 0 !important;"
+            value="{{medicalRecord.reasonToExamination}}" readonly>
+    </div>
+    <div class="row d-flex justify-content-lg-center align-items-center">
+        <h2 class="m-1 text-center w-100 m-0">TIỀN SỬ BỆNH CỦA ĐỐI TƯỢNG KHÁM SỨC KHỎE</h2>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>1. Tiền sử gia đình</b></p>
+            <p class="text-justify">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Có ai trong già đình ông(bà) mắc một trong
+                các bệnh: truyền
+                nhiễm,tim mạch, đái tháo đường, lao, hen phế quản, ung thư, động kinh, rối loạn tâm
+                thần khác.
+            </p>
+            <div class="form-group purple-border">
+                <textarea disabled class="form-control"
+                    value="{{medicalRecord.medicalHistory.medicalHistoryFamily.details}}"
+                    rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>2. Tiền sử bản thân</b></p>
+            <p class="text-justify">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Ông(bà) đã/đang mắc bệnh, tình trạng bệnh
+                nào sau đây không:
+                Bệnh truyền nhiễm, bệnh tim mạch, đái tháo đường, lao, hen phế quản, ung thư, động
+                kinh, bệnh khác.
+            </p>
+
+            <div class="form-group purple-border">
+                <textarea disabled class="form-control"
+                    value="{{medicalRecord.medicalHistory.medicalHistoryCustomer.details}}"
+                    rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <p><b>3. Câu hỏi khác (nếu có)</b></p>
+            <p>
+                a) Ông(bà) có đang điều trị bệnh gì không? Nếu có, xin hãy liệt kê các thuốc đang
+                dùng và liều
+                lượng
+            </p>
+            <div class="form-group">
+                <textarea disabled class="form-control"
+                    value="{{medicalRecord.medicalHistory.anotherQuestions.medicationsIsUsing}}"
+                    rows="2"></textarea>
+            </div>
+            b) Tiền sử thai sản (Đối với phụ nữ)
+            <div class="form-group">
+                <textarea disabled class="form-control"
+                    value="{{medicalRecord.medicalHistory.anotherQuestions.pregnancyHistory}}"
+                    rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+</section>

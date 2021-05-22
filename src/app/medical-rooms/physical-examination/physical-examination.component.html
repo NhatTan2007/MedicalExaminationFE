@@ -1,0 +1,82 @@
+<div *ngIf="medicalRecord != null" class="mt-2">
+	<label for="physicalExamination" class="btn btn-info">Kiểm tra thể lực</label>
+	<form [formGroup]="updateForm" #physicalExamination (ngSubmit)="onSubmit()"
+	*ngIf="this.medicalRecord.details.physicalExamination.isRegistered">
+		<div class="form-row">
+			<div class="form-group col-sm-6 pl-0">
+				<label for="height">Chiều cao (cm)</label>
+				<input type="number" min="0" #height [class.is-invalid]="(isError('height') && isTouched('height'))
+				  || (isError('height') && showErrors)" class="form-control" formControlName="height">
+				<span class="invalid-feedback d-block" *ngIf="(hasError('height', 'required') && isTouched('height'))
+				|| (showErrors && hasError('height', 'required'))">Không được để trống</span>
+				  <span class="invalid-feedback d-block" *ngIf="(hasError('height', 'min') && isTouched('height'))
+				|| (showErrors && hasError('height', 'min'))">Giá trị nhập không được nhỏ hơn 0</span>
+			</div>
+			<div class="form-group col-sm-6">
+				<label for="weight">Cân nặng (kg)</label>
+				<input type="number" min="0" #weight [class.is-invalid]="(isError('weight') && isTouched('weight'))
+				  || (isError('weight') && showErrors)" class="form-control" formControlName="weight">
+				<span class="invalid-feedback d-block" *ngIf="(hasError('weight', 'required') && isTouched('weight'))
+				|| (showErrors && hasError('weight', 'required'))">Không được để trống</span>
+				<span class="invalid-feedback d-block" *ngIf="(hasError('weight', 'min') && isTouched('weight'))
+				|| (showErrors && hasError('weight', 'min'))">Giá trị nhập không được nhỏ hơn 0</span>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-sm-6 pl-0">
+				<label for="bmiIndex">Chỉ số BMI</label>
+				<input type="number" min="0" #bmiIndex [class.is-invalid]="(isError('bmiIndex') && isTouched('bmiIndex'))
+				  || (isError('bmiIndex') && showErrors)" class="form-control" formControlName="bmiIndex">
+				<span class="invalid-feedback d-block" *ngIf="(hasError('bmiIndex', 'required') && isTouched('bmiIndex'))
+				|| (showErrors && hasError('bmiIndex', 'required'))">Không được để trống</span>
+				<span class="invalid-feedback d-block" *ngIf="(hasError('bmiIndex', 'min') && isTouched('bmiIndex'))
+				|| (showErrors && hasError('bmiIndex', 'min'))">Giá trị nhập không được nhỏ hơn 0</span>
+			</div>
+	
+			<div class="form-group col-sm-6">
+				<label for="heartBeat">Mạch (lần/phút)</label>
+				<input type="number" min="0" #heartBeat [class.is-invalid]="(isError('heartBeat') && isTouched('heartBeat'))
+				  || (isError('heartBeat') && showErrors)" class="form-control" formControlName="heartBeat">
+				<div class="invalid-feedback d-block" *ngIf="(isError('heartBeat') && isTouched('heartBeat'))
+				|| (showErrors && isError('heartBeat'))">Không được để trống</div>
+				<span class="invalid-feedback d-block" *ngIf="(hasError('heartBeat', 'min') && isTouched('heartBeat'))
+				|| (showErrors && hasError('heartBeat', 'min'))">Giá trị nhập không được nhỏ hơn 0</span>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-sm-6 pl-0">
+				<label for="bloodPressure">Huyết áp (mmHg)</label>
+				<input type="text" #bloodPressure [class.is-invalid]="(isError('bloodPressure') && isTouched('bloodPressure'))
+				  || (isError('bloodPressure') && showErrors)" class="form-control" formControlName="bloodPressure">
+				<div class="invalid-feedback d-block" *ngIf="(isError('bloodPressure') && isTouched('bloodPressure'))
+				|| (showErrors && isError('bloodPressure'))">Không được để trống</div>
+			</div>
+	
+			<div class="form-group col-sm-6">
+				<label for="physicalLevel">Phân loại thể lực</label>
+				<input type="number" min="1" #physicalLevel [class.is-invalid]="(isError('physicalLevel') && isTouched('physicalLevel'))
+				  || (isError('physicalLevel') && showErrors)" class="form-control" formControlName="physicalLevel">
+				<span class="invalid-feedback d-block" *ngIf="(hasError('physicalLevel', 'required') && isTouched('physicalLevel'))
+				|| (showErrors && hasError('physicalLevel', 'required'))">Không được để trống</span>
+				<span class="invalid-feedback d-block" *ngIf="(hasError('physicalLevel', 'min') && isTouched('physicalLevel'))
+				|| (showErrors && hasError('physicalLevel', 'min'))">Giá trị nhập không được nhỏ hơn 1</span>
+			</div>
+		</div>
+
+		<div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+		</div>
+	</form>
+	<div *ngIf="!this.medicalRecord.details.physicalExamination.isRegistered" class="text-center">
+		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
+	</div>
+</div>
+
+<div *ngIf="medicalRecord == null" class="text-center">
+	<h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+</div>
+
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
+</ngx-spinner>

@@ -1,0 +1,117 @@
+<form *ngIf="$organization | async" [formGroup] = "formModify" (ngSubmit)="updateOrganizationInfo()">
+    <div class="form-group">
+        <label for="#organizationName">Tên tổ chức:</label>
+        <input  [class.is-invalid]="(isError('organizationName') && isTouched('organizationName'))
+                || (showErrors && isError('organizationName'))"
+                type="text" class="form-control" 
+                formControlName="organizationName"
+                #organizationName [attr.disabled]="!update ? true : null">
+        <div class="invalid-feedback d-block" 
+            *ngIf="(isError('organizationName') && isTouched('organizationName'))
+            || (showErrors && isError('organizationName'))">Tên tổ chức không được để trống</div>	
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="#organizationPhoneNumber">Số điện thoại</label>
+            <input  type="text" class="form-control" 
+                    formControlName="organizationPhoneNumber"
+                    #organizationPhoneNumber [attr.disabled]="!update ? true : null">
+        </div>
+        <div class="form-group col-6">
+            <label for="#organizationEmail">Email</label>
+            <input  type="text" class="form-control" 
+                    formControlName="organizationEmail"
+                    #organizationEmail [attr.disabled]="!update ? true : null">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="#organizationAddress">Địa chỉ</label>
+        <input  [class.is-invalid]="isError('organizationAddress') && isTouched('organizationAddress')"
+                type="text" class="form-control" 
+                formControlName="organizationAddress"
+                #organizationAddress [attr.disabled]="!update ? true : null">
+        <div *ngIf="hasError('organizationAddress', 'required')"
+                class="invalid-feedback d-block">Địa chỉ tổ chức không được để trống</div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label for="#personContact">Người liên hệ</label>
+            <input  [class.is-invalid]="(isError('personContact') && isTouched('personContact'))
+                    || (isError('personContact') && showErrors)"
+                    type="text" class="form-control" 
+                    formControlName="personContact"
+                    #personContact [attr.disabled]="!update ? true : null">
+            <div class="invalid-feedback d-block"
+                *ngIf="(isError('personContact') && isTouched('personContact'))
+                || (isError('personContact') && showErrors)">Tên người liên hệ không được để trống</div>	
+        </div>
+        <div class="form-group col-6">
+            <label for="#emailContact">Email người liên hệ</label>
+            <input  [class.is-invalid]="(isError('emailContact') && isTouched('emailContact'))
+                    || (isError('emailContact') && showErrors)"
+                    type="text" class="form-control" 
+                    formControlName="emailContact"
+                    #emailContact [attr.disabled]="!update ? true : null">
+            <div class="invalid-feedback d-block"
+                *ngIf="(hasError('emailContact', 'required') && isTouched('emailContact'))
+                || (hasError('emailContact', 'required') && showErrors)">Email người liên hệ không được để trống</div>
+                <div class="invalid-feedback d-block"
+                *ngIf="(hasError('emailContact', 'pattern') && isTouched('emailContact'))
+                || (hasError('emailContact', 'pattern') && showErrors)">Định dạng email đã nhập không đúng</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="#phoneContact">Điện thoại liên hệ</label>
+        <input  [class.is-invalid]="(isError('phoneContact') && isTouched('phoneContact'))
+                || (isError('phoneContact') && showErrors)"
+                type="text" class="form-control" 
+                formControlName="phoneContact"
+                #phoneContact [attr.disabled]="!update ? true : null">
+            <div *ngIf="(hasError('phoneContact', 'required') && isTouched('phoneContact'))
+                || (hasError('phoneContact', 'required') && showErrors)"
+                class="invalid-feedback d-block">Số điện thoại của người liên hệ</div>
+            <div *ngIf="(hasError('phoneContact', 'minlength') && isTouched('phoneContact'))
+                || (hasError('phoneContact', 'minlength') && showErrors)"
+                class="invalid-feedback d-block">Số điện thoại có độ dài tối thiểu 10 số</div>
+            <div *ngIf="(hasError('phoneContact', 'pattern') && isTouched('phoneContact'))
+            || (hasError('phoneContact', 'pattern') && showErrors)"
+                class="invalid-feedback d-block">Số điện thoại bắt đầu bằng số 0 và chỉ bao gồm chữ số</div>
+    </div>
+    <div class="d-flex">
+        <a  class="btn btn-primary"
+            (click)="openUpdate()"
+            *ngIf="!update">Chỉnh sửa</a>
+        <button class="btn btn-primary" type="submit"
+                *ngIf="update">Xác nhận</button>
+        <a type="button" class="btn btn-info ml-2 mr-2">Xuất chi tiết đợt khám</a>
+        <a type="submit" class="btn btn-success">Tạo đợt khám mới</a>
+        </div>
+</form>
+<form class="mt-2">
+    <div class="row">
+        <div class="col-2 border">
+            <div class="list-group">
+                <h6>Đợt khám</h6>
+
+                <ul>
+                    <li>bla bla</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-3 border">
+            <div class="list-group">
+                <h6>Danh sách nhân viên</h6>
+            </div>
+        </div>
+        <div class="col-7 border">
+            <div class="list-group">
+                <h6>Danh sách dịch vụ</h6>
+            </div>
+        </div>
+    </div>
+</form>
+<ngx-spinner
+    fullScreen = false
+    color = "#fff"
+    type = "ball-clip-rotate"
+></ngx-spinner>

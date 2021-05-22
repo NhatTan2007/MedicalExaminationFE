@@ -1,0 +1,92 @@
+<form [formGroup]="createForm" (ngSubmit)="createOrganization()">
+  	<div class="w-100">
+		<div class="form-group">
+			<label for="#organizationName" class="form-label">Tên tổ chức</label>
+			<input 	[class.is-invalid]="(isError('organizationName') && isTouched('organizationName'))
+					|| (isError('organizationName') && showErrors)"
+					#organizationName
+					formControlName="organizationName" type="text"
+					class="form-control" placeholder="Nhập tên tổ chức">
+			<div class="invalid-feedback d-block"
+				*ngIf="(isError('organizationName') && isTouched('organizationName'))
+					|| (showErrors && isError('organizationName'))">Tên tổ chức không được để trống</div>		
+		</div>
+		<div class="form-row">
+			<div class="form-group col">
+				<label for="#organizationPhoneNumber">Số điện thoại</label>
+				<input	
+						#organizationPhoneNumber
+						formControlName="organizationPhoneNumber"
+						type="tel" class="form-control" 
+						placeholder="Nhập số điện thoại">
+			</div>
+			<div class="form-group col">
+				<label for="#organizationEmail">Email</label>
+				<input	#organizationEmail formControlName="organizationEmail"
+						type="email" class="form-control"
+						placeholder="Nhập email">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="#organizationAddress">Địa chỉ</label>
+			<input [class.is-invalid]="(isError('organizationAddress') && isTouched('organizationAddress'))
+					|| (isError('organizationAddress') && showErrors)"
+					#organizationAddress formControlName="organizationAddress" 
+					type="text" class="form-control"
+					placeholder="Nhập địa chỉ">
+			<div *ngIf="(hasError('organizationAddress', 'required') && isTouched('organizationAddress')) 
+				|| (showErrors && hasError('organizationAddress', 'required'))"
+					class="invalid-feedback d-block d-block">Địa chỉ tổ chức không được để trống</div>
+			<div *ngIf="(hasError('organizationAddress', 'minlength') && isTouched('organizationAddress')) 
+			|| (showErrors && hasError('organizationAddress', 'minlength'))"
+					class="invalid-feedback d-block">Điền đầy đủ Địa chỉ tổ chức không được để trống</div>
+		</div>
+	</div>
+	<div class="w-100">
+		<div class="form-row">
+			<div class="form-group col">
+					<label class="#personContact">Tên người liên hệ</label>
+					<input 	[class.is-invalid]="(isError('personContact') && isTouched('personContact'))
+							|| (isError('personContact') && showErrors)"
+							#personContact formControlName="personContact"
+							type="text" class="form-control" 
+							placeholder="Tên người liên hệ">
+					<div class="invalid-feedback d-block"
+						*ngIf="(isError('personContact') && isTouched('personContact')) 
+						|| (showErrors && isError('personContact'))">Tên người liên hệ không được để trống</div>	
+			</div>
+			<div class="form-group col">
+					<label for="#emailContact">Email của người liên hệ</label>
+					<input 	[class.is-invalid]="(isError('emailContact') && isTouched('emailContact'))
+							|| (isError('emailContact') && showErrors)"
+							#emailContact formControlName="emailContact"
+							type="email" class="form-control"
+							placeholder="Nhập email" pattern="(^[\w])+([\w._])*\@([\w{2,}\-])+(\.[\w]{2,4})$">
+					<div class="invalid-feedback d-block"
+						*ngIf="(isError('emailContact') && isTouched('emailContact')) 
+						|| (showErrors && isError('emailContact'))">Email người liên hệ không được để trống</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="#phoneContact">Số điện thoại của người liên hệ</label>
+			<input 	[class.is-invalid]="(isError('phoneContact') && isTouched('phoneContact'))
+					|| (isError('phoneContact') && showErrors)"
+					#phoneContact formControlName="phoneContact"
+					type="tel" class="form-control"
+					placeholder="Nhập số điện thoại">
+			<div *ngIf="(hasError('phoneContact', 'required') && isTouched('phoneContact')) 
+				|| (showErrors && hasError('phoneContact', 'required'))"
+                class="invalid-feedback">Số điện thoại của người liên hệ</div>
+            <div *ngIf="(hasError('phoneContact', 'minlength') && isTouched('phoneContact')) 
+			|| (showErrors && hasError('phoneContact', 'minlength'))"
+                class="invalid-feedback">Độ dài số điện thoại tối thiểu 10 số</div>
+            <div *ngIf="(hasError('phoneContact', 'pattern') && isTouched('phoneContact')) 
+			|| (showErrors && hasError('phoneContact', 'pattern'))"
+                class="invalid-feedback">Số điện thoại bắt đầu bằng số 0 không có chữ số</div>
+		</div>
+		<div class="mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary">Tạo mới</button>
+			<a (click)="resetForm()" class="btn btn-warning ml-2">Thiết lập lại</a>
+		</div>
+	</div>
+</form>

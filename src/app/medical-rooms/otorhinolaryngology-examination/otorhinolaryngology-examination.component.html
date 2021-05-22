@@ -1,0 +1,84 @@
+<div *ngIf="medicalRecord != null" class="mt-2">
+	<label for="obstetricsAndGynecologyExamination" class="btn btn-info">Chẩn đoán Tai - Mũi - Họng</label>
+	<form [formGroup]="updateForm" #obstetricsAndGynecologyExamination (ngSubmit)="onSubmit()"
+	*ngIf="this.medicalRecord.details.otorhinolaryngologyExamination.isRegistered">
+		<div class="form-row">
+			<div class="form-group col-sm-6 pl-0">
+				<label for="leftEarNormal">Tai trái nói thường (m)</label>
+				<input type="number" min="0" #leftEarNormal [class.is-invalid]="(isError('leftEarNormal') && isTouched('leftEarNormal'))
+					|| (isError('leftEarNormal') && showErrors)" class="form-control"
+					formControlName="leftEarNormal">
+				<span class="invalid-feedback d-block" *ngIf="(hasError('leftEarNormal', 'required') && isTouched('leftEarNormal'))
+					|| (showErrors && hasError('leftEarNormal', 'required'))">Không được để trống</span>
+				<span class="invalid-feedback d-block" *ngIf="(hasError('leftEarNormal', 'min') && isTouched('leftEarNormal'))
+					|| (showErrors && hasError('leftEarNormal', 'min'))">Giá trị nhập không được nhỏ hơn 0</span>
+			</div>
+	
+			<div class="form-group col-sm-6">
+				<label for="leftEarWhisper">Tai trái nói thầm (m)</label>
+				<input type="number" min="0" #leftEarWhisper [class.is-invalid]="(isError('leftEarWhisper') && isTouched('leftEarWhisper'))
+			  		|| (isError('leftEarWhisper') && showErrors)" class="form-control"
+					formControlName="leftEarWhisper">
+				<span class="invalid-feedback d-block" *ngIf="(hasError('leftEarWhisper', 'required') && isTouched('leftEarWhisper'))
+					|| (showErrors && hasError('leftEarWhisper', 'required'))">Không được để trống</span>
+				<span class="invalid-feedback d-block" *ngIf="(hasError('leftEarWhisper', 'min') && isTouched('leftEarWhisper'))
+					|| (showErrors && hasError('leftEarWhisper', 'min'))">Giá trị nhập không được nhỏ hơn 0</span>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-sm-6 pl-0">
+				<label for="rightEarNormal">Tai phải nói thường (m)</label>
+				<input type="number" min="0" #rightEarNormal [class.is-invalid]="(isError('rightEarNormal') && isTouched('rightEarNormal'))
+				  	|| (isError('rightEarNormal') && showErrors)" class="form-control"
+					formControlName="rightEarNormal">
+				<span class="invalid-feedback d-block" *ngIf="(hasError('rightEarNormal', 'required') && isTouched('rightEarNormal'))
+					|| (showErrors && hasError('rightEarNormal', 'required'))">Không được để trống</span>
+				<span class="invalid-feedback d-block" *ngIf="(hasError('rightEarNormal', 'min') && isTouched('rightEarNormal'))
+					|| (showErrors && hasError('rightEarNormal', 'min'))">Giá trị nhập không được nhỏ hơn 0</span>
+			</div>
+	
+			<div class="form-group col-sm-6">
+				<label for="rightEarWhisper">Tai phải nói thầm (m)</label>
+				<input type="number" min="0" #rightEarWhisper [class.is-invalid]="(isError('rightEarWhisper') && isTouched('rightEarWhisper'))
+				  	|| (isError('rightEarWhisper') && showErrors)" class="form-control"
+					formControlName="rightEarWhisper">
+				<span class="invalid-feedback d-block" *ngIf="(hasError('rightEarWhisper', 'required') && isTouched('rightEarWhisper'))
+					|| (showErrors && hasError('rightEarWhisper', 'required'))">Không được để trống</span>
+				<span class="invalid-feedback d-block" *ngIf="(hasError('rightEarWhisper', 'min') && isTouched('rightEarWhisper'))
+					|| (showErrors && hasError('rightEarWhisper', 'min'))">Giá trị nhập không được nhỏ hơn 0</span>
+			</div>
+		</div>
+
+		<div class="form-group mt-3">
+			<label for="otorhinolaryngologyDiseases">Các bệnh về tai mũi họng (nếu có)</label>
+			<textarea #otorhinolaryngologyDiseases class="form-control" rows="2"
+				formControlName="otorhinolaryngologyDiseases"></textarea>
+		</div>
+
+		<div class="form-group mt-3">
+			<label for="otorhinolaryngologyLevel">Phân loại</label>
+			<input type="number" min="1" #otorhinolaryngologyLevel [class.is-invalid]="(isError('otorhinolaryngologyLevel') && isTouched('otorhinolaryngologyLevel'))
+      			|| (isError('otorhinolaryngologyLevel') && showErrors)" class="form-control"
+				formControlName="otorhinolaryngologyLevel">
+				<span class="invalid-feedback d-block" *ngIf="(hasError('otorhinolaryngologyLevel', 'required') && isTouched('otorhinolaryngologyLevel'))
+				|| (showErrors && hasError('otorhinolaryngologyLevel', 'required'))">Không được để trống</span>
+				<span class="invalid-feedback d-block" *ngIf="(hasError('otorhinolaryngologyLevel', 'min') && isTouched('otorhinolaryngologyLevel'))
+				|| (showErrors && hasError('otorhinolaryngologyLevel', 'min'))">Giá trị nhập không được nhỏ hơn 1</span>
+		</div>
+
+		<div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+		</div>
+	</form>
+	<div *ngIf="!this.medicalRecord.details.otorhinolaryngologyExamination.isRegistered" class="text-center">
+		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
+	</div>
+</div>
+
+<div *ngIf="medicalRecord == null" class="text-center">
+	<h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+</div>
+
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
+</ngx-spinner>

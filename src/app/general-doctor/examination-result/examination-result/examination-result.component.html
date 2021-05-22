@@ -1,0 +1,462 @@
+<section *ngIf="medicalRecord != null" class="mt-2">
+    <div #physicalExamination *ngIf="this.medicalRecord.details.physicalExamination.isRegistered" class="mb-3">
+        <label for="physicalExamination" class="btn btn-info">Kiểm tra thể lực</label>
+		<div class="form-row">
+			<div class="form-group col-sm-6 pl-0">
+				<label for="height">Chiều cao (cm)</label>
+                <div #height class="result">
+                    {{medicalRecord.details.physicalExamination.height}}
+                </div>
+			</div>
+			<div class="form-group col-sm-6 pl-0">
+				<label for="weight">Cân nặng (kg)</label>
+                <div #weight class="result">
+                    {{medicalRecord.details.physicalExamination.weight}}
+                </div>
+			</div>
+		</div>
+
+		<div class="form-row">
+			<div class="form-group col-sm-6 pl-0">
+				<label for="bmiIndex">Chỉ số BMI</label>
+                <div #bmiIndex class="result">
+                    {{medicalRecord.details.physicalExamination.bmiIndex}}
+                </div>
+			</div>
+            <div class="form-group col-sm-6 pl-0">
+				<label for="heartBeat">Mạch (lần/phút)</label>
+                <div #heartBeat class="result">
+                    {{medicalRecord.details.physicalExamination.heartBeat}}
+                </div>
+			</div>
+		</div>
+        
+        <div class="form-row">
+			<div class="form-group col-sm-6 pl-0">
+				<label for="bloodPressure">Huyết áp (mmHg)</label>
+                <div #bloodPressure class="result">
+                    {{medicalRecord.details.physicalExamination.bloodPressure}}
+                </div>
+			</div>
+            <div class="form-group col-sm-6 pl-0">
+				<label for="physicalLevel">Phân loại thể lực</label>
+                <div #physicalLevel class="result">
+                    {{medicalRecord.details.physicalExamination.physicalLevel}}
+                </div>
+			</div>
+		</div>
+	</div>
+
+    
+	<div #internalMedicineExamination *ngIf="medicalRecord.details.internalMedicineExamination.isRegisted" class="mb-3">
+        <label for="InternalMedicineExamination" class="btn btn-info">Nội khoa</label>
+		<div class="form-content form-row">
+			<div class="col-sm-6 pl-0">
+                <div class="form-group">
+                    <label for="circulatory">Tuần hoàn</label>
+                    <div #circulatory class="result">
+                        {{medicalRecord.details.internalMedicineExamination.circulatory}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="circulatoryLevel">Phân loại tuần hoàn</label>
+                    <div #circulatoryLevel class="result">
+                        {{medicalRecord.details.internalMedicineExamination.circulatoryLevel}}
+                    </div>
+                </div>
+			</div>
+	
+			<div class="col-sm-6">
+                <div class="form-group">
+                    <label for="respiratory">Hô hấp</label>
+                    <div #respiratory class="result">
+                        {{medicalRecord.details.internalMedicineExamination.respiratory}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="respiratoryLevel">Phân loại hô hấp</label>
+                    <div #respiratoryLevel class="result">
+                        {{medicalRecord.details.internalMedicineExamination.respiratoryLevel}}
+                    </div>
+                </div>
+			</div>
+	
+			<div class="col-sm-6 pl-0">
+                <div class="form-group">
+                    <label for="alimentary">Tiêu hóa</label>
+                    <div #alimentary class="result">
+                        {{medicalRecord.details.internalMedicineExamination.alimentary}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="alimentaryLevel">Phân loại tiêu hóa</label>
+                    <div #alimentaryLevel class="result">
+                        {{medicalRecord.details.internalMedicineExamination.alimentaryLevel}}
+                    </div>
+                </div>
+			</div>
+	
+			<div class="col-sm-6">
+                <div class="form-group">
+                    <label for="nephroUrology">Thận - Tiết niệu</label>
+                    <div #nephroUrology class="result">
+                        {{medicalRecord.details.internalMedicineExamination.nephroUrology}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nephroUrologyLevel">Phân loại Thận - Tiết niệu</label>
+                    <div #nephroUrologyLevel class="result">
+                        {{medicalRecord.details.internalMedicineExamination.nephroUrologyLevel}}
+                    </div>
+                </div>
+			</div>
+	
+			<div class="col-sm-6 pl-0">
+                <div class="form-group">
+                    <label for="musculoskeletal">Cơ - Xương - Khớp</label>
+                    <div #musculoskeletal class="result">
+                        {{medicalRecord.details.internalMedicineExamination.musculoskeletal}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="musculoskeletalLevel">Phân loại Cơ - Xương - Khớp</label>
+                    <div #musculoskeletalLevel class="result">
+                        {{medicalRecord.details.internalMedicineExamination.musculoskeletalLevel}}
+                    </div>
+                </div>
+			</div>
+		</div>
+    </div>
+
+
+	<div #neurologyExamination *ngIf="medicalRecord.details.neurologyExamination.isRegistered" class="mb-3">
+        <label for="neurologyExamination" class="btn btn-info">Chẩn đoán thần kinh</label>
+        <div class="form-group">
+            <label for="neurosurgery">Thần kinh</label>
+            <div #neurosurgery class="result">
+                {{medicalRecord.details.neurologyExamination.neurosurgery}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="neurosurgeryLevel">Phân loại</label>
+            <div #neurosurgeryLevel class="result">
+                {{medicalRecord.details.neurologyExamination.neurosurgeryLevel}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="psychiatry">Tâm thần</label>
+            <div #psychiatry class="result">
+                {{medicalRecord.details.neurologyExamination.psychiatry}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="psychiatryLevel">Phân loại</label>
+            <div #psychiatryLevel class="result">
+                {{medicalRecord.details.neurologyExamination.psychiatryLevel}}
+            </div>
+        </div>
+	</div>
+
+	<div #sugeryExamination *ngIf="medicalRecord.details.surgeryExamination.isRegistered"  class="mb-3">
+        <label for="sugeryExamination" class="btn btn-info">Chẩn đoán ngoại khoa</label>
+        <div class="form-group">
+            <label for="surgery">Ngoại khoa</label>
+            <div #surgery class="result">
+                {{medicalRecord.details.surgeryExamination.surgery}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="surgeryLevel">Phân loại</label>
+            <div #surgeryLevel class="result">
+                {{medicalRecord.details.surgeryExamination.surgeryLevel}}
+            </div>
+        </div>
+	</div>
+
+    <div #dermatologyExamination *ngIf="this.medicalRecord.details.dermatologyExamination.isRegistered" class="mb-3">
+        <label for="dermatologyExamination" class="btn btn-info">Chẩn đoán da liễu</label>
+		<div class="form-group">
+			<label for="dermatologyExamination">Nội dung chẩn đoán</label>
+			<div #dermatology class="result">
+                {{medicalRecord.details.dermatologyExamination.dermatology}}
+            </div>
+		</div>
+        <div class="form-group">
+			<label for="dermatologyLevel">Phân loại</label>
+			<div #dermatologyLevel class="result">
+                {{medicalRecord.details.dermatologyExamination.dermatologyLevel}}
+            </div>
+		</div>
+	</div>
+
+
+	<div #ophthalmologyExamination *ngIf="medicalRecord.details.ophthalmologyExamination.isRegistered" class="mb-3">
+        <label for="ophthalmologyExamination" class="btn btn-info">Chẩn đoán mắt</label>
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="leftEyeSightWithoutGlass">Mắt trái không kính</label>
+                <div #leftEyeSightWithoutGlass class="result">
+                    {{medicalRecord.details.ophthalmologyExamination.leftEyeSightWithoutGlass}}
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="rightEyeSightWithoutGlass">Mắt phải không kính</label>
+                <div #rightEyeSightWithoutGlass class="result">
+                    {{medicalRecord.details.ophthalmologyExamination.rightEyeSightWithoutGlass}}
+                </div>
+            </div>
+		</div>
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="leftEyeSightWithGlass">Mắt trái không kính</label>
+                <div #leftEyeSightWithGlass class="result">
+                    {{medicalRecord.details.ophthalmologyExamination.leftEyeSightWithGlass}}
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="rightEyeSightWithGlass">Mắt phải không kính</label>
+                <div #rightEyeSightWithGlass class="result">
+                    {{medicalRecord.details.ophthalmologyExamination.rightEyeSightWithGlass}}
+                </div>
+            </div>
+		</div>
+        <div class="form-group">
+            <label for="eyeDiseases">Các bệnh về mắt (nếu có)</label>
+            <div #eyeDiseases class="result">
+                {{medicalRecord.details.ophthalmologyExamination.eyeDiseases}}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="ophthalmologyLevel">Phân loại</label>
+            <div #ophthalmologyLevel class="result">
+                {{medicalRecord.details.ophthalmologyExamination.ophthalmologyLevel}}
+            </div>
+        </div>
+	</div>
+
+	<div #obstetricsAndGynecologyExamination *ngIf="this.medicalRecord.details.otorhinolaryngologyExamination.isRegistered" class="mb-3">
+        <label for="obstetricsAndGynecologyExamination" class="btn btn-info">Chẩn đoán Tai - Mũi - Họng</label>
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="leftEarNormal">Tai trái nói thường (m)</label>
+                <div #leftEarNormal class="result">
+                    {{medicalRecord.details.otorhinolaryngologyExamination.leftEarNormal}}
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="leftEarWhisper">Tai trái nói thầm (m)</label>
+                <div #leftEarWhisper class="result">
+                    {{medicalRecord.details.otorhinolaryngologyExamination.leftEarWhisper}}
+                </div>
+            </div>
+		</div>
+
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="rightEarNormal">Tai phải nói thường (m)</label>
+                <div #rightEarNormal class="result">
+                    {{medicalRecord.details.otorhinolaryngologyExamination.rightEarNormal}}
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="rightEarWhisper">Tai phải nói thầm (m)</label>
+                <div #rightEarWhisper class="result">
+                    {{medicalRecord.details.otorhinolaryngologyExamination.rightEarWhisper}}
+                </div>
+            </div>
+		</div>
+
+		<div class="form-group">
+			<label for="otorhinolaryngologyDiseases">Các bệnh về tai mũi họng (nếu có)</label>
+			<div #otorhinolaryngologyDiseases class="result">
+                {{medicalRecord.details.otorhinolaryngologyExamination.otorhinolaryngologyDiseases}}
+            </div>
+		</div>
+
+        <div class="form-group">
+            <label for="otorhinolaryngologyLevel">Phân loại</label>
+            <div #otorhinolaryngologyLevel class="result">
+                {{medicalRecord.details.otorhinolaryngologyExamination.otorhinolaryngologyLevel}}
+            </div>
+        </div>
+	</div>
+
+    
+	<div #oralAndMaxillofacialExamination *ngIf="this.medicalRecord.details.oralAndMaxillofacialExamination.isRegistered" class="mb-3">
+        <label for="obstetricsAndGynecologyExamination" class="btn btn-info">Chẩn đoán Răng - Hàm - Mặt</label>
+		<label class="d-block"><strong>Kết quả khám</strong></label>
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="upperJaw">Hàm trên</label>
+                <div #upperJaw class="result">
+                    {{medicalRecord.details.oralAndMaxillofacialExamination.upperJaw}}
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="lowerJaw">Hàm dưới</label>
+                <div #lowerJaw class="result">
+                    {{medicalRecord.details.oralAndMaxillofacialExamination.lowerJaw}}
+                </div>
+            </div>
+		</div>
+
+		<div class="form-group">
+            <label for="oralAndMaxillofacialDiseases">Các bệnh về răng hàm mặt (nếu có)</label>
+            <div #oralAndMaxillofacialDiseases class="result">
+                {{medicalRecord.details.oralAndMaxillofacialExamination.oralAndMaxillofacialDiseases}}
+            </div>
+		</div>
+
+		<div class="form-group">
+            <label for="oralAndMaxillofacialLevel">Phân loại</label>
+            <div #oralAndMaxillofacialLevel class="result">
+                {{medicalRecord.details.oralAndMaxillofacialExamination.oralAndMaxillofacialLevel}}
+            </div>
+		</div>
+	</div>
+
+	<div #BloodTests *ngIf="this.medicalRecord.details.bloodTests.isRegistered" class="mb-3">
+        <label for="BloodTests" class="btn btn-info">Xét nghiệm máu</label>
+		<label class="d-block"><strong>Công thức máu</strong></label>
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="hcAmount">Số lượng HC (10<sup>12</sup>/l)</label>
+                <div #hcAmount class="result">
+                    {{medicalRecord.details.bloodTests.hcAmount}}
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="leukocytesAmount">Số lượng bạch cầu (10<sup>9</sup>/l)</label>
+                <div #leukocytesAmount class="result">
+                    {{medicalRecord.details.bloodTests.leukocytesAmount}}
+                </div>
+            </div>
+		</div>
+
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="plateletsAmount">Số lượng tiểu cầu (10<sup>9</sup>/l)</label>
+                <div #plateletsAmount class="result">
+                    {{medicalRecord.details.bloodTests.plateletsAmount}}
+                </div>
+            </div>
+		</div>
+		<label class="mt-2 d-block"><strong>Sinh hóa máu</strong></label>
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="bloodSugar">Đường máu (mmol/l)</label>
+                <div #bloodSugar class="result">
+                    {{medicalRecord.details.bloodTests.bloodSugar}}
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="ure">Ure (mmol/l)</label>
+                <div #ure class="result">
+                    {{medicalRecord.details.bloodTests.ure}}
+                </div>
+            </div>
+		</div>
+
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="creatinin">Creatinin</label>
+                <div #creatinin class="result">
+                    {{medicalRecord.details.bloodTests.creatinin}}
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="asatgot">ASAT(GOT) (U/L)</label>
+                <div #asatgot class="result">
+                    {{medicalRecord.details.bloodTests.asatgot}}
+                </div>
+            </div>
+		</div>
+
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="alatgpt">ALAT(GPT) (U/L)</label>
+                <div #alatgpt class="result">
+                    {{medicalRecord.details.bloodTests.alatgpt}}
+                </div>
+            </div>
+		</div>
+	</div>
+
+	<div #ClinicalUrineTests *ngIf="this.medicalRecord.details.clinicalUrineTests.isRegistered" class="mb-3">
+        <label for="BloodTests" class="btn btn-info">Xét nghiệm nước tiểu</label>
+		<div class="form-row">
+            <div class="form-group col-sm-6 pl-0">
+                <label for="sugar" class="d-block">Đường</label>
+				<mat-radio-group class="example-radio-group" #sugar disabled>
+					<mat-radio-button class="mr-2" value=1 [checked]="medicalRecord.details.clinicalUrineTests.sugar == 1">
+						Dương tính
+					</mat-radio-button>
+					<mat-radio-button value=0 [checked]="medicalRecord.details.clinicalUrineTests.sugar == 0">
+						Âm tính
+					</mat-radio-button>
+				</mat-radio-group>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="protein" class="d-block">Protein</label>
+				<mat-radio-group class="example-radio-group" disabled #protein>
+					<mat-radio-button class="mr-2" value=1 [checked]="medicalRecord.details.clinicalUrineTests.protein == 1">
+						Dương tính
+					</mat-radio-button>
+					<mat-radio-button value=0 [checked]="medicalRecord.details.clinicalUrineTests.protein == 0">
+						Âm tính
+					</mat-radio-button>
+				</mat-radio-group>
+            </div>
+		</div>
+		<div class="form-group">
+			<label for="other">Khác (nếu có)</label>
+			<div #other class="result">{{medicalRecord.details.clinicalUrineTests.other}}</div>
+		</div>
+	</div>
+
+	<div #abdominalUltrasound *ngIf="this.medicalRecord.details.abdominalUltrasound.isRegistered" class="mb-3">
+        <label for="abdominalUltrasound" class="btn btn-info">Chẩn đoán kết quả siêu âm bụng</label>
+        <div class="form-group pl-0">
+            <div #abdominalUltrasoundResult class="result">
+                {{medicalRecord.details.abdominalUltrasound.abdominalUltrasoundResult}}
+            </div>
+        </div>
+	</div>
+
+	<div #thyroidUltrasound *ngIf="this.medicalRecord.details.thyroidUltrasound.isRegistered" class="mb-3">
+        <label for="thyroidUltrasound" class="btn btn-info">Chẩn đoán kết quả siêu âm tuyến giáp</label>
+        <div class="form-group pl-0">
+            <div #thyroidUltrasoundResult class="result">
+                {{medicalRecord.details.thyroidUltrasound.thyroidUltrasoundResult}}
+            </div>
+        </div>
+	</div>
+
+	<div #breastUltrasound *ngIf="this.medicalRecord.details.breastUltrasound.isRegistered" class="mb-3">
+        <label for="breastUltrasound" class="btn btn-info">Chẩn đoán kết quả siêu âm tuyến vú</label>
+        <div class="form-group pl-0">
+            <div #breastUltrasoundResult class="result">
+                {{medicalRecord.details.breastUltrasound.breastUltrasoundResult}}
+            </div>
+        </div>
+	</div>
+
+	<div #cardiacUltrasoundProbes *ngIf="this.medicalRecord.details.cardiacUltrasoundProbes.isRegistered" class="mb-3">
+        <label for="cardiacUltrasoundProbes" class="btn btn-info">Chẩn đoán kết quả thăm dò tim mạch</label>
+        <div class="form-group pl-0">
+            <div #cardiacUltrasoundProbesResult class="result">
+                {{medicalRecord.details.cardiacUltrasoundProbes.cardiacUltrasoundProbesResult}}
+            </div>
+        </div>
+	</div>
+
+	<div #chestXray *ngIf="this.medicalRecord.details.chestXray.isRegistered" class="mb-3">
+        <label for="chestXray" class="btn btn-info">Chẩn đoán kết quả X quang ngực</label>
+        <div class="form-group pl-0">
+            <div #chestXrayResult class="result">
+                {{medicalRecord.details.chestXray.chestXrayResult}}
+            </div>
+        </div>
+	</div>
+
+</section>

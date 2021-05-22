@@ -1,0 +1,54 @@
+<div *ngIf="medicalRecord != null" class="mt-2">
+	<label for="obstetricsAndGynecologyExamination" class="btn btn-info">Chẩn đoán Răng - Hàm - Mặt</label>
+	<form [formGroup]="updateForm" #oralAndMaxillofacialExamination (ngSubmit)="onSubmit()"
+		*ngIf="this.medicalRecord.details.oralAndMaxillofacialExamination.isRegistered">
+		<label><strong>Kết quả khám</strong></label>
+		<div class="form-row">
+			<div class="form-group col-sm-6 pl-0">
+				<label for="upperJaw">Hàm trên</label>
+				<input #upperJaw [class.is-invalid]="(isError('upperJaw') && isTouched('upperJaw'))
+				  || (isError('upperJaw') && showErrors)" class="form-control" formControlName="upperJaw">
+				<div class="invalid-feedback d-block" *ngIf="(isError('upperJaw') && isTouched('upperJaw'))
+				  || (showErrors && isError('upperJaw'))">Không được để trống</div>
+			</div>
+			<div class="form-group col-sm-6">
+				<label for="lowerJaw">Hàm dưới</label>
+				<input #lowerJaw [class.is-invalid]="(isError('lowerJaw') && isTouched('lowerJaw'))
+				  || (isError('lowerJaw') && showErrors)" class="form-control" formControlName="lowerJaw">
+				<div class="invalid-feedback d-block" *ngIf="(isError('lowerJaw') && isTouched('lowerJaw'))
+				  || (showErrors && isError('lowerJaw'))">Không được để trống</div>
+			</div>
+		</div>
+
+		<div class="form-group mt-3">
+			<label for="oralAndMaxillofacialDiseases">Các bệnh về răng hàm mặt (nếu có)</label>
+			<textarea #oralAndMaxillofacialDiseases class="form-control" rows="2"
+				formControlName="oralAndMaxillofacialDiseases"></textarea>
+		</div>
+
+		<div class="form-group mt-3">
+			<label for="oralAndMaxillofacialLevel">Phân loại</label>
+			<input type="number" min="1" #oralAndMaxillofacialLevel [class.is-invalid]="(isError('oralAndMaxillofacialLevel') && isTouched('oralAndMaxillofacialLevel'))
+      		|| (isError('oralAndMaxillofacialLevel') && showErrors)" class="form-control"
+				formControlName="oralAndMaxillofacialLevel">
+			<span class="invalid-feedback d-block" *ngIf="(hasError('oralAndMaxillofacialLevel', 'required') && isTouched('oralAndMaxillofacialLevel'))
+			|| (showErrors && hasError('oralAndMaxillofacialLevel', 'required'))">Không được để trống</span>
+			<span class="invalid-feedback d-block" *ngIf="(hasError('oralAndMaxillofacialLevel', 'min') && isTouched('oralAndMaxillofacialLevel'))
+			|| (showErrors && hasError('oralAndMaxillofacialLevel', 'min'))">Giá trị nhập không được nhỏ hơn 1</span>
+		</div>
+
+		<div class=" mt-2 d-flex justify-content-end">
+			<button type="submit" class="btn btn-primary mb-5 ">Ghi nội dung</button>
+		</div>
+	</form>
+	<div *ngIf="!this.medicalRecord.details.oralAndMaxillofacialExamination.isRegistered" class="text-center">
+		<h3 class="btn btn-warning">Bệnh nhân không đăng ký khám dịch vụ này</h3>
+	</div>
+</div>
+
+<div *ngIf="medicalRecord == null" class="text-center">
+	<h1 class="text-center mt-5 btn btn-info">Xin mời chọn bệnh án</h1>
+</div>
+
+<ngx-spinner fullScreen=false color="#fff" type="ball-clip-rotate">
+</ngx-spinner>
