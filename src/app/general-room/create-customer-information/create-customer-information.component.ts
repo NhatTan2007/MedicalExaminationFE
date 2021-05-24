@@ -44,8 +44,7 @@ export class CreateCustomerInformationComponent implements OnInit {
 			this.showErrors = false;
 			this.spiner.show();
 			let newCustomer = this.createForm.value as CreateCustomerReq
-			newCustomer.gender = this.createForm.get("gender").value==0 ? false : true
-			console.log(newCustomer);
+			newCustomer.gender = this.createForm.get("gender").value == 0 ? false : true
 			this.customerService.CreateCustomer(this.createForm.value as CreateCustomerReq)
 				.subscribe((res) => {
 					if(res.success) {
