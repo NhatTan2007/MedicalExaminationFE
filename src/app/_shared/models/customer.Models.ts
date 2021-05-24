@@ -31,7 +31,7 @@ export interface UpdateCustomerRes{
     success         : boolean
 }
 
-export interface QuerryCustomersRes{
+export interface QueryCustomersRes{
     customers:  Customer[]
     totalCustomer:  number
 }

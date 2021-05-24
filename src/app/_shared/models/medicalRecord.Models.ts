@@ -47,6 +47,7 @@ export class CreateMedicalRecordReq{
     wasFinishedExamination: boolean
     customerId: string
     reasonToExamination: string
+    wasPrinted: boolean
     servicesRegisted: number
     
     constructor(customerId: string){
@@ -58,6 +59,7 @@ export class CreateMedicalRecordReq{
         this.isPaid = false;
         this.isGroup = false;
         this.totalAmount = 0;
+        this.wasPrinted = false;
         this.servicesRegisted = 0;
     }
 }
@@ -81,14 +83,21 @@ export interface MedicalRecordViewRes{
     customerLastName: string
     customerFullName: string
     createDate: number
+    dateCompleted: number
     isActive: boolean
     isPaid: boolean
     reasonCancel: string
+    wasPrinted: boolean
 }
 
 export interface UpdateMedicalRecordRes{
     medicalRecordId: string
     message: string
     success : boolean
+}
+
+export interface QueryMedicalRecordsRes{
+    medicalRecords: MedicalRecordViewRes[]
+    totalMedicalRecords: number
 }
 

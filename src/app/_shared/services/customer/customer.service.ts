@@ -2,7 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CreateCustomerReq, Customer, CreateCustomerRes, UpdateCustomerRes, UpdateCustomerReq, QuerryCustomersRes } from '../../models/customer.Models';
+import { CreateCustomerReq,
+		Customer,
+		CreateCustomerRes,
+		UpdateCustomerRes,
+		UpdateCustomerReq,
+		QueryCustomersRes } from '../../models/customer.Models';
 import { ConfigService } from '../config/config.service';
 
 @Injectable({
@@ -20,9 +25,9 @@ export class CustomerService {
 	}
 
 	
-	GetCustomersByPagination(currentPage: number, pageSize: number): Observable<QuerryCustomersRes>{
+	GetCustomersByPagination(currentPage: number, pageSize: number): Observable<QueryCustomersRes>{
 		return this.httpClient.get(`${this.apiDomain}/currentPage/${currentPage}/pageSize/${pageSize}`)
-			.pipe(map(res => (res as QuerryCustomersRes)));
+			.pipe(map(res => (res as QueryCustomersRes)));
 	}
 
 	GetCustomer(customerId: string): Observable<Customer>{
@@ -40,9 +45,9 @@ export class CustomerService {
 		.pipe(map(res => res as UpdateCustomerRes));
 	}
 
-	SearchCustomer(keyword: string,currentPage: number, pageSize: number): Observable<QuerryCustomersRes>{
+	SearchCustomer(keyword: string,currentPage: number, pageSize: number): Observable<QueryCustomersRes>{
 		return this.httpClient.get(`${this.apiDomain}/search/${keyword}/currentPage/${currentPage}/pageSize/${pageSize}`)
-			.pipe(map(res => (res as QuerryCustomersRes)));
+			.pipe(map(res => (res as QueryCustomersRes)));
 									
 	}
 

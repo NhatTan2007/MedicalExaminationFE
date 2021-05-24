@@ -15,7 +15,7 @@
 	<h1 class="text-center"><strong class="h3">GIẤY KHÁM SỨC KHỎE</strong></h1>
 	<mat-horizontal-stepper linear>
 		<mat-step [stepControl]="medicalHistoryFrom">
-			<form [formGroup]="medicalHistoryFrom" (ngSubmit)="submitFirstStep()">
+			<form [formGroup]="medicalHistoryFrom" (ngSubmit)="submitFirstStep()" *ngIf="getMedicalServices$ | async">
 				<ng-template matStepLabel>Khai báo thông tin tiền sử bệnh</ng-template>
 				<div class="form-group d-flex">
 					<label class="d-flex align-items-end mb-0 p-0" style="width: 200px;">Lý do khám sức
@@ -158,7 +158,7 @@
 		</mat-step>
 		<mat-step>
 			<ng-template matStepLabel>Kiểm tra</ng-template>
-			<div [formGroup]="medicalHistoryFrom">
+			<div *ngIf="getMedicalServices$ | async">
 				<ng-template matStepLabel>Khai báo thông tin tiền sử bệnh</ng-template>
 				<div class="form-group d-flex">
 					<label class="d-flex align-items-end mb-0 p-0" style="width: 200px;">Lý do khám sức
@@ -227,7 +227,7 @@
 			</div>
 			<section id="medical-services" class="text-center">
 				<ng-template matStepLabel (click)="submitFirstStep()">Dịch vụ đã chọn</ng-template>
-				<table class="table table-borderless table-hover">
+				<table class="table table-borderless table-hover" *ngIf="getMedicalServices$ | async">
 					<thead class="thead-light">
 						<tr class="text-uppercase">
 							<th class="p-2">Tên dịch vụ</th>
@@ -241,7 +241,7 @@
 						</tr>
 					</tbody>
 					<tfoot class="bg-light">
-						<tr>
+						<tr class="font-weight-bold">
 							<td class="text-left">Tổng</td>
 							<td class="text-right">{{this.newMedicalRecord.totalAmount | mask: 'separator':'.'}}
 							</td>

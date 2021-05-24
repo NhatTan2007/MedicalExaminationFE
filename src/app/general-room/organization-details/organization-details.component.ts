@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router} from '@angular/router';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { empty, Observable } from 'rxjs';
 import { AExaminationRooms } from 'src/app/_shared/models/medicalExaminationDetails.Models';
@@ -26,7 +27,8 @@ export class OrganizationDetailsComponent implements OnInit {
 				private router: Router,
 				private spinner: NgxSpinnerService,
 				private formBuilder: FormBuilder,
-				private formService: FormService){}
+				private formService: FormService,
+				private notification: NzNotificationService){}
 
 	async ngOnInit(): Promise<void> {
 		this.spinner.show();
@@ -55,25 +57,29 @@ export class OrganizationDetailsComponent implements OnInit {
 	}
 
 	openUpdate(){
+		this.update = true
 		this.formModify.enable();
 	}
 
 	updateOrganizationInfo(){
 		if(this.formModify.valid){
+			this.update = false
 			this.showErrors = false;
 			this.formModify.disable();
 			let updateOrganization: Organization = this.formModify.value as Organization
 			updateOrganization.organizationId = this.organization.organizationId
-			this.organizationService.UpdateOrganization(updateOrganization).subscribe(
-				(res) => {
+			this.organizationService.UpdateOrganization(updateOrganization)
+			.subscribe((res) => {
+				console.log(res)
+				if(res.success) {
 					if(res.success) this.organization = res.organization
-					for (let key in res){
-						if(res.hasOwnProperty(key)){
-							console.log(res[key])
-						}
-					}
+					this.notification.blank('Thành công', res.message, {nzClass: "success text-white", nzAnimate: true})
+				} else{
+					this.notification.blank('Thất bại', res.message, {nzClass: "error text-white", nzAnimate: true})
 				}
-			)
+			},(err) => {
+				this.notification.blank('Thất bại', "Xin mời liên lạc với Quản trị viên", {nzClass: "error text-white", nzAnimate: true})
+			})
 		} else{
 			this.showErrors = true
 		}

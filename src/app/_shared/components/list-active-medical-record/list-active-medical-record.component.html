@@ -7,8 +7,8 @@
         </mat-form-field>
     </div>
     
-    <div class="border" style="border-radius: 5px;">
-        <table class="table-sm w-100">
+    <div>
+        <table class="table w-100 table-bordered" style="border-radius: 5px;">
             <tbody>
                 <tr *ngFor="let mRecord of listActiveMedicalRecord">
                     <td [class.selected]="medicalRecord.medicalRecordId == mRecord.medicalRecordId"
