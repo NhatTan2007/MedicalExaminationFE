@@ -51,7 +51,7 @@
                         <mat-icon>more_vert</mat-icon>
                         </button>
                         <mat-menu #menu="matMenu">
-							<button mat-menu-item *ngIf="record.dateCompleted"
+							<button mat-menu-item *ngIf="record.dateCompleted > 0"
 								(click)="printMedicalExaminationResult(record)">
 								<mat-icon class="text-primary">print</mat-icon>
 								<span>In kết quả</span>
