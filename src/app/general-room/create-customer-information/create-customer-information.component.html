@@ -1,6 +1,6 @@
 <form [formGroup]="createForm" (ngSubmit)="createCustomer()">
   <div class="form-row">
-    <div class="form-group col-6">
+    <div class="form-group col-6 pl-0">
       <label for="#lastName">Họ</label>
       <input [class.is-invalid]="(isError('lastName') && isTouched('lastName'))
                     || (isError('lastName') && showErrors)" type="text" class="form-control" formControlName="lastName"
@@ -8,7 +8,7 @@
       <div class="invalid-feedback d-block" *ngIf="(isError('lastName') && isTouched('lastName'))
             || (showErrors && isError('lastName'))">Họ của bệnh nhân không được để trống</div>
     </div>
-    <div class="form-group col-6">
+    <div class="form-group col-6 pr-0">
       <label for="#firstName">Tên</label>
       <input [class.is-invalid]="(isError('firstName') && isTouched('firstName'))
                     || (isError('firstName') && showErrors)" type="text" class="form-control"
@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class="form-row">
-    <div class="form-group col-3">
+    <div class="form-group col-3 pl-0">
       <label for="#gender" class="mr-2 w-100">Giới tính:</label>
       <mat-radio-group class="example-radio-group" formControlName="gender" #gender>
         <mat-radio-button class="mr-2" value=1>
@@ -39,7 +39,7 @@
             || isError('dateOfBirth') && isTouched('dateOfBirth')">Xin mời nhập ngày sinh</div>
 
     </div>
-    <div class="form-group col-6">
+    <div class="form-group col-6 pr-0">
       <label for="#identityNumber">Số CMND/Hộ chiếu</label>
       <input [class.is-invalid]="(isError('identityNumber') && isTouched('identityNumber'))
                     || (isError('identityNumber') && showErrors)" type="text" class="form-control"
@@ -51,7 +51,7 @@
     </div>
   </div>
   <div class="form-row">
-    <div class="form-group col-3">
+    <div class="form-group col-3 pl-0">
       <label for="#dateOfIssuanceIdentityNumber">Cấp ngày</label>
       <input [class.is-invalid]="(isError('dateOfIssuanceIdentityNumber') && isTouched('dateOfIssuanceIdentityNumber'))
                     || (isError('dateOfIssuanceIdentityNumber') && showErrors)" type="date" class="form-control"
@@ -67,7 +67,7 @@
       <div class="invalid-feedback d-block" *ngIf="(isError('placeOfIssuanceIdentityNumber') && isTouched('placeOfIssuanceIdentityNumber'))
             || (showErrors && isError('placeOfIssuanceIdentityNumber'))">Xin mời nhập nơi cấp CMND/Hộ chiếu</div>
     </div>
-    <div class="form-group col-4">
+    <div class="form-group col-4 pr-0">
       <label for="#phoneNumber">Điện thoại</label>
       <input [class.is-invalid]="(isError('phoneNumber') && isTouched('phoneNumber'))
                     || (isError('phoneNumber') && showErrors)" type="text" class="form-control"
@@ -84,7 +84,7 @@
 
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group form-row">
     <label for="#address">Địa chỉ</label>
     <input [class.is-invalid]="(isError('address') && isTouched('address'))
                 || (isError('address') && showErrors)" type="text" class="form-control" formControlName="address"

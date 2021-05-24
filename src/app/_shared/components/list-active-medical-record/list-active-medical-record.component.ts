@@ -24,6 +24,10 @@ export class ListActiveMedicalRecordComponent implements OnInit {
 			if(res.departmentId == DepartmentId.tong_hop) this.getActiveMedicalRecordFinishedExamination()
 			else this.getActiveMedicalRecord();
 		})
+		this.medicalRecordService.listActiveMedicalRecord$.asObservable()
+			.subscribe((data) => {
+				this.listActiveMedicalRecord = data
+			})
 	}
 
 	getActiveMedicalRecord(){

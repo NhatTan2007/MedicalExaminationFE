@@ -1,6 +1,6 @@
-<div class="container p-0">
+<div class="container-fluid p-0">
 	<nav class="navbar navbar-expand-lg navbar-light mb-2" style="background-color: #3498db;">
-		<a class="navbar-brand text-white" href="#">BVSKCB - TT Huế</a>
+		<a class="navbar-brand text-white" href="javascript:;">BVSKCB - TT Huế</a>
 		<li class="nav-item dropdown ml-auto" style="list-style: none;">
 			<a style="padding: 0 !important;" class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" *ngIf="getUserInfo$ | async"
 				aria-haspopup="true" aria-expanded="false">
@@ -8,8 +8,8 @@
 				<span class="text-white" style="font-weight: 500;">{{userInfo.fullName}}</span>
 			</a>
 			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="#"><i class="fas fa-user"></i> Profile</a>
-				<a class="dropdown-item" (click)="logout()" href="javascript:;"><i class="fas fa-sign-out-alt"></i> Sign out</a>
+				<a class="dropdown-item pt-2 pb-2" href="javascript:;"><i class="fas fa-user"></i> Profile</a>
+				<a class="dropdown-item pt-2 pb-2" (click)="logout()" href="javascript:;"><i class="fas fa-sign-out-alt"></i> Sign out</a>
 			</div>
 		</li>
 	</nav>
