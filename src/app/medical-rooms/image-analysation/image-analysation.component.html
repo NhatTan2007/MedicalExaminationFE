@@ -24,7 +24,7 @@
 	<label for="abdominalUltrasound" class="btn btn-info">Chẩn đoán kết quả siêu âm bụng</label>
 	<form [formGroup]="updateAbdominalUltrasoundForm" #abdominalUltrasound (ngSubmit)="onSubmitAbdominalUltrasound()"
 		*ngIf="this.medicalRecord.details.abdominalUltrasound.isRegistered">
-		<div class="form-group col-sm-6 pl-0">
+		<div class="form-group col-sm-12 pl-0 pr-0">
 			<textarea #abdominalUltrasoundResult [class.is-invalid]="(isError(updateAbdominalUltrasoundForm, 'abdominalUltrasoundResult')
 			&& isTouched(updateAbdominalUltrasoundForm, 'abdominalUltrasoundResult'))
 			|| (isError(updateAbdominalUltrasoundForm, 'abdominalUltrasoundResult') && showAbdominalUltrasoundErrors)"
@@ -45,7 +45,7 @@
 	<label for="thyroidUltrasound" class="btn btn-info">Chẩn đoán kết quả siêu âm tuyến giáp</label>
 	<form [formGroup]="updateThyroidUltrasoundForm" #thyroidUltrasound (ngSubmit)="onSubmitThyroidUltrasound()"
 		*ngIf="this.medicalRecord.details.thyroidUltrasound.isRegistered">
-		<div class="form-group col-sm-6 pl-0">
+		<div class="form-group col-sm-12 pl-0 pr-0">
 			<textarea #thyroidUltrasoundResult [class.is-invalid]="(isError(updateThyroidUltrasoundForm, 'thyroidUltrasoundResult')
 			&& isTouched(updateThyroidUltrasoundForm, 'thyroidUltrasoundResult'))
 			|| (isError(updateThyroidUltrasoundForm, 'thyroidUltrasoundResult') && showThyroidUltrasoundErrors)"
@@ -66,7 +66,7 @@
 	<label for="breastUltrasound" class="btn btn-info">Chẩn đoán kết quả siêu âm tuyến vú</label>
 	<form [formGroup]="updateBreastUltrasoundForm" #breastUltrasound (ngSubmit)="onSubmitBreastUltrasound()"
 		*ngIf="this.medicalRecord.details.breastUltrasound.isRegistered">
-		<div class="form-group col-sm-6 pl-0">
+		<div class="form-group col-sm-12 pl-0 pr-0">
 			<textarea #breastUltrasoundResult [class.is-invalid]="(isError(updateBreastUltrasoundForm, 'breastUltrasoundResult')
 				&& isTouched(updateBreastUltrasoundForm, 'breastUltrasoundResult'))
 				|| (isError(updateBreastUltrasoundForm, 'breastUltrasoundResult') && showBreastUltrasoundErrors)"
@@ -89,7 +89,7 @@
 	<label for="cardiacUltrasoundProbes" class="btn btn-info">Chẩn đoán kết quả thăm dò tim mạch</label>
 	<form [formGroup]="updateCardiacUltrasoundProbesForm" #cardiacUltrasoundProbes (ngSubmit)="onSubmitCardiacUltrasoundProbes()"
 		*ngIf="this.medicalRecord.details.cardiacUltrasoundProbes.isRegistered">
-		<div class="form-group col-sm-6 pl-0">
+		<div class="form-group col-sm-12 pl-0 pr-0">
 			<textarea #cardiacUltrasoundProbesResult [class.is-invalid]="(isError(updateCardiacUltrasoundProbesForm, 'cardiacUltrasoundProbesResult')
 				&& isTouched(updateCardiacUltrasoundProbesForm, 'cardiacUltrasoundProbesResult'))
 				|| (isError(updateCardiacUltrasoundProbesForm, 'cardiacUltrasoundProbesResult') && showCardiacUltrasoundProbesErrors)"
@@ -112,7 +112,7 @@
 	<label for="chestXray" class="btn btn-info">Chẩn đoán kết quả X quang ngực</label>
 	<form [formGroup]="updateChestXrayForm" #chestXray (ngSubmit)="onSubmitChestXray()"
 		*ngIf="this.medicalRecord.details.chestXray.isRegistered">
-		<div class="form-group col-sm-6 pl-0">
+		<div class="form-group col-sm-12 pl-0 pr-0">
 			<textarea #chestXrayResult [class.is-invalid]="(isError(updateChestXrayForm, 'chestXrayResult')
 				&& isTouched(updateChestXrayForm, 'chestXrayResult'))
 				|| (isError(updateChestXrayForm, 'chestXrayResult') && showChestXrayErrors)"
